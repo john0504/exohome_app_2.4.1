@@ -39,7 +39,7 @@ export class ButtonGroupLogic extends LogicBase<ButtonGroupLogicState> {
 
         if (values instanceof Array) {
             values.forEach((item) => {
-                this.state.buttons.push(item);
+              this.state.buttons.push(item);
             });
         } else {
             let vs: UIOptions = values as UIOptions;
@@ -66,6 +66,9 @@ export class ButtonGroupLogic extends LogicBase<ButtonGroupLogicState> {
             }
         }
         if (range) {
+            var keyNum = Number("0x" + key.substring(1, 3));
+            keyNum = keyNum | 0x80;
+            let key2 = "H" + keyNum.toString(16).toUpperCase();
             range.forEach(element => {
                 if (element[key]) {
                     let value: number = element[key];
@@ -73,7 +76,23 @@ export class ButtonGroupLogic extends LogicBase<ButtonGroupLogicState> {
                     let index = 0;
                     do {
                         if (value % 2 == 1) {
-                            buttons.push(this.state.buttons[index]);
+                            if (this.state.buttons[index]) {
+                                buttons.push(this.state.buttons[index]);
+                            }
+                        }
+                        index++;
+                        value = value >> 1;
+                    } while (value);
+                    this.state.buttons = buttons;
+                } else if (element[key2]) {
+                    let value: number = element[key2];
+                    let buttons = [];
+                    let index = 0;
+                    do {
+                        if (value % 2 == 1) {
+                            if (this.state.buttons[index]) {
+                                buttons.push(this.state.buttons[index]);
+                            }
                         }
                         index++;
                         value = value >> 1;
@@ -105,7 +124,7 @@ export class ButtonGroupLogic extends LogicBase<ButtonGroupLogicState> {
         }, this._defaultValueItem);
         let out = this.state.currentValueItem.value;
         if (out === OUTLIER) {
-            out = this.state.default;
+            out = val;
         }
         if (out !== undefined) {
             this.exoChange.emit({ key: this.state.key, value: out });

@@ -40,6 +40,7 @@ export interface ControlItemModel {
 export interface ValueItem {
     value: number | string;
     text: string;
+    sendValue?: number | string;
     icon?: string;
 }
 

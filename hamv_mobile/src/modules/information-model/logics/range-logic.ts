@@ -42,6 +42,9 @@ export class RangeLogic extends LogicBase<RangeLogicState> {
     if (this.values instanceof Array) {
       const currentValues = this.values as Array<ValueItem>;
       return currentValues.findIndex(({ value }) => value === currentValue);
+    } else if (this.values.func) {
+      let valueItem: ValueItem = this.ims.getValueItemByFunction(this.values.func, currentValue, this._defaultValueItem);
+      return valueItem.value;
     }
     return currentValue;
   }
@@ -101,11 +104,49 @@ export class RangeLogic extends LogicBase<RangeLogicState> {
       this.values = values;
     }
     if (range) {
+      var keyNum = Number("0x" + key.substring(1, 3));
+      keyNum = keyNum | 0x80;
+      let key2 = "H" + keyNum.toString(16).toUpperCase();
       range.forEach(element => {
         if (element[key]) {
           let value: number = element[key];
-          let min_value = value >> 8;
-          let max_value = value & 0xFF;
+          let min_value: number = value >> 8;
+          let max_value: number = value & 0xFF;
+          if (unitModel.options && unitModel.options.type == 'int') {
+            if (min_value > 127) {
+              min_value = -256 + min_value;
+            }
+            if (max_value > 127) {
+              max_value = -256 + max_value;
+            }
+          }
+          else if (unitModel.options && unitModel.options.type == 'uint16') {
+            min_value = value >> 16;
+            max_value = value & 0xFFF;
+          }
+
+          this.state.status = {
+            min: min_value,
+            max: max_value,
+            step: 1,
+          };
+        } else if (element[key2]) {
+          let value: number = element[key2];
+          let min_value: number = value >> 8;
+          let max_value: number = value & 0xFF;
+          if (unitModel.options && unitModel.options.type == 'int') {
+            if (min_value > 127) {
+              min_value = -256 + min_value;
+            }
+            if (max_value > 127) {
+              max_value = -256 + max_value;
+            }
+          }
+          else if (unitModel.options && unitModel.options.type == 'uint16') {
+            min_value = value >> 16;
+            max_value = value & 0xFFF;
+          }
+
           this.state.status = {
             min: min_value,
             max: max_value,
@@ -113,8 +154,8 @@ export class RangeLogic extends LogicBase<RangeLogicState> {
           };
         }
       });
-    }
-    return this.state;
+    } else
+      return this.state;
   }
 
   public processUIState(currentValueState: any, key: string, model: ControlItemModel): RangeLogicState {
@@ -133,8 +174,11 @@ export class RangeLogic extends LogicBase<RangeLogicState> {
   public sendValue(value: any): RangeLogicState {
     const valueItem = this.getValueItem(value);
     this.state.currentValueItem = valueItem;
-
-    this.exoChange.emit({ key: this.state.key, value: valueItem.value });
+    if (valueItem.sendValue) {
+      this.exoChange.emit({ key: this.state.key, value: valueItem.sendValue });
+    } else {
+      this.exoChange.emit({ key: this.state.key, value: valueItem.value });
+    }
     return this.state;
   }
 
@@ -145,7 +189,7 @@ export class RangeLogic extends LogicBase<RangeLogicState> {
 }
 
 export interface RangeLogicState {
-  currentIndex: number;
+  currentIndex: any;
   default: number;
   disableState: boolean;
   key: string;
