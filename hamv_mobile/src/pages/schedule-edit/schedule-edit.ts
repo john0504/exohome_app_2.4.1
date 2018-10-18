@@ -6,10 +6,12 @@ import {
   IonicPage,
   NavParams,
   ViewController,
+  Loading,
 } from 'ionic-angular';
 import {
   Schedule,
   StateStore,
+  AppTasks
 } from 'app-engine';
 import { Observable } from 'rxjs/Observable';
 import { first } from 'rxjs/operators';
@@ -74,6 +76,7 @@ export class ScheduleEditPage {
   deviceSn: string;
   scheduleCore: TzScheduleCore;
   index: number = -2;
+  loading: Loading;
 
   devices$: Observable<any>;
 
@@ -87,6 +90,7 @@ export class ScheduleEditPage {
     public alertCtrl: AlertController,
     public viewCtrl: ViewController,
     public params: NavParams,
+    private appTasks: AppTasks,
   ) {
     this.devices$ = this.stateStore.devices$;
     this.deviceSn = params.get('deviceSn');
@@ -100,6 +104,12 @@ export class ScheduleEditPage {
     return this.index === -1;
   }
 
+  ionViewDidLoad() {
+    this.loading = this.popupService.makeLoading({
+      content: this.translate.instant('DEVICE_DETAIL.GET_RANGE')
+    });
+  }
+
   ionViewWillEnter() {
     this.devices$.pipe(first()).subscribe(devices => this.processValues(devices));
   }
@@ -107,16 +117,32 @@ export class ScheduleEditPage {
   private processValues(devices) {
     if (this.validateDevices(devices) && this.validateIndex(this.index)) {
       const device = devices[this.deviceSn];
-      this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
-      this.deviceCore.selfUpdate();
-      if (this.isCreationMode()) {
-        this.initCreationPage();
-      } else {
-        this.initEditPage();
-      }
-      this.schedule = this.scheduleCore.schedule;
-      this.isOneShot = this.scheduleCore.isOneShot;
+      this.appTasks.getDeviceModelInfo(device.profile.esh.model).then((result: any) => {
+        this.loading.dismiss();
+        this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+        this.deviceCore.status.range = result;
+        this.deviceCore.selfUpdate();
+        if (this.isCreationMode()) {
+          this.initCreationPage();
+        } else {
+          this.initEditPage();
+        }
+        this.schedule = this.scheduleCore.schedule;
+        this.isOneShot = this.scheduleCore.isOneShot;
+      }).catch((error: any) => {
+        this.loading.dismiss();
+        this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+        this.deviceCore.selfUpdate();
+        if (this.isCreationMode()) {
+          this.initCreationPage();
+        } else {
+          this.initEditPage();
+        }
+        this.schedule = this.scheduleCore.schedule;
+        this.isOneShot = this.scheduleCore.isOneShot;
+      });
     } else {
+      this.loading.dismiss();
       this.viewCtrl.dismiss();
     }
   }
@@ -133,8 +159,8 @@ export class ScheduleEditPage {
     this.action = this.translate.instant('SCHEDULE_EDIT.CREATE');
     const currentDate: Date = new Date();
     const startHour = currentDate.getHours() + 1;
-    const esh = Object.assign({}, this.deviceCore.status);
-    const eshActions = this.deviceCore.filterActions(esh, defaultActions);
+    const eshActions = Object.assign({}, this.deviceCore.status, defaultActions);
+    // const eshActions = this.deviceCore.filterActions(esh, defaultActions);
     const schedule: Schedule = {
       name: '',
       start: AppUtils.getFormatTime(startHour),
@@ -151,7 +177,7 @@ export class ScheduleEditPage {
     this.action = this.translate.instant('SCHEDULE_EDIT.EDIT');
     const utcSchedule = this.deviceCore.calendar[this.index];
     this.scheduleCore = this.scheduleInjector.fromUtcToTzSchedule(utcSchedule);
-    const eshActions = Object.assign({}, utcSchedule.esh);
+    const eshActions = Object.assign({}, this.deviceCore.status, utcSchedule.esh, defaultActions);
     this.scheduleCore.schedule.esh = eshActions;
   }
 
@@ -244,6 +270,7 @@ export class ScheduleEditPage {
   private saveCalendar(executeNow: boolean = false) {
     this.adjustScheduleName();
     this.adjustSchedule();
+    delete this.scheduleCore.esh['range'];
 
     if (executeNow) {
       this.deviceCore.sendCommands(this.scheduleCore.esh);
@@ -282,5 +309,15 @@ export class ScheduleEditPage {
     } else {
       this.schedule.name = this.translate.instant('SCHEDULE_EDIT.MY_SCHEDULE');
     }
+  }  
+
+  isVisable(m) {
+    let isVisable = true;
+    m.models.forEach(element => {
+      if (this.deviceCore.status[element.key] == null) {
+        isVisable = false;
+      }
+    });
+    return isVisable;
   }
 }

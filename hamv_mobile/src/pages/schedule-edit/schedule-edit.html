@@ -51,8 +51,8 @@
       <div class="control-item-divider"></div>
       <h3 ion-text class="settings-title" align="center">{{ 'SCHEDULE_EDIT.SETTINGS' | translate }}</h3>
       <div *ngFor="let m of deviceCore.actions; let i = index;">
-        <ui-component color="primary" [(ngModel)]="schedule.esh" [model]="m" (exoChange)="setCommand($event)"></ui-component>
-        <div *ngIf="i < deviceCore.actions.length - 1" class="control-item-divider"></div>
+        <ui-component color="primary" *ngIf="isVisable(m)" [(ngModel)]="schedule.esh" [model]="m" (exoChange)="setCommand($event)"></ui-component>
+        <div *ngIf="i < deviceCore.actions.length - 1 && isVisable(m)" class="control-item-divider"></div>
       </div>
     </ion-list>
     <div class="delete-schedule">
