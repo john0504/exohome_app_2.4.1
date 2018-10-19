@@ -50,8 +50,8 @@ export interface AppConfig {
 
 export const appConfig: AppConfig = {
   appEngine: {
-    solutionId: 'hamv-tenx',
-    productId: 'g30qvzkqcoki00000',
+    solutionId: 'taiseia',
+    productId: 'h56htm0x79n800000',
   },
   mixpanel: {
     token: 'YOUR_TOKEN',

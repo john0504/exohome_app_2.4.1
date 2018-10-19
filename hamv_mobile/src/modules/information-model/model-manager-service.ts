@@ -218,7 +218,10 @@ export class ModelManagerService {
 
   public getUIModelName(device): string {
     if (!device) return null;
-    let modelName = this.modelDispatchHelper.getUIModelViaCustomLogic(device);
+    let modelName = device.profile.esh.model;
+    if (!this.modelDictionaries.has(modelName)) {
+      modelName = this.modelDispatchHelper.getUIModelViaCustomLogic(device);
+    }
     if (!this.modelDictionaries.has(modelName)) {
       this.modelDictionaries.forEach((v, key) => {
         if (modelName) return;
