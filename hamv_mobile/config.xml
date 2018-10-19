@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.smarthome.hamvtenx24" version="2.4.1.20181018" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HAMV-Tenx 2.4.1</name>
+<widget id="com.smarthome.anfson" version="2.4.1.20181018" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Anfson 2.4.1</name>
     <description>ExoHome App developed by Exosite.</description>
     <author email="support@exosite.com">Exosite</author>
     <content src="index.html" />
@@ -33,7 +33,7 @@
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
         <config-file parent="/resources" target="./res/values/strings.xml">
-            <string name="fb_app_id">194158767928038</string>
+            <string name="fb_app_id">MY_APP_ID</string>
             <string name="fb_app_name">HAMV-TENX</string>
         </config-file>
     </platform>
@@ -94,7 +94,7 @@
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
     <plugin name="cordova-plugin-facebook4" spec="^2.3.0">
-        <variable name="APP_ID" value="194158767928038" />
+        <variable name="APP_ID" value="MY_APP_ID" />
         <variable name="APP_NAME" value="HAMV-TENX" />
         <variable name="ANDROID_SDK_VERSION" value="4.33.0" />
     </plugin>
@@ -113,7 +113,7 @@
     <plugin name="ionic-plugin-deeplinks" spec="^1.0.17">
         <variable name="URL_SCHEME" value="myproduct" />
         <variable name="DEEPLINK_SCHEME" value="myproduct" />
-        <variable name="DEEPLINK_HOST" value="hamv-tenx.apps.exosite.io" />
+        <variable name="DEEPLINK_HOST" value="hamv-anfson.apps.exosite.io" />
         <variable name="ANDROID_PATH_PREFIX" value="/" />
         <variable name="ANDROID_2_PATH_PREFIX" value="/" />
         <variable name="ANDROID_3_PATH_PREFIX" value="/" />
