@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, Loading } from 'ionic-angular';
 
 import { WifiSecurityType } from 'app-engine';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { defer } from 'rxjs/observable/defer';
-import { delay, repeatWhen } from 'rxjs/operators';
+import { delay, repeatWhen, retry } from 'rxjs/operators';
 import { NgRedux } from '@angular-redux/store';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -15,6 +15,8 @@ import { ThemeService } from '../../providers/theme-service';
 import { CheckNetworkService } from '../../providers/check-network';
 
 import { AppUtils } from '../../utils/app-utils';
+import { PopupService } from '../../providers/popup-service';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -35,12 +37,14 @@ export class GpsDevicePage {
   iconName: string = "eye";
   inputType: string = "password";
   showPassword: boolean = false;
+  loading: Loading;
 
   vendorVer: string = "";
   vendorName: string = "";
   semiVer: string = "";
   latitude: number = 0;
   longitude: number = 0;
+  log: string = "";
 
   constructor(
     private ngRedux: NgRedux<any>,
@@ -51,6 +55,8 @@ export class GpsDevicePage {
     public themeService: ThemeService,
     public viewCtrl: ViewController,
     private geolocation: Geolocation,
+    private translate: TranslateService,
+    private popupService: PopupService,
   ) {
     this.subs = [];
     this.deviceInfo$ = this.ngRedux.select(['ssidConfirm', 'deviceInfo']);
@@ -99,6 +105,26 @@ export class GpsDevicePage {
   }
 
   onNext() {
+    this.localMode()
+      .pipe(delay(10000))
+      .subscribe(() => {
+        this.loading.dismiss();
+        this.viewCtrl.dismiss();
+      }, (error) => {
+        this.loading.dismiss();
+        this.viewCtrl.dismiss();
+      });
+  }
+
+  private localMode() {    
+    this.loading = this.popupService.makeLoading({
+      content: this.translate.instant('PROVISION_LOADING.CONNECTING')
+    });
+    return defer(() => this.localModePromise())
+      .pipe(retry(2));
+  }
+
+  private localModePromise() {
     let command = {
       "ssid": this.wifiAp.ssid,
       "password": this.wifiAp.password,
@@ -106,10 +132,8 @@ export class GpsDevicePage {
       "latitude": this.latitude,
       "longitude": this.longitude
     };
-    this.appTasks.localModeTask(JSON.stringify(command))
-      .then(() => {
-        this.closePage();
-      });
+    this.log = JSON.stringify(command);
+    return this.appTasks.localModeTask(JSON.stringify(command));
   }
 
   onShowHidePassword() {

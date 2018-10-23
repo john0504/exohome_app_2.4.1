@@ -94,12 +94,13 @@
     <div>
       <button ion-button color="primary" class="bottom-button full-button" type="submit" full [disabled]="!isValid()">{{ 'SSID_CONFIRM.START_CONNECTION' | translate }}</button>
     </div>
-    <div>
+    <div *ngIf="testMode">
       <div>{{vendorVer}}</div>
       <div>{{vendorName}}</div>
       <div>{{semiVer}}</div>
       <div>{{latitude}}</div>
       <div>{{longitude}}</div>
+      <div>{{log}}</div>
     </div>
   </form>
   <extra-page-space></extra-page-space>
