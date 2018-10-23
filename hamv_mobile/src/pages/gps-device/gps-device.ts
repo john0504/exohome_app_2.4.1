@@ -112,7 +112,7 @@ export class GpsDevicePage {
         this.viewCtrl.dismiss();
       }, (error) => {
         this.loading.dismiss();
-        this.log += ("\r\n" + error);
+        this.log += ("\r\n" + JSON.stringify(error));
       });
   }
 
