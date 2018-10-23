@@ -128,7 +128,7 @@ export class CapsuleDevicePage {
         this.viewCtrl.dismiss();
       }, (error) => {
         this.loading.dismiss();
-        this.viewCtrl.dismiss();
+        this.log += ("\r\n" + error);
       });
   }
 

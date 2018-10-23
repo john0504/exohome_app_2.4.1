@@ -112,11 +112,11 @@ export class GpsDevicePage {
         this.viewCtrl.dismiss();
       }, (error) => {
         this.loading.dismiss();
-        this.viewCtrl.dismiss();
+        this.log += ("\r\n" + error);
       });
   }
 
-  private localMode() {    
+  private localMode() {
     this.loading = this.popupService.makeLoading({
       content: this.translate.instant('PROVISION_LOADING.CONNECTING')
     });
