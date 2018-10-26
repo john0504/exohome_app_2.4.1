@@ -132,7 +132,7 @@ export class CapsuleDevicePage {
       });
   }
 
-  private localMode() {    
+  private localMode() {
     this.loading = this.popupService.makeLoading({
       content: this.translate.instant('PROVISION_LOADING.CONNECTING')
     });
@@ -149,8 +149,8 @@ export class CapsuleDevicePage {
       "gift": this.gift,
       "name": this.devicename,
       "serial": this.serial,
-      "latitude": this.latitude,
-      "longitude": this.longitude
+      "latitude": round(this.latitude, 7),
+      "longitude": round(this.longitude, 7)
     } : {
         "ssid": this.wifiAp.ssid,
         "password": this.wifiAp.password,
@@ -158,8 +158,8 @@ export class CapsuleDevicePage {
         "money": this.money,
         "gift": this.gift,
         "name": this.devicename,
-        "latitude": this.latitude,
-        "longitude": this.longitude
+        "latitude": round(this.latitude, 7),
+        "longitude": round(this.longitude, 7)
       };
     this.log = JSON.stringify(command);
     return this.appTasks.localModeTask(JSON.stringify(command));
@@ -280,4 +280,9 @@ export function ssidConfirmReducer(state = INITIAL_STATE, action) {
     default:
       return state;
   }
+}
+
+function round(value: number, precision: number) {
+  const base = 10 ** precision;
+  return Math.round(value * base) / base;
 }
