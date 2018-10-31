@@ -74,7 +74,13 @@ export class LocalModeDeviceItemPage {
 
   ionViewDidLoad() {
     this.checkNetworkService.pause();
-    this.setupTestMode();
+    this.setupTestMode();  
+
+    let cmd = {};
+    cmd["LocalMode"] = 1;
+    cmd["timestamp"] = Math.floor(this.getTimestamp() / 1000);
+    let arr = ["", cmd];
+    this.myCommand.push(arr);
   }
 
   ionViewDidEnter() {
@@ -142,12 +148,6 @@ export class LocalModeDeviceItemPage {
           }
         })
     );
-
-    let cmd = {};
-    cmd["LocalMode"] = 1;
-    cmd["timestamp"] = Math.floor(this.getTimestamp() / 1000);
-    let arr = ["", cmd];
-    this.myCommand.push(arr);
     this.subs.push(
       defer(() => this.sendPolling())
         .pipe(repeatWhen(attampes => attampes.pipe(delay(100))))
