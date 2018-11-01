@@ -33,7 +33,7 @@ export class CapsuleDevicePage {
   wifiAp: { ssid?: string, password?: string, sec?: string } = {};
   sec;
   useText: boolean = false;
-  isSelectFocus = false;
+  isSelectFocus: boolean = false;
 
   iconName: string = "eye";
   inputType: string = "password";
@@ -95,6 +95,32 @@ export class CapsuleDevicePage {
     }
   }
 
+  isMoneyValid(): boolean {
+    if (this.money && this.money !== '' && (parseInt(this.money) > 65535 || parseInt(this.money) < 0)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isGiftValid(): boolean {
+    if (this.gift && this.gift !== '' && (parseInt(this.gift) > 65535 || parseInt(this.gift) < 0)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isDevicenameValid(): boolean {
+    if (this.devicename && this.devicename !== '') {
+      var str = encodeURIComponent(this.devicename);
+      var len = str.replace(/%[A-F\d]{2}/g, 'U').length;
+      if (len > 33)
+        return false;
+    }
+    return true;
+  }
+
   isValid(): boolean {
     if (!this.wifiAp) return false;
     if (!this.wifiAp.ssid || this.wifiAp.ssid === '')
@@ -117,6 +143,9 @@ export class CapsuleDevicePage {
     if (this.testMode && (!this.serial || this.serial === ''))
       return false;
 
+    if (!this.isMoneyValid() || !this.isGiftValid() || !this.isDevicenameValid())
+      return false;
+      
     return true;
   }
 

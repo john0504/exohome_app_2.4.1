@@ -35,7 +35,7 @@
       <p align="center">{{ 'SSID_CONFIRM.NETWORK_INFO' | translate }}</p>
       <ion-item color="lightGrey" *ngIf="useText">
         <ion-label floating color="darkGrey">SSID</ion-label>
-        <ion-input [(ngModel)]="wifiAp.ssid" (ngModelChange)="fulfillPassword()" name="ssid" type="text" #ssid="ngModel" myTabIndex="1">
+        <ion-input [(ngModel)]="wifiAp.ssid" (ngModelChange)="fulfillPassword()" name="ssid" type="text" #ssid="ngModel" maxlength="30" myTabIndex="1">
         </ion-input>
       </ion-item>
       <ion-item color="lightGrey" *ngIf="!useText">
@@ -47,7 +47,7 @@
       </ion-item>
       <ion-item color="lightGrey" *ngIf="needPassword()" class="input-with-eye-toggle">
         <ion-label floating color="darkGrey">{{ 'SSID_CONFIRM.PASSWORD' | translate }}</ion-label>
-        <ion-input [(ngModel)]="wifiAp.password" name="password" [type]="inputType" #password="ngModel" myTabIndex="2" clearOnEdit="false">
+        <ion-input [(ngModel)]="wifiAp.password" name="password" [type]="inputType" #password="ngModel" maxlength="30" myTabIndex="2" clearOnEdit="false">
         </ion-input>
         <button (click)="onShowHidePassword()" ion-button icon-only clear item-right type="button">
           <ion-icon [name]="iconName" color="dark"></ion-icon>
