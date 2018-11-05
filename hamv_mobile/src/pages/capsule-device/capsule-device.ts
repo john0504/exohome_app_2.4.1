@@ -115,7 +115,7 @@ export class CapsuleDevicePage {
     if (this.devicename && this.devicename !== '') {
       var str = encodeURIComponent(this.devicename);
       var len = str.replace(/%[A-F\d]{2}/g, 'U').length;
-      if (len > 33)
+      if (len > 30)
         return false;
     }
     return true;
