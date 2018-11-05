@@ -74,7 +74,7 @@ export class LocalModeDeviceItemPage {
 
   ionViewDidLoad() {
     this.checkNetworkService.pause();
-    this.setupTestMode();  
+    this.setupTestMode();
 
     let cmd = {};
     cmd["LocalMode"] = 1;
@@ -230,7 +230,10 @@ export class LocalModeDeviceItemPage {
       clearTimeout(timeoutNumber);
     }
     if (isTimeout) {
-      this.navCtrl.pop();
+      if (!this.testMode) {
+        this.navCtrl.pop();
+        this.printLog("Pring Error", "Time out");
+      }
     } else {
       timeoutNumber = setTimeout(() => { isTimeout = true; }, 3000);
     }
@@ -245,7 +248,10 @@ export class LocalModeDeviceItemPage {
       this.isPollingCmd = true;
       return this.callLocalModeTask(arr)
         .catch(() => {
-          this.navCtrl.pop();
+          if (!this.testMode) {
+            this.navCtrl.pop();
+            this.printLog("Pring Error", "callLocalModeTask PollingStatus");
+          }
         });
     }
   }
@@ -253,7 +259,10 @@ export class LocalModeDeviceItemPage {
   sendNormalCommand(): Promise<any> {
     return this.callLocalModeTask(this.myCommand.pop())
       .catch(() => {
-        this.navCtrl.pop();
+        if (!this.testMode) {
+          this.navCtrl.pop();
+          this.printLog("Pring Error", "callLocalModeTask NormalCommand");
+        }
       });
   }
 
