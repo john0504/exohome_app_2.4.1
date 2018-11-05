@@ -5,7 +5,7 @@ export interface PageInterface {
 
 export const appPageConfig: { [key: string]: PageInterface } = {
   'HomePage': {
-    target: 'PopitListPage',
+    target: 'LargeListPage',
     paramKeys: []
   },
   'AmazonEchoPage': {
