@@ -288,6 +288,61 @@ export const functionMap = {
       text: round(val * 10, 2) + '',
     };
   },
+  water: (val) => {
+    if (val === -32767) {
+      return {
+        value: val,
+        text: '--L',
+      };
+    }
+    return {
+      value: val,
+      text: round(val / 100, 2) + 'L',
+    };
+  },
+  humi: (val) => {
+    if (val === -32767) {
+      return {
+        value: val,
+        text: '--%',
+      };
+    }
+    return {
+      value: val,
+      text: round(val, 2) + '%',
+    };
+  },
+  tempInt8: (val) => {
+    if (val === -32767 || val === undefined || val === null) {
+      return {
+        value: val,
+        text: '--°C',
+        icon: 'thermostat',
+      };
+    }
+    if (val > 127) {
+      return {
+        value: -256 + val,
+        text: round(-256 + val, 2) + '°C',
+        sendValue: val,
+        icon: 'thermostat',
+      };
+    }
+    if (val < 0) {
+      return {
+        value: val,
+        text: round(val, 2) + '°C',
+        sendValue: 256 + val,
+        icon: 'thermostat',
+      };
+    }
+    return {
+      value: val,
+      text: round(val, 2) + '°C',
+      sendValue: val,
+      icon: 'thermostat',
+    };
+  },
 };
 
 function round(value: number, precision: number) {
