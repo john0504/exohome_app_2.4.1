@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.smarthome.hamvtenx24" version="2.4.1.20181023" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HAMV-Tenx 2.4.1</name>
+<widget id="com.smarthome.supportmode" version="2.4.1.20181128" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>HAMV-Support Mode</name>
     <description>ExoHome App developed by Exosite.</description>
     <author email="support@exosite.com">Exosite</author>
     <content src="index.html" />

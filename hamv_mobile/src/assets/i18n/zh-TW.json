@@ -103,7 +103,10 @@
     "GPS_MODE": "GPS模式",
     "LOCAL_MODE": "遙控器模式",
     "LOCAL_MODE_DEVICE": "本機裝置",
-    "LOCAL_MODE_LEAVE": "離開本機模式"
+    "LOCAL_MODE_LEAVE": "離開本機模式",
+    "SUPPORT_MODE": "工程模式",
+    "SUPPORTL_MODE_DEVICE": "工程模式裝置",
+    "SUPPORT_MODE_LEAVE": "離開工程模式"
   },
   "DEVICE_DETAIL": {
     "HISTORY": "歷史",

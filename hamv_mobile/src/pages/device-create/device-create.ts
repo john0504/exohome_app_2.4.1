@@ -26,6 +26,7 @@ export class DeviceCreatePage {
   private deviceInfo$: Observable<any>;
   canContinue: boolean = false;
   canLocalMode: boolean = false;
+  canSupportMode: boolean = false;
   canGpsMode: boolean = false;
   canBroadcast: boolean = false;
   canLocalBroadcast: boolean = false;
@@ -34,6 +35,9 @@ export class DeviceCreatePage {
   isTokenValidated: boolean = false;
   appName: Promise<string>;
   alert: Alert;
+  brand: string = "";
+  model: string = "";
+  serial: string = "";
 
   constructor(
     private stateStore: StateStore,
@@ -67,11 +71,15 @@ export class DeviceCreatePage {
       this.deviceInfo$
         .subscribe(deviceInfo => {
           this.canLocalMode = deviceInfo && (deviceInfo.TenxLocal === "1" || deviceInfo.TenxLocal === "2");
+          this.canSupportMode = deviceInfo && (deviceInfo.TenxLocal === "3" || deviceInfo.TenxLocal === "4");
           this.canGpsMode = deviceInfo && deviceInfo.TenxGps === "1";
           this.canBroadcast = deviceInfo && deviceInfo.TenxBroadcast === "1";
           this.canLocalBroadcast = deviceInfo && deviceInfo.TenxLocalBroadcast === "1";
           this.canCapsuleMode = deviceInfo && deviceInfo.TenxCapsule === "1";
-          this.canCloudMode = deviceInfo && deviceInfo.TenxLocal !== "2" && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
+          this.canCloudMode = deviceInfo && (deviceInfo.TenxLocal !== "2" && deviceInfo.TenxLocal !== "4") && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
+          this.brand = deviceInfo && deviceInfo.Brand;
+          this.model = deviceInfo && deviceInfo.Model;
+          this.serial = deviceInfo && deviceInfo.serial;
         })
     );
   }
@@ -122,6 +130,11 @@ export class DeviceCreatePage {
       .then(() => this.closePage());
   }
 
+  onSupportMode() {
+    this.navCtrl.push('SupportModePage', { brand: this.brand, model: this.model, serial: this.serial })
+      .then(() => this.closePage());
+  }
+
   onGpsMode() {
     this.navCtrl.push('GpsDevicePage')
       .then(() => this.closePage());
@@ -149,6 +162,9 @@ export class DeviceCreatePage {
     this.canBroadcast = false;
     this.canCapsuleMode = false;
     this.canCloudMode = true;
+    this.brand = "";
+    this.model = "";
+    this.serial = "";
   }
 
   private showAlert() {

@@ -103,7 +103,10 @@
     "GPS_MODE": "GPS MODE",
     "LOCAL_MODE": "LOCAL MODE",
     "LOCAL_MODE_DEVICE": "Local mode device",
-    "LOCAL_MODE_LEAVE": "Leave local mode"
+    "LOCAL_MODE_LEAVE": "Leave local mode",
+    "SUPPORT_MODE": "SUPPORT MODE",
+    "SUPPORT_MODE_DEVICE": "Support mode device",
+    "SUPPORT_MODE_LEAVE": "Leave support mode"
   },
   "DEVICE_DETAIL": {
     "HISTORY": "History",
