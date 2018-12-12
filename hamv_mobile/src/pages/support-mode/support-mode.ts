@@ -8,7 +8,7 @@ import { NgRedux } from '@angular-redux/store';
 
 import { AppActions, AppTasks, ErrorsService } from 'app-engine';
 
-// import { defer } from 'rxjs/observable/defer';
+import { defer } from 'rxjs/observable/defer';
 import {
   delay,
   // repeatWhen 
@@ -131,12 +131,13 @@ export class SupportModePage {
 
     var cmd = { LocalMode: 0, timestamp: Math.floor(this.getTimestamp() / 1000) };
     var arr: any = ["", cmd];
-    this.appTasks.postLocalModeTask(arr).then(() => {
+
+    defer(() => this.appTasks.postLocalModeTask(arr).then(() => {
       this.popupService.makeToast({
         message: this.translate.instant('DEVICE_CREATE.SUPPORT_MODE_LEAVE'),
         duration: 3000
-      });
-    });
+      })
+    })).pipe(delay(1000)).subscribe();
   }
 
   ionViewWillUnload() {

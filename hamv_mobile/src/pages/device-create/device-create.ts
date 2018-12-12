@@ -76,7 +76,7 @@ export class DeviceCreatePage {
           this.canBroadcast = deviceInfo && deviceInfo.TenxBroadcast === "1";
           this.canLocalBroadcast = deviceInfo && deviceInfo.TenxLocalBroadcast === "1";
           this.canCapsuleMode = deviceInfo && deviceInfo.TenxCapsule === "1";
-          this.canCloudMode = deviceInfo && (deviceInfo.TenxLocal !== "2" && deviceInfo.TenxLocal !== "4") && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
+          this.canCloudMode = deviceInfo && (deviceInfo.TenxLocal === "1" || deviceInfo.TenxLocal === "3") && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
           this.brand = deviceInfo && deviceInfo.Brand;
           this.model = deviceInfo && deviceInfo.Model;
           this.serial = deviceInfo && deviceInfo.serial;
