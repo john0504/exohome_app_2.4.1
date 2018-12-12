@@ -1,0 +1,103 @@
+---
+familyName: typeE-2
+familyMembers:
+- typeE-2.*
+images:
+  thumbnail:
+    uri: "../assets/img/product2.png"
+  banner:
+    uri: "../assets/img/product_b.png"
+controlLayout:
+  primary:
+  - H00
+  secondary:
+  - H02
+  - H14
+  - H56
+  - H63R
+scheduleLayout:
+  primary:
+  - H02  
+  - H14
+  - H56
+deviceId: E
+components:
+  H00:
+    type: toggle
+    title: ''
+    icon: power
+    models:
+    - key: H00
+      values:
+      - value: 0
+        text: 關閉
+      - value: 1
+        text: 開啟
+  H02:
+    type: button-group
+    title: ''
+    icon: wind_speed
+    models:
+    - key: H02
+      values:
+      - value: 1
+        text: ""
+        icon: btn_1
+      - value: 2
+        text: ""
+        icon: btn_2
+      - value: 3
+        text: ""
+        icon: btn_3
+      - value: 4
+        text: ""
+        icon: btn_4
+      - value: 5
+        text: ""
+        icon: btn_5
+      - value: 6
+        text: ""
+        icon: btn_6
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H14:
+    type: toggle
+    title: ''
+    icon: net
+    models:
+    - key: H14
+      values:
+      - value: 0
+        text: 正常
+      - value: 1
+        text: 須清洗
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+      - conditions:
+        - key: H14
+          op: eq
+          target: 0
+  H56:
+    type: text
+    title: ''
+    icon: co2
+    models:
+    - key: H56
+      values:
+        func: airbox_co2
+  H63R:
+    type: text
+    title: 強制風扇
+    models:
+    - key: H63
+      values:        
+      - value: 0
+        text: "關閉"
+      - value: 1
+        text: "啟動"

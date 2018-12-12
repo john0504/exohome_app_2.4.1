@@ -41,17 +41,13 @@ export interface AppConfig {
     googleHome: {
       ghName: string,
     },
-    ble: {
-      bleProductName: string,
-      bleName: string,
-    },
   };
 }
 
 export const appConfig: AppConfig = {
   appEngine: {
-    solutionId: 'hamv-tenx',
-    productId: 'g30qvzkqcoki00000',
+    solutionId: 'yensun',
+    productId: 'x4dowqy82d2400000',
   },
   mixpanel: {
     token: 'YOUR_TOKEN',
@@ -90,10 +86,6 @@ export const appConfig: AppConfig = {
     },
     googleHome: {
       ghName: 'gh_name',
-    },
-    ble: {      
-      bleProductName: 'AirBox',
-      bleName: 'BLE-XXXX',
     },
   }
 };

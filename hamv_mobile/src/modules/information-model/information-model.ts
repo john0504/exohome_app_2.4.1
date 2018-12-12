@@ -26,6 +26,7 @@ export interface ComponentModel {
     title: string;
     models: Array<ControlItemModel>;
     hideFromGroup: boolean;
+    icon?: string;
 }
 
 export interface ControlItemModel {

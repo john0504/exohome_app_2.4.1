@@ -13,8 +13,8 @@
     <ion-list class="schedule-main-content">
       <ion-item>
         <ion-label stacked>{{ 'SCHEDULE_EDIT.SCHEDULE_NAME' | translate }}</ion-label>
-        <ion-input [(ngModel)]="schedule.name" color="list-blue" placeholder="{{ ('SCHEDULE_EDIT.MY_SCHEDULE') | translate }}" type="text"
-          maxlength="40"></ion-input>
+        <ion-input [(ngModel)]="schedule.name" color="list-blue" placeholder="{{ ('SCHEDULE_EDIT.MY_SCHEDULE') | translate }}"
+          type="text" maxlength="40"></ion-input>
       </ion-item>
       <div class="schedule-time-set">
         <button ion-item (click)="startDt.open()" detail-none>
@@ -22,16 +22,16 @@
             <ion-label>{{ 'SCHEDULE_EDIT.START_TIME' | translate }}</ion-label>
             <h1 ion-text color="list-blue">{{ (schedule.start | remarkTime) || '--:--' }}</h1>
           </ion-label>
-          <ion-datetime #startdt [(ngModel)]="schedule.start" cancelText="{{ 'SCHEDULE_EDIT.CANCEL' | translate }}" doneText="{{ 'SCHEDULE_EDIT.DONE' | translate }}"
-            pickerFormat="h:mm A" displayFormat="H:mm" hidden></ion-datetime>
+          <ion-datetime #startdt [(ngModel)]="schedule.start" cancelText="{{ 'SCHEDULE_EDIT.CANCEL' | translate }}"
+            doneText="{{ 'SCHEDULE_EDIT.DONE' | translate }}" pickerFormat="h:mm A" displayFormat="H:mm" hidden></ion-datetime>
         </button>
         <button ion-item (click)="endDt.open()" detail-none>
           <ion-label>
             <ion-label>{{ 'SCHEDULE_EDIT.END_TIME' | translate }}</ion-label>
             <h1 ion-text color="list-blue">{{ (schedule.end | remarkTime) || '--:--' }}</h1>
           </ion-label>
-          <ion-datetime #enddt [(ngModel)]="schedule.end" cancelText="{{ 'SCHEDULE_EDIT.CANCEL' | translate }}" doneText="{{ 'SCHEDULE_EDIT.DONE' | translate }}"
-            pickerFormat="h:mm A" displayFormat="H:mm" hidden></ion-datetime>
+          <ion-datetime #enddt [(ngModel)]="schedule.end" cancelText="{{ 'SCHEDULE_EDIT.CANCEL' | translate }}"
+            doneText="{{ 'SCHEDULE_EDIT.DONE' | translate }}" pickerFormat="h:mm A" displayFormat="H:mm" hidden></ion-datetime>
         </button>
       </div>
       <div class="repeat-time-toggle">
@@ -43,16 +43,15 @@
       </div>
       <div *ngIf="!isOneShot" class="repeat-time-button">
         <button [ngClass]="{'control-item-active': schedule.days.indexOf(button.value) !== -1 }" [ngStyle]="{ 'min-width': '12.5%', 'max-width': '12.5%' }"
-          (click)="scheduleCore.toggleScheduleDay(button.value)" *ngFor="let button of buttons" class="control-button" clear
-          ion-button round>
-          {{ button.text | translate }}
+          (click)="scheduleCore.toggleScheduleDay(button.value)" *ngFor="let button of buttons" class="control-button"
+          clear ion-button round>
+          <ion-icon *ngIf="button.icon" [name]="button.icon"></ion-icon>
         </button>
       </div>
       <div class="control-item-divider"></div>
-      <h3 ion-text class="settings-title" align="center">{{ 'SCHEDULE_EDIT.SETTINGS' | translate }}</h3>
       <div *ngFor="let m of deviceCore.actions; let i = index;">
-        <ui-component color="primary" *ngIf="isVisable(m)" [(ngModel)]="schedule.esh" [model]="m" (exoChange)="setCommand($event)"></ui-component>
-        <div *ngIf="i < deviceCore.actions.length - 1 && isVisable(m)" class="control-item-divider"></div>
+        <ui-component color="primary" [(ngModel)]="schedule.esh" [model]="m" (exoChange)="setCommand($event)"></ui-component>
+        <div *ngIf="i < deviceCore.actions.length - 1" class="control-item-divider"></div>
       </div>
     </ion-list>
     <div class="delete-schedule">

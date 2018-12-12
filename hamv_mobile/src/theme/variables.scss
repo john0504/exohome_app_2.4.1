@@ -33,8 +33,8 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #2EB427,
-  secondary:  #32db64,
+  primary:    #0076bf,
+  secondary:  #DCDCDC,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
@@ -251,12 +251,37 @@ $font-family-wp-base: 'Nunito Sans', sans-serif;
   }
 }
 @include makeIcon(brand-logo, url(../assets/img/logo.png));
-@include makeIcon(level0, url(../assets/img/level0.png));
-@include makeIcon(level1, url(../assets/img/level1.png));
-@include makeIcon(level2, url(../assets/img/level2.png));
-@include makeIcon(level3, url(../assets/img/level3.png));
-@include makeIcon(level4, url(../assets/img/level4.png));
-@include makeIcon(level5, url(../assets/img/level5.png));
+@include makeIcon(net, url(../assets/img/net.png));
+@include makeIcon(net_hour, url(../assets/img/net_hour.png));
+@include makeIcon(change_net_count, url(../assets/img/change_net_count.png));
+@include makeIcon(power, url(../assets/img/power.png));
+@include makeIcon(wind_speed, url(../assets/img/wind_speed.png));
+@include makeIcon(set_timer, url(../assets/img/set_timer.png));
+@include makeIcon(safe_lock, url(../assets/img/safe_lock.png));
+@include makeIcon(pm25, url(../assets/img/pm25.png));
+@include makeIcon(co2, url(../assets/img/co2.png));
+@include makeIcon(net_cover, url(../assets/img/net_cover.png));
+@include makeIcon(sleep, url(../assets/img/sleep.png));
+@include makeIcon(dump, url(../assets/img/dump.png));
+@include makeIcon(mon, url(../assets/img/mon.png));
+@include makeIcon(tue, url(../assets/img/tue.png));
+@include makeIcon(wed, url(../assets/img/wed.png));
+@include makeIcon(thu, url(../assets/img/thu.png));
+@include makeIcon(fri, url(../assets/img/fri.png));
+@include makeIcon(sat, url(../assets/img/sat.png));
+@include makeIcon(sun, url(../assets/img/sun.png));
+@include makeIcon(btn_1, url(../assets/img/btn_1.png));
+@include makeIcon(btn_2, url(../assets/img/btn_2.png));
+@include makeIcon(btn_3, url(../assets/img/btn_3.png));
+@include makeIcon(btn_4, url(../assets/img/btn_4.png));
+@include makeIcon(btn_5, url(../assets/img/btn_5.png));
+@include makeIcon(btn_6, url(../assets/img/btn_6.png));
+@include makeIcon(btn_7, url(../assets/img/btn_7.png));
+@include makeIcon(btn_8, url(../assets/img/btn_8.png));
+@include makeIcon(btn_9, url(../assets/img/btn_9.png));
+@include makeIcon(btn_a, url(../assets/img/btn_a.png));
+@include makeIcon(btn_b, url(../assets/img/btn_b.png));
+@include makeIcon(btn_c, url(../assets/img/btn_c.png));
 @include makeIcon(schedules, '\e900');
 @include makeIcon(fan, '\e902');
 @include makeIcon(fan-auto, '\e904');

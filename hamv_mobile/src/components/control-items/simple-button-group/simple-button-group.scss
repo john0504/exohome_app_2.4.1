@@ -16,11 +16,10 @@ simple-button-group {
 
   .popit-control-buttons {
     align-items: center;
-    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 8px;
+    margin-top: 0px;
 
     .control-button {
       background-color: $background-transparent;
@@ -30,11 +29,11 @@ simple-button-group {
       font-size: $font-title;
       font-weight: $font-bold-light;
       margin: 0;
-      padding: 0 8px;
+      padding: 0 4px;
 
       ion-icon {
         font-size: $font-title + 0.9rem;
-        padding: 0 5px;
+        padding: 0 0px;
       }
 
       span {

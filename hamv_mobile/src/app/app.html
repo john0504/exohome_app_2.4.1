@@ -1,15 +1,12 @@
 <ion-menu [content]="content" id="mainMenu">
   <ion-header color="primary">
-    <ion-navbar color="primary">
+    <ion-navbar color="secondary">
       <img class="center-logo" [src]="themeService.navbarLogoUrl" [ngClass]="{'center-logo-ios': isIOS() }">
     </ion-navbar>
   </ion-header>
   <ion-content>
     <button ion-item menuClose *ngFor="let p of appPages" (click)="goPage(p)" [ngClass]="{'menu-item-highlight': isCurrentPage(p) }">
       <h2>{{ p.title | translate }}</h2>
-    </button>
-    <button *ngIf="testMode" ion-item menuClose (click)="goPage(bleSettingPage)" [ngClass]="{'menu-item-highlight': isCurrentPage(bleSettingPage) }">
-      <h2>{{ bleSettingPage.title | translate }}</h2>
     </button>
   </ion-content>
   <ion-footer no-border>

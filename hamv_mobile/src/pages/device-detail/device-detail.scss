@@ -22,13 +22,14 @@ page-device-detail {
     max-height: 200px;
   }
   .main-content {
-    margin: 5px;
-    padding: 0 16px 16px 16px;
+    margin: 0px;
+    padding: 0 16px 0px 16px;
     display: flex;
     flex-direction: column;
+    background-color: color($colors, lightGrey);
     .control-item-divider {
-      padding-bottom: 15px;
-      margin-bottom: 15px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
       border-bottom: 1px solid color($colors, grey);
     }
   }

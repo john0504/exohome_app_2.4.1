@@ -25,6 +25,7 @@ import {
 })
 export class SimpleToggle extends UIComponentBase {
     title: string = '';
+    icon: string = ''; 
     logic: ToggleLogic;
     state: ToggleLogicState;
 
@@ -40,6 +41,7 @@ export class SimpleToggle extends UIComponentBase {
     protected processLayout(model: ComponentModel, values: Array<ValueItem> | UIOptions, key: string, index: number, unitModel: ControlItemModel) {
         if (!values || !model || !unitModel || index !== 0) return;
         this.title = model.title;
+        this.icon = model.icon;
         this.state = this.logic.processLayout(values, key, unitModel);
     }
 

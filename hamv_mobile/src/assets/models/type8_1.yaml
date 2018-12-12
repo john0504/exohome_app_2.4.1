@@ -1,0 +1,239 @@
+---
+familyName: type8-1
+familyMembers:
+- type8-1.*
+images:
+  thumbnail:
+    uri: "../assets/img/product.png"
+  banner:
+    uri: "../assets/img/product_b.png"
+controlLayout:
+  primary:
+  - H00
+  secondary:
+  - H50
+  - H53R
+  - H56R
+  - H03
+  - H51
+  - H08
+  - H59R
+  - H54R
+  - H55R
+  - H5AR
+scheduleLayout:
+  primary:
+  - H50  
+  - H08
+  - H51
+deviceId: 8
+components:
+  H00:
+    type: toggle
+    title: ''
+    icon: power
+    models:
+    - key: H00
+      values:
+      - value: 0
+        text: 關閉
+      - value: 1
+        text: 開啟
+  H03:
+    type: button-group
+    title: ''
+    icon: set_timer
+    models:
+    - key: H03
+      values:
+      - value: 1
+        text: ""
+        icon: btn_1
+      - value: 2
+        text: ""
+        icon: btn_2
+      - value: 3
+        text: ""
+        icon: btn_3
+      - value: 4
+        text: ""
+        icon: btn_4
+      - value: 5
+        text: ""
+        icon: btn_5
+      - value: 6
+        text: ""
+        icon: btn_6
+      - value: 7
+        text: ""
+        icon: btn_7
+      - value: 8
+        text: ""
+        icon: btn_8
+      - value: 9
+        text: ""
+        icon: btn_9
+      - value: 10
+        text: ""
+        icon: btn_a
+      - value: 11
+        text: ""
+        icon: btn_b
+      - value: 12
+        text: ""
+        icon: btn_c
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H08:
+    type: toggle
+    title: ''
+    icon: safe_lock
+    models:
+    - key: H08
+      values:
+      - value: 0
+        text: 關閉
+      - value: 1
+        text: 開啟
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H50:
+    type: button-group
+    title: ''
+    icon: wind_speed
+    models:
+    - key: H50
+      values:
+      - value: 1
+        text: ""
+        icon: btn_1
+      - value: 2
+        text: ""
+        icon: btn_2
+      - value: 3
+        text: ""
+        icon: btn_3
+      - value: 4
+        text: ""
+        icon: btn_4
+      - value: 5
+        text: ""
+        icon: btn_5
+      - value: 6
+        text: ""
+        icon: btn_6
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H51:
+    type: toggle
+    title: ''
+    icon: sleep
+    models:
+    - key: H51
+      values:
+      - value: 0
+        text: 關閉
+      - value: 1
+        text: 開啟
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H52:
+    type: toggle
+    title: ''
+    icon: net
+    models:
+    - key: H52
+      values:
+      - value: 0
+        text: 正常
+      - value: 1
+        text: 須清洗
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+      - conditions:
+        - key: H52
+          op: eq
+          target: 0
+  H53R:
+    type: text
+    title: ''
+    icon: pm25
+    models:
+    - key: H53
+      values:
+        func: ugm3
+  H54R:
+    type: text
+    title: ''
+    icon: net_cover
+    models:
+    - key: H54
+      values:
+      - value: 0
+        text: 正常
+      - value: 1
+        text: 異常
+  H55R:
+    type: text
+    title: ''
+    icon: dump
+    models:
+    - key: H55
+      values:
+      - value: 0
+        text: 正常
+      - value: 1
+        text: 傾倒
+  H56R:
+    type: text
+    title: ''
+    icon: co2
+    models:
+    - key: H56
+      values:
+        func: ppm
+  H57R:
+    type: text
+    title: "PM2.5 LED"
+    models:
+    - key: H57
+      values:
+        func: text
+  H58R:
+    type: text
+    title: "CO2 LED"
+    models:
+    - key: H58
+      values:
+        func: text
+  H59R:
+    type: text
+    title: ''
+    icon: net_hour
+    models:
+    - key: H59
+      values:
+        func: timerHour
+  H5AR:
+    type: text
+    title: ''
+    icon: change_net_count
+    models:
+    - key: H5A
+      values:
+        func: text

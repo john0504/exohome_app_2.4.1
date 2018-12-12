@@ -26,10 +26,8 @@ export class DeviceCreatePage {
   private deviceInfo$: Observable<any>;
   canContinue: boolean = false;
   canLocalMode: boolean = false;
-  canGpsMode: boolean = false;
   canBroadcast: boolean = false;
   canLocalBroadcast: boolean = false;
-  canCapsuleMode: boolean = false;
   canCloudMode: boolean = true;
   isTokenValidated: boolean = false;
   appName: Promise<string>;
@@ -67,10 +65,8 @@ export class DeviceCreatePage {
       this.deviceInfo$
         .subscribe(deviceInfo => {
           this.canLocalMode = deviceInfo && (deviceInfo.TenxLocal === "1" || deviceInfo.TenxLocal === "2");
-          this.canGpsMode = deviceInfo && deviceInfo.TenxGps === "1";
           this.canBroadcast = deviceInfo && deviceInfo.TenxBroadcast === "1";
           this.canLocalBroadcast = deviceInfo && deviceInfo.TenxLocalBroadcast === "1";
-          this.canCapsuleMode = deviceInfo && deviceInfo.TenxCapsule === "1";
           this.canCloudMode = deviceInfo && deviceInfo.TenxLocal !== "2" && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
         })
     );
@@ -122,11 +118,6 @@ export class DeviceCreatePage {
       .then(() => this.closePage());
   }
 
-  onGpsMode() {
-    this.navCtrl.push('GpsDevicePage')
-      .then(() => this.closePage());
-  }
-
   onBroadcast() {
     this.navCtrl.push('BroadcastPage', { mode: "Broadcast" })
       .then(() => this.closePage());
@@ -137,17 +128,10 @@ export class DeviceCreatePage {
       .then(() => this.closePage());
   }
 
-  onCapsuleMode() {
-    this.navCtrl.push('CapsuleDevicePage')
-      .then(() => this.closePage());
-  }
-
   closePage() {
     this.viewCtrl.dismiss();
     this.canLocalMode = false;
-    this.canGpsMode = false;
     this.canBroadcast = false;
-    this.canCapsuleMode = false;
     this.canCloudMode = true;
   }
 
