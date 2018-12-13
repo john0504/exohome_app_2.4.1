@@ -1,12 +1,12 @@
 ---
-familyName: type8-1
+familyName: YS-3591ACW
 familyMembers:
-- type8-1.*
+- YS-3591ACW.*
 images:
   thumbnail:
-    uri: "../assets/img/product.png"
+    uri: "assets/img/product.png"
   banner:
-    uri: "../assets/img/product_b.png"
+    uri: "assets/img/product_b.png"
 controlLayout:
   primary:
   - H00

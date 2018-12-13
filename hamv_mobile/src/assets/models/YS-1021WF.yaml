@@ -1,12 +1,12 @@
 ---
-familyName: typeE-2
+familyName: YS-1021WF
 familyMembers:
-- typeE-2.*
+- YS-1021WF.*
 images:
   thumbnail:
-    uri: "../assets/img/product2.png"
+    uri: "assets/img/product2.png"
   banner:
-    uri: "../assets/img/product_b.png"
+    uri: "assets/img/product_2b.png"
 controlLayout:
   primary:
   - H00

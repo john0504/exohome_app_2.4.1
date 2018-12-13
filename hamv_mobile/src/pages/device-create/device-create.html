@@ -14,13 +14,13 @@
       <h1 ion-text color="dark" align="center">{{ 'DEVICE_CREATE.CONNECT_TO_DEVICE' | translate }}</h1>
       <img class="hint" src="assets/img/phone_graphic.png">
       <p align="center" [innerHTML]="'DEVICE_CREATE.HOW_TO_BEGIN' | translate: { productName: themeService.productName, wifiName: themeService.wifiName }"></p>
-      <img src="../assets/img/go_setting.png" style="width : 50% ; height : 50%" (click)="nativeSettings.open('wifi')">
+      <img src="assets/img/go_setting.png" style="width : 50% ; height : 50%" (click)="nativeSettings.open('wifi')">
       <p align="center" [innerHTML]="'DEVICE_CREATE.AFTER_SETTINGS' | translate: { productName: (appName | async) }"></p>
-      <img src="../assets/img/localmode.png" style="width : 50% ; height : 50%" *ngIf="canLocalMode && canContinue"
+      <img src="assets/img/localmode.png" style="width : 50% ; height : 50%" *ngIf="canLocalMode && canContinue"
         (click)="onLocalMode()">
-      <img src="../assets/img/broadcast.png" style="width : 50% ; height : 50%" *ngIf="canBroadcast && canContinue"
+      <img src="assets/img/broadcast.png" style="width : 50% ; height : 50%" *ngIf="canBroadcast && canContinue"
         (click)="onBroadcast()">
-      <img src="../assets/img/local_broadcast.png" style="width : 50% ; height : 50%" *ngIf="canLocalBroadcast && canContinue"
+      <img src="assets/img/local_broadcast.png" style="width : 50% ; height : 50%" *ngIf="canLocalBroadcast && canContinue"
         (click)="onLocalBroadcast()">
     </div>
     <div>

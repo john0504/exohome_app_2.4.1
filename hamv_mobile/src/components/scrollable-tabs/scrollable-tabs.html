@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs" #scrollableTabs>
+<ul class="nav my-nav-tabs" #scrollableTabs>
   <li *ngFor="let tab of tabs; let i = index" tappable (click)="selectTab(tab, i)" [class.active]="selectedTabIndex === i">
     <span>{{ tab.title }}</span>
   </li>
