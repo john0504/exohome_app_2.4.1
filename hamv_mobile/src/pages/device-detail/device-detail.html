@@ -13,7 +13,7 @@
     (click)="showInfo()">
     {{ (deviceCore.isUpdating ? 'DEVICE_DETAIL.UPDATING' : !deviceCore.isConnected ? 'DEVICE_DETAIL.OFFLINE' : '') | translate }}
   </button>
-  <img class="banner-image" jy-lazy-load [source]="deviceCore.banner?.uri" placeholder="assets/img/model_image_banner_placeholder.png">
+  <!-- <img class="banner-image" jy-lazy-load [source]="deviceCore.banner?.uri" placeholder="assets/img/model_image_banner_placeholder.png"> -->
   <div class="main-content">
     <div *ngFor="let m of deviceCore.controllers; let i = index;">
       <ui-component (exoChange)="deviceCore.send($event)" [(ngModel)]="deviceCore.status" [disabled]="!deviceCore.isAvailable"

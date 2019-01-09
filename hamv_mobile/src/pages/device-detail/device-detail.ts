@@ -6,10 +6,10 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   StateStore,
   Account,
-  AppTasks
+  // AppTasks
 } from 'app-engine';
 import {
-  Loading,
+  // Loading,
   IonicPage,
   NavParams,
   ViewController,
@@ -24,7 +24,7 @@ import { first } from 'rxjs/operators';
 import { debounceImmediate } from '../../app/app.extends';
 import { DeviceCore } from '../../item-models/device/device-core';
 import { DeviceCoreInjector } from '../../item-models/device/device-core-injector';
-import { PopupService } from '../../providers/popup-service';
+// import { PopupService } from '../../providers/popup-service';
 
 @IonicPage()
 @Component({
@@ -40,7 +40,7 @@ export class DeviceDetailPage {
   deviceCore: DeviceCore;
   deviceSn: string;
   account: Account;
-  loading: Loading;
+  // loading: Loading;
 
   constructor(
     private actionSheetCtrl: ActionSheetController,
@@ -51,8 +51,8 @@ export class DeviceDetailPage {
     public navCtrl: NavController,
     public params: NavParams,
     public viewCtrl: ViewController,
-    private appTasks: AppTasks,
-    private popupService: PopupService,
+    // private appTasks: AppTasks,
+    // private popupService: PopupService,
   ) {
     this.deviceSn = this.params.get('deviceSn');
     this.subs = [];
@@ -68,9 +68,9 @@ export class DeviceDetailPage {
 
   ionViewDidLoad() {
     this.account$.pipe(first()).subscribe(account => this.account = account);
-    this.loading = this.popupService.makeLoading({
-      content: this.translate.instant('DEVICE_DETAIL.GET_RANGE')
-    });
+    // this.loading = this.popupService.makeLoading({
+    //   content: this.translate.instant('DEVICE_DETAIL.GET_RANGE')
+    // });
   }
 
   ionViewWillEnter() {
@@ -81,40 +81,40 @@ export class DeviceDetailPage {
     );
   }
 
-  // private processValues(devices) {
-  //   if (this.validateDevices(devices)) {
-  //     const device = devices[this.deviceSn];
-  //     this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
-  //     this.deviceCore.selfUpdate();
-  //   } else {
-  //     this.viewCtrl.dismiss();
-  //   }
-  // }
-
   private processValues(devices) {
     if (this.validateDevices(devices)) {
       const device = devices[this.deviceSn];
-      if (device.profile.esh.model) {
-        this.appTasks.getDeviceModelInfo(device.profile.esh.model).then((result: any) => {
-          this.loading.dismiss();
-          this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
-          this.deviceCore.status.sn = this.deviceSn;
-          this.deviceCore.status.range = result;
-          this.deviceCore.selfUpdate();
-        }).catch((error: any) => {
-          this.loading.dismiss();
-          this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
-          this.deviceCore.status.sn = this.deviceSn;
-          this.deviceCore.selfUpdate();
-        });
-      } else {
-        this.loading.dismiss();
-        this.viewCtrl.dismiss();
-      }
+      this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+      this.deviceCore.selfUpdate();
     } else {
       this.viewCtrl.dismiss();
     }
   }
+
+  // private processValues(devices) {
+  //   if (this.validateDevices(devices)) {
+  //     const device = devices[this.deviceSn];
+  //     if (device.profile.esh.model) {
+  //       this.appTasks.getDeviceModelInfo(device.profile.esh.model).then((result: any) => {
+  //         this.loading.dismiss();
+  //         this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+  //         this.deviceCore.status.sn = this.deviceSn;
+  //         this.deviceCore.status.range = result;
+  //         this.deviceCore.selfUpdate();
+  //       }).catch((error: any) => {
+  //         this.loading.dismiss();
+  //         this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+  //         this.deviceCore.status.sn = this.deviceSn;
+  //         this.deviceCore.selfUpdate();
+  //       });
+  //     } else {
+  //       this.loading.dismiss();
+  //       this.viewCtrl.dismiss();
+  //     }
+  //   } else {
+  //     this.viewCtrl.dismiss();
+  //   }
+  // }
 
   private validateDevices(devices) {
     return this.deviceSn && devices && devices[this.deviceSn];

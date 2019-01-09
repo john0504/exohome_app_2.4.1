@@ -26,6 +26,7 @@ export class ProvisionDonePage {
   private unregister;
   private deviceSn;
   newDeviceName: string;
+  deviceMachineType: string;
 
   constructor(
     private appTasks: AppTasks,
@@ -56,8 +57,20 @@ export class ProvisionDonePage {
     this.unregister && this.unregister();
   }
 
+  getMachineCodeCallback = (params) => {
+    return new Promise(() => {
+      if (params) {
+        this.deviceMachineType = params;
+      }
+    });
+  }
+
+  onQRcode() {
+    this.navCtrl.push('ScanPage', { callback: this.getMachineCodeCallback });
+  }
+
   onNext() {
-    this.saveDevice()    
+    this.saveDevice()
       .then(() => {
         this.navCtrl.pop();
       });
@@ -68,6 +81,6 @@ export class ProvisionDonePage {
       ? this.newDeviceName.trim()
       : this.translate.instant('PROVISION_LOADING.MY_NEW_PRODUCT', { productName: this.themeService.productName });
 
-      return this.appTasks.wsRequestSetPropertiesTask(this.deviceSn, { displayName });
+    return this.appTasks.wsRequestSetPropertiesTask(this.deviceSn, { displayName });
   }
 }

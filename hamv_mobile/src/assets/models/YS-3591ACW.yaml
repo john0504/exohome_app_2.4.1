@@ -1,0 +1,197 @@
+---
+familyName: YS-3591ACW
+familyMembers:
+- YS-3591ACW.*
+controlLayout:
+  primary:
+  - H00
+  - H50
+  secondary:
+  - H03
+  - H08
+  - H51
+  - H59R
+  - H52
+  - H53R
+  - H56R
+  - H54R
+  - H55R
+  - H57R
+  - H58R
+  - H5AR
+scheduleLayout:
+  primary:
+  - H50  
+  - H08
+  - H51
+deviceId: 8
+components:
+  H00:
+    type: toggle
+    title: 電源
+    models:
+    - key: H00
+      values:
+      - value: 0
+        text: 關閉
+      - value: 1
+        text: 開啟
+  H03:
+    type: range-with-toggle
+    title: 定時關機
+    models:
+    - key: H03
+      values:
+        min: 0
+        max: 12
+        step: 1
+        func: timer_hour
+      options: 
+        type: 'uint8'
+    - key: H03
+      values:
+      - value: 0
+        text: 關閉
+        icon: timer
+      - value: "*"
+        text: ''
+      default: 1
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H08:
+    type: toggle
+    title: 兒童鎖
+    models:
+    - key: H08
+      values:
+      - value: 0
+        text: 關閉
+      - value: 1
+        text: 開啟
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H50:
+    type: button-group
+    title: 風速
+    models:
+    - key: H50
+      values:
+      - value: 1
+        text: "1"
+      - value: 2
+        text: "2"
+      - value: 3
+        text: "3"
+      - value: 4
+        text: "4"
+      - value: 5
+        text: "5"
+      - value: 6
+        text: "6"
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H51:
+    type: toggle
+    title: 睡眠模式
+    models:
+    - key: H51
+      values:
+      - value: 0
+        text: 關閉
+      - value: 1
+        text: 開啟
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H52:
+    type: toggle
+    title: 濾網
+    models:
+    - key: H52
+      values:
+      - value: 0
+        text: 正常
+      - value: 1
+        text: 須清洗
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+      - conditions:
+        - key: H52
+          op: eq
+          target: 0
+  H53R:
+    type: text
+    title: "PM2.5"
+    models:
+    - key: H53
+      values:
+        func: airbox_pm25
+  H54R:
+    type: text
+    title: 濾網蓋
+    models:
+    - key: H54
+      values:
+      - value: 0
+        text: 正常
+      - value: 1
+        text: 異常
+  H55R:
+    type: text
+    title: 傾倒偵測
+    models:
+    - key: H55
+      values:
+      - value: 0
+        text: 正常
+      - value: 1
+        text: 傾倒
+  H56R:
+    type: text
+    title: CO2
+    models:
+    - key: H56
+      values:
+        func: airbox_co2
+  H57R:
+    type: text
+    title: "PM2.5 LED"
+    models:
+    - key: H57
+      values:
+        func: text
+  H58R:
+    type: text
+    title: "CO2 LED"
+    models:
+    - key: H58
+      values:
+        func: text
+  H59R:
+    type: text
+    title: 濾網壽命
+    models:
+    - key: H59
+      values:
+        func: text
+  H5AR:
+    type: text
+    title: 新風機需更換濾網數
+    models:
+    - key: H5A
+      values:
+        func: text

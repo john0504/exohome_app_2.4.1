@@ -17,6 +17,8 @@ grid-device-item {
   }
 
   .list-button {
+    background-color: transparent;
+    
     ion-label {
       &:first-of-type {
         align-items: center;

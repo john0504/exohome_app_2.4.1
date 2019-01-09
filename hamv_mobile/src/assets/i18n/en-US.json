@@ -149,7 +149,8 @@
     "UPDATE_NOW": "Update Now",
     "UPDATE_STARTED_MSG": "Your device will be temporarily inaccessible while the update happens, and will return to available once the update is complete.",
     "UPDATE_STARTED": "Update started",
-    "UPDATING": "Updating..."
+    "UPDATING": "Updating...",
+    "DEVICE_MACHINE_TYPE": "MACHINE TYPE"
   },
   "DEVICE_SHARING": {
     "ADD_GUEST_MSG": "Your {{ familyName }} is ready! To get started, create an account and claim your device here, {{ url }}",
@@ -278,7 +279,10 @@
     "PM25_VALUE": "PM2.5 VALUE",
     "VOC_VALUE": "VOC VALUE",
     "EMWD_LEVEL": "EMWD LEVEL",
-    "WEEK": "WEEK"
+    "WEEK": "WEEK",
+    "SLEEP_MODE": "SLEEP MODE",
+    "ROOM_TEMPERATURE": "ROOM TEMPERATURE",
+    "AIR_CLEAR": "AIR CLEAR"
   },
   "LANGUAGE": {
     "BACK": "Back",
@@ -381,6 +385,7 @@
     "MY_NEW_PRODUCT": "My New {{ productName }}",
     "READY_FOR_USE": "Your <a ion-text color=\"bluish\">{{ productName}}</a> is now connected and ready to use.",
     "RENAME_DEVICE": "Would you like to name your device?",
+    "DEVICE_MACHINE_TYPE": "Scan your device machine type",
     "SUCCESS": "Success!"
   },
   "PROVISION_FAILURE": {

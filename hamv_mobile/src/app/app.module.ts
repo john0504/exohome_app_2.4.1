@@ -32,7 +32,6 @@ import { DeviceControlService } from '../providers/device-control-service';
 import { GoAddingDeviceService } from '../providers/go-adding-device-service';
 import { PopupService } from '../providers/popup-service';
 import { ViewStateService } from '../providers/view-state-service';
-import { HockeyApp } from '../providers/hockey-app';
 import { OtaUpdatePopup } from '../providers/ota-update-popup';
 import { OtaUpdateResult } from '../providers/ota-update-result';
 import { ScheduleAdapterService } from '../providers/schedule-adapter-service';
@@ -44,7 +43,7 @@ import { ScheduleCoreInjector } from '../item-models/schedule/schedule-core-inje
 import { AppEngineModule, ReduxModule } from 'app-engine';
 
 import { Geolocation } from '@ionic-native/geolocation';
-import { BLE } from '@ionic-native/ble';
+import { QRScanner } from '@ionic-native/qr-scanner';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -98,7 +97,6 @@ export function createTranslateLoader(http: HttpClient) {
     OtaUpdateResult,
     PopupService,
     ViewStateService,
-    HockeyApp,
     OpenNativeSettings,
     ScheduleAdapterService,
     ThemeService,
@@ -107,7 +105,7 @@ export function createTranslateLoader(http: HttpClient) {
     ScheduleCoreInjector,
     CalendarService,
     Geolocation,
-    BLE,
+    QRScanner,
   ]
 })
 export class AppModule { }

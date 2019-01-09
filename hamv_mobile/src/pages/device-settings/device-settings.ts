@@ -12,6 +12,7 @@ import {
   IonicPage,
   NavParams,
   ViewController,
+  NavController,
 } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -40,6 +41,7 @@ export class DeviceSettingsPage {
   deviceName: string;
   isOwner: boolean = false;
   isVersionLoading: boolean = false;
+  deviceMachineType: string;
 
   constructor(
     private alertCtrl: AlertController,
@@ -48,6 +50,7 @@ export class DeviceSettingsPage {
     private popupService: PopupService,
     private stateStore: StateStore,
     private translate: TranslateService,
+    public navCtrl: NavController,
     public params: NavParams,
     public viewCtrl: ViewController,
   ) {
@@ -102,6 +105,18 @@ export class DeviceSettingsPage {
     if (!this.deviceName) {
       this.deviceName = this.deviceCore.displayName;
     }
+  }  
+
+  getMachineCodeCallback = (params) => {
+    return new Promise(() => {
+      if (params) {
+        this.deviceMachineType = params;
+      }
+    });
+  }
+
+  onQRcode() {
+    this.navCtrl.push('ScanPage', { callback: this.getMachineCodeCallback });
   }
 
   saveDevice() {

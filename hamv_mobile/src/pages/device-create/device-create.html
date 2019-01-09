@@ -44,7 +44,7 @@
       <button ion-button color="orange" class="full-button" full round *ngIf="canCapsuleMode && canContinue" (click)="onCapsuleMode()" full>{{ 'DEVICE_CREATE.CAPSULE_MODE' | translate }}</button>
     </div>
     <div>
-      <button ion-button color="primary" class="bottom-button full-button" [disabled]="!canContinue || !canCloudMode"  (click)="onNext()" full>{{ 'DEVICE_CREATE.CLOUD_MODE' | translate }}</button>
+      <button ion-button color="primary" class="bottom-button full-button" [disabled]="!canContinue || !canCloudMode"  (click)="onNext()" full>{{ 'DEVICE_CREATE.CONTINUE' | translate }}</button>
     </div>
   </div>
   <extra-page-space></extra-page-space>

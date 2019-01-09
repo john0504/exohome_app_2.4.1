@@ -31,7 +31,12 @@
       <div padding-bottom *ngIf="isOwner">
         <span class="control-item-text">{{ 'DEVICE_SETTINGS.SERIAL' | translate }}</span>
         <p>{{ deviceCore.macAddress }}</p>
-      </div>
+      </div>      
+      <div padding-bottom *ngIf="isOwner">
+        <span class="control-item-text">{{ 'DEVICE_SETTINGS.DEVICE_MACHINE_TYPE' | translate }}</span>
+        <p>{{ deviceMachineType }}</p>
+        <button ion-button color="orange" class="full-button" full round (click)="onQRcode()" full>QR Code</button>
+      </div>      
     </div>
     <div padding class="danger-side">
       <h2 align="center">{{ 'DEVICE_SETTINGS.DELETE_DEVICE' | translate }}</h2>

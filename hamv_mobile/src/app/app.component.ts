@@ -43,7 +43,6 @@ import { NgRedux } from '@angular-redux/store';
 import { debounceImmediate } from '../app/app.extends';
 import { CheckNetworkService } from '../providers/check-network';
 import { GoAddingDeviceService } from '../providers/go-adding-device-service';
-// import { HockeyApp } from '../providers/hockey-app';
 import { OtaUpdatePopup } from '../providers/ota-update-popup';
 import { OtaUpdateResult } from '../providers/ota-update-result';
 import { PopupService } from '../providers/popup-service';
@@ -97,20 +96,10 @@ export class MyApp implements OnInit, OnDestroy {
   testModeDatetime: number;
 
   appPages: Array<any> = [
-    // { title: 'APP.HOME', component: 'HomePage' },
-    { title: 'APP.HOME', component: 'LargeListPage' },
-    { title: 'Medium Grid', component: 'MediumGridPage' },
-    { title: 'Medium List', component: 'MediumListPage' },
-    // { title: 'Small Grid', component: 'SmallGridPage' },
-    // { title: 'Small List', component: 'SmallListPage' },
-    // { title: 'Single Accordion', component: 'SingleAccordionPage' },
+    { title: 'APP.HOME', component: 'MediumGridPage' },
     { title: 'APP.MY_GROUPS', component: 'MyGroupsPage' },
-    { title: 'APP.BLUETOOTH', component: 'BluetoothListPage' },
-    { title: 'APP.BLUETOOTH_MEMORY', component: 'BluetoothDevicePage' },
     { title: 'APP.SETTINGS', component: 'SettingsPage' },
   ];
-
-  bleSettingPage = { title: 'APP.BLUETOOTH_SETTING', component: 'BluetoothSettingPage' };
 
   constructor(
     private app: App,
@@ -121,7 +110,6 @@ export class MyApp implements OnInit, OnDestroy {
     private deeplinks: Deeplinks,
     private esService: EchartsService,
     private goService: GoAddingDeviceService,
-    // private hockeyApp: HockeyApp,
     private log: LogService,
     private imageCache: ImageCacheService,
     private mms: ModelManagerService,
@@ -151,7 +139,6 @@ export class MyApp implements OnInit, OnDestroy {
       .then(() => this.setupLanguage())
       .then(() => this.setupTestMode())
       .then(() => this.loadModels())
-      // .then(() => this.setupHockeyApp())
       .then(() => mixpanel.init(appConfig.mixpanel.token))
       .then(() => this.setupDeeplinks())
       .then(() => this.startAppEngine())
@@ -166,7 +153,6 @@ export class MyApp implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     // Don't put appEngine.onInit() in here, because plugins are not ready
-
     const middlewares = [];
     const reduxLogger = createLogger();
     middlewares.push(reduxLogger);
@@ -264,7 +250,7 @@ export class MyApp implements OnInit, OnDestroy {
   }
 
   goHomePage() {
-    this.navCtrl.setRoot('LargeListPage');
+    this.navCtrl.setRoot('MediumGridPage');
   }
 
   isCurrentPage(p): boolean {
@@ -373,14 +359,6 @@ export class MyApp implements OnInit, OnDestroy {
         if (this.platform.is('cordova')) this.setupDeeplinks();
       });
   }
-
-  // private setupHockeyApp() {
-  //   if (this.platform.is('android') && appConfig.hockeyApp.ids.android) {
-  //     this.hockeyApp.start(appConfig.hockeyApp.ids.android);
-  //   } else if (this.platform.is('ios') && appConfig.hockeyApp.ids.ios) {
-  //     this.hockeyApp.start(appConfig.hockeyApp.ids.ios);
-  //   }
-  // }
 
   private setupLogService() {
     if (!appConfig.app.disableLog) Logger.setup(this.log, appConfig.app.logConfig);

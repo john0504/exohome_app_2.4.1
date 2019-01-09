@@ -149,7 +149,8 @@
     "UPDATE_NOW": "立即更新",
     "UPDATE_STARTED_MSG": "您的裝置直到更新完成前將會暫時無法使用。",
     "UPDATE_STARTED": "開始更新",
-    "UPDATING": "更新中..."
+    "UPDATING": "更新中...",
+    "DEVICE_MACHINE_TYPE": "機型"
   },
   "DEVICE_SHARING": {
     "ADD_GUEST_MSG": "您的 {{ familyName }} 已經準備好了! 從 {{ url }} 創建帳號並且新增裝置開始吧。",
@@ -278,7 +279,10 @@
     "VOC_VALUE": "VOC值",
     "EMWD_LEVEL": "電磁波強度",
     "WEEK": "一週",
-    "HOUR": "小時"
+    "HOUR": "小時",
+    "SLEEP_MODE": "舒眠模式",
+    "ROOM_TEMPERATURE": "室溫",
+    "AIR_CLEAR": "空氣清淨"
   },
   "LANGUAGE": {
     "BACK": "上一頁",
@@ -381,6 +385,7 @@
     "MY_NEW_PRODUCT": "我的新{{ productName }}",
     "READY_FOR_USE": "您的 <a ion-text color=\"bluish\">{{ productName}}</a> 已經連接且可以使用.",
     "RENAME_DEVICE": "想要命名您的裝置嗎?",
+    "DEVICE_MACHINE_TYPE": "掃描裝置機型",
     "SUCCESS": "成功!"
   },
   "PROVISION_FAILURE": {

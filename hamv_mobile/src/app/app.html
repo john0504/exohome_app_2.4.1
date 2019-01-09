@@ -4,7 +4,7 @@
       <img class="center-logo" [src]="themeService.navbarLogoUrl" [ngClass]="{'center-logo-ios': isIOS() }">
     </ion-navbar>
   </ion-header>
-  <ion-content>
+  <ion-content class="left-page">
     <button ion-item menuClose *ngFor="let p of appPages" (click)="goPage(p)" [ngClass]="{'menu-item-highlight': isCurrentPage(p) }">
       <h2>{{ p.title | translate }}</h2>
     </button>

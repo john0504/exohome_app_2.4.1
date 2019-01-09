@@ -6,12 +6,6 @@ export interface AppConfig {
   mixpanel: {
     token: string,
   };
-  hockeyApp: {
-    ids: {
-      android: string,
-      ios: string,
-    }
-  };
   app: {
     group: {
       max: number,
@@ -50,17 +44,11 @@ export interface AppConfig {
 
 export const appConfig: AppConfig = {
   appEngine: {
-    solutionId: 'hamv-tenx',
-    productId: 'g30qvzkqcoki00000',
+    solutionId: 'tenx-smarthome-v2',
+    productId: 'k128kwz9llmds0000',
   },
   mixpanel: {
     token: 'YOUR_TOKEN',
-  },
-  hockeyApp: {
-    ids: {
-      android: '',
-      ios: '',
-    }
   },
   app: {
     group: {
