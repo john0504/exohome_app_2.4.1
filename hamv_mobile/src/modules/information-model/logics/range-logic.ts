@@ -105,6 +105,9 @@ export class RangeLogic extends LogicBase<RangeLogicState> {
     }
     if (range) {
       var keyNum = Number("0x" + key.substring(1, 3));
+      if (keyNum >= 0x50) {
+        return this.state;
+      }
       keyNum = keyNum | 0x80;
       let key2 = "H" + keyNum.toString(16).toUpperCase();
       range.forEach(element => {

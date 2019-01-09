@@ -281,7 +281,10 @@
     "PM25_VALUE": "PM2.5 VALUE",
     "VOC_VALUE": "VOC VALUE",
     "EMWD_LEVEL": "EMWD LEVEL",
-    "WEEK": "WEEK"
+    "WEEK": "WEEK",
+    "SLEEP_MODE": "SLEEP MODE",
+    "ROOM_TEMPERATURE": "ROOM TEMPERATURE",
+    "AIR_CLEAR": "AIR CLEAR"
   },
   "LANGUAGE": {
     "BACK": "Back",

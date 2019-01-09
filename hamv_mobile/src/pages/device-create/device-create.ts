@@ -25,13 +25,7 @@ export class DeviceCreatePage {
   private subs: Array<Subscription>;
   private deviceInfo$: Observable<any>;
   canContinue: boolean = false;
-  canLocalMode: boolean = false;
   canSupportMode: boolean = false;
-  canGpsMode: boolean = false;
-  canBroadcast: boolean = false;
-  canLocalBroadcast: boolean = false;
-  canCapsuleMode: boolean = false;
-  canCloudMode: boolean = true;
   isTokenValidated: boolean = false;
   appName: Promise<string>;
   alert: Alert;
@@ -70,13 +64,7 @@ export class DeviceCreatePage {
     this.subs.push(
       this.deviceInfo$
         .subscribe(deviceInfo => {
-          this.canLocalMode = deviceInfo && (deviceInfo.TenxLocal === "1" || deviceInfo.TenxLocal === "2");
           this.canSupportMode = deviceInfo && (deviceInfo.TenxLocal === "3" || deviceInfo.TenxLocal === "4");
-          this.canGpsMode = deviceInfo && deviceInfo.TenxGps === "1";
-          this.canBroadcast = deviceInfo && deviceInfo.TenxBroadcast === "1";
-          this.canLocalBroadcast = deviceInfo && deviceInfo.TenxLocalBroadcast === "1";
-          this.canCapsuleMode = deviceInfo && deviceInfo.TenxCapsule === "1";
-          this.canCloudMode = deviceInfo && (deviceInfo.TenxLocal === "1" || deviceInfo.TenxLocal === "3") && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
           this.brand = deviceInfo && deviceInfo.Brand;
           this.model = deviceInfo && deviceInfo.Model;
           this.serial = deviceInfo && deviceInfo.serial;
@@ -120,48 +108,14 @@ export class DeviceCreatePage {
     this.checkNetworkService.resume();
   }
 
-  onNext() {
-    this.navCtrl.push('SsidConfirmPage')
-      .then(() => this.closePage());
-  }
-
-  onLocalMode() {
-    this.navCtrl.push('LocalModeDeviceItemPage')
-      .then(() => this.closePage());
-  }
-
   onSupportMode() {
     this.navCtrl.push('SupportModePage', { brand: this.brand, model: this.model, serial: this.serial })
       .then(() => this.closePage());
   }
 
-  onGpsMode() {
-    this.navCtrl.push('GpsDevicePage')
-      .then(() => this.closePage());
-  }
-
-  onBroadcast() {
-    this.navCtrl.push('BroadcastPage', { mode: "Broadcast" })
-      .then(() => this.closePage());
-  }
-
-  onLocalBroadcast() {
-    this.navCtrl.push('BroadcastPage', { mode: "Local Broadcast" })
-      .then(() => this.closePage());
-  }
-
-  onCapsuleMode() {
-    this.navCtrl.push('CapsuleDevicePage')
-      .then(() => this.closePage());
-  }
-
   closePage() {
     this.viewCtrl.dismiss();
-    this.canLocalMode = false;
-    this.canGpsMode = false;
-    this.canBroadcast = false;
-    this.canCapsuleMode = false;
-    this.canCloudMode = true;
+    this.canSupportMode = false;
     this.brand = "";
     this.model = "";
     this.serial = "";

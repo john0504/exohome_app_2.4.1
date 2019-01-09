@@ -281,7 +281,10 @@
     "VOC_VALUE": "VOC值",
     "EMWD_LEVEL": "電磁波強度",
     "WEEK": "一週",
-    "HOUR": "小時"
+    "HOUR": "小時",
+    "SLEEP_MODE": "舒眠模式",
+    "ROOM_TEMPERATURE": "室溫",
+    "AIR_CLEAR": "空氣清淨"
   },
   "LANGUAGE": {
     "BACK": "上一頁",

@@ -136,7 +136,7 @@ export class SupportModePage {
       this.popupService.makeToast({
         message: this.translate.instant('DEVICE_CREATE.SUPPORT_MODE_LEAVE'),
         duration: 3000
-      })
+      });
     })).pipe(delay(1000)).subscribe();
   }
 
