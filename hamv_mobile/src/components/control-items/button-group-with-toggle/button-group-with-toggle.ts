@@ -21,6 +21,7 @@ export class ButtonGroupWithToggle extends UIComponentBase {
   btnGroupLogic: ButtonGroupLogic;
   btnGroupState: ButtonGroupLogicState;
   title: string = '';
+  icon: string;
   toggleLogic: ToggleLogic;
   toggleState: ToggleLogicState;
 
@@ -39,6 +40,7 @@ export class ButtonGroupWithToggle extends UIComponentBase {
   protected processLayout(model: ComponentModel, values: Array<ValueItem> | UIOptions, key: string, index: number, unitModel: ControlItemModel) {
     if (!values || !model || !unitModel || (index !== 0 && index !== 1) ) return;
     this.title = model.title;
+    this.icon = model.icon;
 
     if (index === 0) {
       this.btnGroupState = this.btnGroupLogic.processLayout(values, key, unitModel);

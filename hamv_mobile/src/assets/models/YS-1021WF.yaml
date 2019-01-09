@@ -86,11 +86,10 @@ components:
   H56:
     type: text
     title: ''
-    icon: co2
     models:
     - key: H56
       values:
-        func: airbox_co2
+        func: co2
   H63R:
     type: text
     title: 強制風扇

@@ -40,7 +40,7 @@ components:
       - value: 1
         text: 開啟
   H03:
-    type: button-group
+    type: button-group-with-toggle
     title: ''
     icon: set_timer
     models:
@@ -75,18 +75,20 @@ components:
         icon: btn_9
       - value: 10
         text: ""
-        icon: btn_a
+        icon: btn_10
       - value: 11
         text: ""
-        icon: btn_b
+        icon: btn_11
       - value: 12
         text: ""
-        icon: btn_c
-      disable:
-      - conditions:
-        - key: H00
-          op: eq
-          target: 0
+        icon: btn_12
+    - key: H03
+      values:
+      - value: 0
+        text: 關閉
+      - value: "*"
+        text: ''
+      default: 1
   H08:
     type: toggle
     title: ''
@@ -172,11 +174,10 @@ components:
   H53R:
     type: text
     title: ''
-    icon: pm25
     models:
     - key: H53
       values:
-        func: ugm3
+        func: pm25
   H54R:
     type: text
     title: ''
@@ -202,11 +203,10 @@ components:
   H56R:
     type: text
     title: ''
-    icon: co2
     models:
     - key: H56
       values:
-        func: ppm
+        func: co2
   H57R:
     type: text
     title: "PM2.5 LED"
@@ -228,7 +228,7 @@ components:
     models:
     - key: H59
       values:
-        func: timerHour
+        func: netHour
   H5AR:
     type: text
     title: ''

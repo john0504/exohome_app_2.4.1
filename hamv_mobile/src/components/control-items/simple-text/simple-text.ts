@@ -39,17 +39,19 @@ export class SimpleText extends UIComponentBase {
   protected processLayout(model: ComponentModel, values: Array<ValueItem> | UIOptions, key: string, index: number, unitModel: ControlItemModel) {
     if (!values || !model || !unitModel || index !== 0) return;
     this.title = model.title;
-    this.icon = model.icon;
+    this.icon = model.icon ? model.icon : this.state.currentValueItem.icon;
     this.state = this.logic.processLayout(values, key, unitModel);
   }
 
   protected processUIState(currentValueState: any, key: string, index: number, model: ControlItemModel) {
     if (!key || index !== 0) return;
     this.state = this.logic.processUIState(currentValueState, key, model);
+    this.icon = this.state.currentValueItem.icon ? this.state.currentValueItem.icon : this.icon;
   }
 
   protected processDisableState(disableState, key: string, index: number, model: ControlItemModel) {
     if (index !== 0) return;
     this.state = this.logic.processDisableState(disableState, key, model);
+    this.icon = this.state.currentValueItem.icon ? this.state.currentValueItem.icon : this.icon;
   }
 }

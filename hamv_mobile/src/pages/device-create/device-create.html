@@ -18,6 +18,8 @@
       <p align="center" [innerHTML]="'DEVICE_CREATE.AFTER_SETTINGS' | translate: { productName: (appName | async) }"></p>
       <img src="assets/img/localmode.png" style="width : 50% ; height : 50%" *ngIf="canLocalMode && canContinue"
         (click)="onLocalMode()">
+      <img src="assets/img/localmode.png" style="width : 50% ; height : 50%" *ngIf="canSupportMode && canContinue"
+        (click)="onSupportMode()">
       <img src="assets/img/broadcast.png" style="width : 50% ; height : 50%" *ngIf="canBroadcast && canContinue"
         (click)="onBroadcast()">
       <img src="assets/img/local_broadcast.png" style="width : 50% ; height : 50%" *ngIf="canLocalBroadcast && canContinue"

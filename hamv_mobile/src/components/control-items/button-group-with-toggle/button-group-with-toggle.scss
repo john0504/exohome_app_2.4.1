@@ -28,11 +28,13 @@ button-group-with-toggle {
     .toggle-block {
       @extend .main-block;
       justify-content: flex-end;
+      margin: 0;
+      padding: 0 0px;
 
       .toggle-status {
         font-size: 1.7rem;
         font-weight: $font-bold;
-        margin: 0 8px;
+        margin: 4px;
         text-align: $text-right;
       }
     }
@@ -48,17 +50,17 @@ button-group-with-toggle {
 
     .control-button {
       background-color: $background-transparent;
-      border: 1px solid transparent;
+      border: 1px solid $background-transparent;
       color: color($colors, dark);
       flex: 1 0 auto;
       font-size: $font-title;
       font-weight: $font-bold-light;
       margin: 0;
-      padding: 0 8px;
+      padding: 0 4px;
 
       ion-icon {
         font-size: $font-title + 0.9rem;
-        padding: 0 5px;
+        padding: 0 0px;
       }
 
       span {

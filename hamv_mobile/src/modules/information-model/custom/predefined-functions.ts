@@ -72,7 +72,6 @@ export const functionMap = {
       return {
         value: val,
         text: '--:--',
-        icon: 'timer',
       };
     }
     let hour = val / 60 | 0;
@@ -82,7 +81,6 @@ export const functionMap = {
     return {
       value: val,
       text: hourS + ':' + minS,
-      icon: 'timer',
     };
   },
   //create more from here
@@ -91,7 +89,6 @@ export const functionMap = {
       return {
         value: val,
         text: '--:--',
-        icon: 'time',
       };
     }
     let hour = val;
@@ -99,7 +96,28 @@ export const functionMap = {
     return {
       value: val,
       text: hourS + ':00',
-      icon: 'time',
+    };
+  },
+  netHour: (val) => {
+    if (val === -32767) {
+      return {
+        value: val,
+        text: '--:--',
+      };
+    }
+    let hour = val;
+    let hourS = hour < 10 ? '0' + hour : hour + '';
+    if (val >= 3000) {
+      return {
+        value: val,
+        text: hourS + ' hr',
+        icon: 'net_hour_red',
+      };
+    }
+    return {
+      value: val,
+      text: hourS + ' hr',
+      icon: 'net_hour',
     };
   },
   dust: (val) => {
@@ -164,6 +182,46 @@ export const functionMap = {
       text: round(val, 0) + ' μg/m³',
     };
   },
+  pm25: (val) => {
+    if (val === -32767) {
+      return {
+        value: val,
+        text: '-- μg/m³',
+        icon: 'pm25',
+      };
+    }
+    if (val < 36) {
+      return {
+        value: val,
+        text: round(val, 0) + ' μg/m³',
+        icon: 'pm25_green',
+      };
+    } else if (val < 59) {
+      return {
+        value: val,
+        text: round(val, 0) + ' μg/m³',
+        icon: 'pm25_yellow',
+      };
+    } else if (val < 71) {
+      return {
+        value: val,
+        text: round(val, 0) + ' μg/m³',
+        icon: 'pm25_red',
+      };
+    } else if (val < 500) {
+      return {
+        value: val,
+        text: round(val, 0) + ' μg/m³',
+        icon: 'pm25_purple',
+      };
+    } else {
+      return {
+        value: val,
+        text: '-- μg/m³',
+        icon: 'pm25',
+      };
+    }
+  },
   airbox_co2: (val) => {
     if (val === -32767) {
       return {
@@ -175,6 +233,40 @@ export const functionMap = {
       value: val,
       text: round(val, 0) + '　ppm',
     };
+  },
+  co2: (val) => {
+    if (val === -32767) {
+      return {
+        value: val,
+        text: '--　ppm',
+        icon: 'co2',
+      };
+    }
+    if (val < 801) {
+      return {
+        value: val,
+        text: round(val, 0) + '　ppm',
+        icon: 'co2_green',
+      };
+    } else if (val < 901) {
+      return {
+        value: val,
+        text: round(val, 0) + '　ppm',
+        icon: 'co2_yellow',
+      };
+    } else if (val < 5000) {
+      return {
+        value: val,
+        text: round(val, 0) + '　ppm',
+        icon: 'co2_red',
+      };
+    } else {
+      return {
+        value: val,
+        text: '--　ppm',
+        icon: 'co2',
+      };
+    }
   },
   airbox_voc: (val) => {
     if (val === -32767) {
