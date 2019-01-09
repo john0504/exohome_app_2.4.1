@@ -44,6 +44,9 @@ export const DT_MONTH = (marker: Date, direction: number) => {
   const startTime = marker.getTime();
   const nextMonth = (m + 1) % 12;
   marker.setMonth(nextMonth);
+  if (nextMonth == 0) {
+    marker.setFullYear(marker.getFullYear() + 1);
+  }
   const endTime = marker.getTime() - 1000;
   const rangeText = moment(startTime).format('MMM YYYY');
 

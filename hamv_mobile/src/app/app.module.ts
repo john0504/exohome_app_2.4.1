@@ -45,6 +45,7 @@ import { AppEngineModule, ReduxModule } from 'app-engine';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { BLE } from '@ionic-native/ble';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -108,6 +109,7 @@ export function createTranslateLoader(http: HttpClient) {
     CalendarService,
     Geolocation,
     BLE,
+    FileTransfer,
   ]
 })
 export class AppModule { }

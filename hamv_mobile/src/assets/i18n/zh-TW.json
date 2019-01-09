@@ -21,7 +21,8 @@
     "SHARED_ADDED_FAILED": "加入共享裝置失敗",
     "SHARED_ADDED": "共享裝置已加入",
     "LIST": "列表",
-    "BLUETOOTH": "藍牙",    
+    "BLUETOOTH": "藍牙", 
+    "BLUETOOTH_LED": "藍牙燈泡",      
     "BLUETOOTH_MEMORY": "藍牙記憶",
     "BLUETOOTH_SETTING": "藍牙設定",
     "TEST_MODE_COUNT":"再按{{ value }}次開啟測試模式",
@@ -99,11 +100,15 @@
     "BROADCAST": "雲端連動模式",
     "LOCAL_BROADCAST": "單機連動模式",
     "CAPSULE_MODE": "扭蛋機模式",
+    "OTA_MODE": "OTA模式",
     "CLOUD_MODE": "雲端控制模式",
     "GPS_MODE": "GPS模式",
     "LOCAL_MODE": "遙控器模式",
     "LOCAL_MODE_DEVICE": "本機裝置",
-    "LOCAL_MODE_LEAVE": "離開本機模式"
+    "LOCAL_MODE_LEAVE": "離開本機模式",
+    "SUPPORT_MODE": "工程模式",
+    "SUPPORTL_MODE_DEVICE": "工程模式裝置",
+    "SUPPORT_MODE_LEAVE": "離開工程模式"
   },
   "DEVICE_DETAIL": {
     "HISTORY": "歷史",
@@ -278,7 +283,10 @@
     "VOC_VALUE": "VOC值",
     "EMWD_LEVEL": "電磁波強度",
     "WEEK": "一週",
-    "HOUR": "小時"
+    "HOUR": "小時",
+    "ROOM_TEMPERATURE": "室溫",
+    "SLEEP_MODE": "舒眠模式",
+    "AIR_CLEAR": "空氣清淨"
   },
   "LANGUAGE": {
     "BACK": "上一頁",
@@ -509,5 +517,8 @@
   },
   "WIFI_AP_MANAGE": {
     "PAGE_TITLE": "已儲存網路"
+  },
+  "OTA_SERVICE": {
+    "OTA_SERVICE": "OTA服務"
   }
 }

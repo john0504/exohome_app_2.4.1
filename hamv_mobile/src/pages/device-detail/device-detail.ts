@@ -101,7 +101,7 @@ export class DeviceDetailPage {
           this.deviceCore.status.sn = this.deviceSn;
           this.deviceCore.status.range = result;
           this.deviceCore.selfUpdate();
-        }).catch((error: any) => {
+        }).catch(() => {
           this.loading.dismiss();
           this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
           this.deviceCore.status.sn = this.deviceSn;

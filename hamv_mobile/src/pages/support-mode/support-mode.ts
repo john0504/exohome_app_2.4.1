@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -9,7 +9,10 @@ import { NgRedux } from '@angular-redux/store';
 import { AppActions, AppTasks, ErrorsService } from 'app-engine';
 
 import { defer } from 'rxjs/observable/defer';
-import { delay, repeatWhen } from 'rxjs/operators';
+import {
+  delay,
+  // repeatWhen 
+} from 'rxjs/operators';
 
 import { ThemeService } from '../../providers/theme-service';
 import { isEqual } from 'lodash';
@@ -23,27 +26,23 @@ import { PopupService } from '../../providers/popup-service';
 import { CheckNetworkService } from '../../providers/check-network';
 import { Storage } from '@ionic/storage';
 
-var isTimeout = false;
-var timeoutNumber;
-
 @IonicPage()
 @Component({
-  selector: 'local-mode-device-item',
-  templateUrl: 'local-mode-device-item.html'
+  selector: 'support-mode',
+  templateUrl: 'support-mode.html'
 })
-export class LocalModeDeviceItemPage {
+export class SupportModePage {
 
   private subs: Array<Subscription>;
   private response$: Observable<any>;
   deviceItem: any;
   uiModel: any;
-  popitPopular: Array<any>;
-  popitExpanded: Array<any>;
   logs = [];
   myCommand = [];
-  token: string = "";
-  isPollingCmd: boolean = false;
   testMode: boolean = false;
+  isFirst: boolean = true;
+  isTimeout = false;
+  timeoutNumber;
 
   constructor(
 
@@ -60,95 +59,62 @@ export class LocalModeDeviceItemPage {
     private popupService: PopupService,
     public checkNetworkService: CheckNetworkService,
     private storage: Storage,
+    public params: NavParams,
   ) {
     this.subs = [];
-    this.popitPopular = [];
-    this.popitExpanded = [];
-    this.response$ = this.ngRedux.select(['localMode', 'response']);
+    this.response$ = this.ngRedux.select(['supportMode', 'response']);
     this.deviceItem = this.makeDeviceItem();
   }
 
-
   ionViewDidLoad() {
+    this.isFirst = true;
     this.checkNetworkService.pause();
     this.setupTestMode();
-
-    let cmd = {};
-    cmd["LocalMode"] = 1;
-    cmd["timestamp"] = Math.floor(this.getTimestamp() / 1000);
-    let arr = ["", cmd];
-    this.myCommand.push(arr);
   }
 
   ionViewDidEnter() {
-    isTimeout = false;
+    this.isTimeout = false;
     this.updateLayout();
     this.deviceItem.viewState = this.updateViewState(this.deviceItem.viewState);
-
     this.subs.push(
       this.response$
+        .pipe(delay(500))
         .subscribe(response => {
-          if (timeoutNumber) {
-            clearTimeout(timeoutNumber);
+          if (this.timeoutNumber) {
+            clearTimeout(this.timeoutNumber);
           }
-          this.printLog("get", JSON.stringify(response));
-          if (!response)
-            return;
-          const topic = response[0];
-          const payload = response[1];
-          switch (topic) {
-            case "":
-              if (this.isPollingCmd) {
-                this.sleep(500);
+          this.printLog("response", JSON.stringify(response));
+          if (this.isFirst) {
+            this.isFirst = false;
+            var cmd = { LocalMode: 3, timestamp: Math.floor(this.getTimestamp() / 1000) };
+            var arr: any = ["", cmd];
+            this.appTasks.postLocalModeTask(arr);
+          } else if (!response || response == "") {
+            this.callSupportModeTask();
+          } else {
+            if (response["data"]) {
+              const status = response;
+              if (!this.deviceItem.viewState.isConnected) {
+                this.deviceItem._device.status = status;
+                this.deviceItem._device.fields = Object.keys(status["data"]);
+                this.deviceItem._device.properties.displayName = this.params.get('serial');
+                this.deviceItem.viewState.isConnected = true;
               }
-              break;
-            case "$resource/states":
-              this.deviceItem._device.status = payload;
-              this.deviceItem.viewState.isConnected = true;
-              this.updateLayout();
-              this.deviceItem.viewState = this.updateViewState(this.deviceItem.viewState);
-              break;
-            case "$resource/ota":
-              break;
-            case "$resource/module":
-              this.deviceItem._device.profile.module = payload;
-              break;
-            case "$resource/cert":
-              this.deviceItem._device.profile.cert = payload;
-              break;
-            case "$resource/esh":
-              this.deviceItem._device.profile.esh = payload;
-              this.deviceItem._device.properties.displayName =
-                this.deviceItem._device.profile.esh.brand + ' '
-                + this.deviceItem._device.profile.esh.model;
-              break;
-            case "$resource/fields":
-              this.deviceItem._device.fields = payload;
-              this.updateLayout();
-              this.deviceItem.viewState = this.updateViewState(this.deviceItem.viewState);
-              break;
-            case "$resource/schedules":
-              break;
-            case "$resource/token":
-              this.token = payload;
-              this.sendLocalModeCommands("provisioned");
-              let arr = [`$resource/owner/${this.getTimestamp()}000`, "5"];
-              this.myCommand.push(arr);
-              break;
-            case "$resource/owner":
-              break;
-            case "$resource/result":
-              break;
-            case "$resource/action":
-              break;
+              if (this.myCommand.length == 0) {
+                this.deviceItem._device.status = status["data"];
+                this.updateLayout();
+                this.deviceItem.viewState = this.updateViewState(this.deviceItem.viewState);
+              }
+            }
+            this.sendPolling();
           }
         })
     );
-    this.subs.push(
-      defer(() => this.sendPolling())
-        .pipe(repeatWhen(attampes => attampes.pipe(delay(100))))
-        .subscribe()
-    );
+    // this.subs.push(
+    //   defer(() => this.sendPolling())
+    //     .pipe(repeatWhen(attampes => attampes.pipe(delay(1000))))
+    //     .subscribe()
+    // );
 
     this.subs.push(
       this.errorsService.getSubject()
@@ -157,20 +123,21 @@ export class LocalModeDeviceItemPage {
   }
 
   ionViewWillLeave() {
-    isTimeout = false;
-    let cmd = {};
-    cmd["LocalMode"] = 0;
-    cmd["timestamp"] = Math.floor(this.getTimestamp() / 1000);
-    let arr = ["", cmd];
-    this.myCommand.push(arr);
+    this.isTimeout = false;
     this.subs && this.subs.forEach((s) => {
       s.unsubscribe();
     });
     this.subs.length = 0;
-    this.popupService.makeToast({
-      message: this.translate.instant('DEVICE_CREATE.LOCAL_MODE_LEAVE'),
-      duration: 3000
-    });
+
+    var cmd = { LocalMode: 0, timestamp: Math.floor(this.getTimestamp() / 1000) };
+    var arr: any = ["", cmd];
+
+    defer(() => this.appTasks.postLocalModeTask(arr).then(() => {
+      this.popupService.makeToast({
+        message: this.translate.instant('DEVICE_CREATE.SUPPORT_MODE_LEAVE'),
+        duration: 3000
+      });
+    })).pipe(delay(1000)).subscribe();
   }
 
   ionViewWillUnload() {
@@ -188,77 +155,67 @@ export class LocalModeDeviceItemPage {
       });
   }
 
-  callLocalModeTask(command): Promise<any> {
-    this.printLog("send", JSON.stringify(command));
-    return this.appTasks.postLocalModeTask(command);
+  callSupportModeTask(command?): Promise<any> {
+    if (command) {
+      this.printLog("callSupportModeTask post", JSON.stringify(command));
+      return this.appTasks.postServiceStatusTask(this.getToken(), command);
+    } else {
+      this.printLog("callSupportModeTask get", "");
+      return this.appTasks.getServiceStatusTask(this.getToken());
+    }
   }
 
-  sendLocalModeCommands(request, command?) {
-    let cmd = {};
-    cmd["request"] = request;
-
-    if (command) {
-      cmd["data"] = command;
+  sendSupportModeCommands(command) {
+    var cmd = { data: command };
+    if (this.myCommand.length > 0) {
+      var cmds = this.myCommand.pop();
+      cmd = { data: Object.assign({}, cmds.data, command) };
     }
-
-    if (request == "provisioned") {
-      cmd["id"] = Math.floor(this.getTimestamp() / 1000);
-    } else {
-      cmd["id"] = this.token;
-    }
-
-    let arr = [`$resource/action/${this.getTimestamp()}000`, cmd];
-    this.myCommand.push(arr);
+    this.myCommand.push(cmd);
   }
 
   sendCommands(commands) {
-    let cmd = {};
+    var cmd = {};
     cmd[commands.key] = commands.value;
-    this.sendLocalModeCommands("set", cmd);
+    this.sendSupportModeCommands(cmd);
 
     this.deviceItem.viewState = Object.assign({}, this.deviceItem.viewState, cmd);
     this.viewStateService.setViewState(this.deviceItem._deviceSn, this.deviceItem.viewState);
   }
 
   sendPolling(): Promise<any> {
-    if (timeoutNumber) {
-      clearTimeout(timeoutNumber);
+    if (this.timeoutNumber) {
+      clearTimeout(this.timeoutNumber);
     }
-    if (isTimeout) {
+    if (this.isTimeout) {
+      this.printLog("Pring Error", "Time out");
       if (!this.testMode) {
         this.navCtrl.pop();
-        this.printLog("Pring Error", "Time out");
       }
     } else {
-      timeoutNumber = setTimeout(() => { isTimeout = true; }, 3000);
+      this.timeoutNumber = setTimeout(() => { this.isTimeout = true; }, 3000);
     }
     this.printLine();
     if (this.myCommand.length != 0) {
-      this.isPollingCmd = false;
       return this.sendNormalCommand();
     } else {
-      let cmd = {};
-      cmd["PollingStatus"] = 1;
-      let arr = ["", cmd];
-      this.isPollingCmd = true;
-      return this.callLocalModeTask(arr)
+      return this.callSupportModeTask()
         .catch(() => {
+          this.printLog("Pring Error", "callLocalModeTask PollingStatus");
           if (!this.testMode) {
             this.navCtrl.pop();
-            this.printLog("Pring Error", "callLocalModeTask PollingStatus");
           }
         });
     }
   }
 
   sendNormalCommand(): Promise<any> {
-    return this.callLocalModeTask(this.myCommand.pop())
-      .catch(() => {
-        if (!this.testMode) {
-          this.navCtrl.pop();
-          this.printLog("Pring Error", "callLocalModeTask NormalCommand");
-        }
-      });
+    return this.callSupportModeTask(this.myCommand.pop()).catch(() => {
+      this.printLog("Pring Error", "callSupportModeTask NormalCommand");
+      if (!this.testMode) {
+        this.navCtrl.pop();
+      }
+    });
   }
 
   sleep(milliseconds) {
@@ -301,7 +258,7 @@ export class LocalModeDeviceItemPage {
               popitPopular.push(m);
             }
           });
-          this.popitPopular = popitPopular;
+          this.deviceItem.popitPopular = popitPopular;
         }
 
         if (controlLayout && controlLayout.secondary) {
@@ -312,7 +269,7 @@ export class LocalModeDeviceItemPage {
               popitExpanded.push(m);
             }
           });
-          this.popitExpanded = popitExpanded;
+          this.deviceItem.popitExpanded = popitExpanded;
         }
 
         this.requestConfig(this.deviceItem._deviceSn, uiModel.config);
@@ -335,8 +292,9 @@ export class LocalModeDeviceItemPage {
 
   printLog(title, msg) {
     console.log(title, msg);
+    const currentDate: Date = new Date();
     this.logs.reverse();
-    this.logs.push(title + "=>" + msg);
+    this.logs.push('[' + currentDate + ']' + title + "=>" + msg);
     this.logs.reverse();
     if (this.logs.length > 100) {
       this.logs.pop();
@@ -359,17 +317,17 @@ export class LocalModeDeviceItemPage {
         profile: {
           esh: {
             class: 0, esh_version: "4.0.0", device_id: "1",
-            brand: "HITACHI", model: ""
+            brand: this.params.get('brand'), model: this.params.get('model')
           },
           module: {
-            firmware_version: "0.6.3", mac_address: "AC83F3A04298",
+            firmware_version: "0.6.3", mac_address: this.params.get('serial'),
             local_ip: "10.1.7.110", ssid: "tenx-hc2_2.4G"
           }, cert: {
             fingerprint: { sha1: "01234567890123456789" },
             validity: { not_before: "01/01/15", not_after: "12/31/25" }
           }
         },
-        properties: { displayName: this.translate.instant('DEVICE_CREATE.LOCAL_MODE_DEVICE') },
+        properties: { displayName: this.params.get('serial') },
         fields: [],
         status: {}
       },
@@ -385,9 +343,17 @@ export class LocalModeDeviceItemPage {
   // error is an action
   private handleErrors(error) {
     switch (error.type) {
+      case AppActions.GET_SERVICE_STATUS_DONE:
+        // this.navCtrl.setRoot('HomePage');
+        this.printLog("get error", JSON.stringify(error));
+        break;
+      case AppActions.POST_SERVICE_STATUS_DONE:
+        // this.navCtrl.setRoot('HomePage');
+        this.printLog("post error", JSON.stringify(error));
+        break;
       case AppActions.POST_LOCAL_MODE_DONE:
-        this.navCtrl.setRoot('HomePage');
-        this.printLog("error", JSON.stringify(error));
+        // this.navCtrl.setRoot('HomePage');
+        this.printLog("local error", JSON.stringify(error));
         break;
     }
   }
@@ -395,16 +361,29 @@ export class LocalModeDeviceItemPage {
   getTimestamp() {
     return Date.now();
   }
+
+  getToken() {
+    return btoa(this.params.get('brand') + this.params.get('model') + ':' + this.params.get('serial'));
+  }
 }
 
 const INITIAL_STATE = {
   response: null,
 };
 
-export function localModeReducer(state = INITIAL_STATE, action) {
+export function supportModeReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case AppActions.GET_SERVICE_STATUS_DONE:
+      if (!action.error) {
+        return Object.assign({}, state, { response: action.payload, });
+      }
+      return state;
+    case AppActions.POST_SERVICE_STATUS_DONE:
+      if (!action.error) {
+        return Object.assign({}, state, { response: action.payload, });
+      }
+      return state;
     case AppActions.POST_LOCAL_MODE_DONE:
-      console.log("get", state);
       if (!action.error) {
         return Object.assign({}, state, { response: action.payload, });
       }

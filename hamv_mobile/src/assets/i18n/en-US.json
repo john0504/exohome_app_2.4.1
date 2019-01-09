@@ -21,7 +21,8 @@
     "SHARED_ADDED_FAILED": "Failed to add shared device",
     "SHARED_ADDED": "Shared device added",
     "LIST": "LIST",
-    "BLUETOOTH": "BLUETOOTH",    
+    "BLUETOOTH": "BLUETOOTH",  
+    "BLUETOOTH_LED": "BLUETOOTH LED",    
     "BLUETOOTH_MEMORY": "BLUETOOTH MEMORY",
     "BLUETOOTH_SETTING": "BLUETOOTH SETTING",
     "TEST_MODE_COUNT":"Press {{ value }} more times to turn on the test mode",
@@ -99,11 +100,15 @@
     "BROADCAST": "CLOUD BROADCAST MODE",
     "LOCAL_BROADCAST": "LOCAL BROADCAST MODE",
     "CAPSULE_MODE": "CAPSULE MODE",
+    "OTA_MODE": "OTA MODE",
     "CLOUD_MODE": "CLOUD MODE",
     "GPS_MODE": "GPS MODE",
     "LOCAL_MODE": "LOCAL MODE",
     "LOCAL_MODE_DEVICE": "Local mode device",
-    "LOCAL_MODE_LEAVE": "Leave local mode"
+    "LOCAL_MODE_LEAVE": "Leave local mode",
+    "SUPPORT_MODE": "SUPPORT MODE",
+    "SUPPORT_MODE_DEVICE": "Support mode device",
+    "SUPPORT_MODE_LEAVE": "Leave support mode"
   },
   "DEVICE_DETAIL": {
     "HISTORY": "History",
@@ -278,7 +283,10 @@
     "PM25_VALUE": "PM2.5 VALUE",
     "VOC_VALUE": "VOC VALUE",
     "EMWD_LEVEL": "EMWD LEVEL",
-    "WEEK": "WEEK"
+    "WEEK": "WEEK",
+    "ROOM_TEMPERATURE": "ROOM TEMPERATURE",
+    "SLEEP_MODE": "SLEEP MODE",
+    "AIR_CLEAR": "AIR CLEAR"
   },
   "LANGUAGE": {
     "BACK": "Back",
@@ -509,5 +517,8 @@
   },
   "WIFI_AP_MANAGE": {
     "PAGE_TITLE": "Saved Networks"
+  },
+  "OTA_SERVICE": {
+    "OTA_SERVICE": "OTA SERVICE"
   }
 }

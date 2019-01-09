@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Alert, AlertController, IonicPage, NavController, ViewController } from 'ionic-angular';
+import { Alert, AlertController, IonicPage, NavController, ViewController, Loading } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { AppVersion } from '@ionic-native/app-version';
 import { Subscription } from 'rxjs/Subscription';
@@ -15,6 +15,9 @@ import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { ThemeService } from '../../providers/theme-service';
 import { CheckNetworkService } from '../../providers/check-network';
 
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { PopupService } from '../../providers/popup-service';
+
 @IonicPage()
 @Component({
   selector: 'page-device-create',
@@ -26,14 +29,20 @@ export class DeviceCreatePage {
   private deviceInfo$: Observable<any>;
   canContinue: boolean = false;
   canLocalMode: boolean = false;
+  canSupportMode: boolean = false;
   canGpsMode: boolean = false;
   canBroadcast: boolean = false;
   canLocalBroadcast: boolean = false;
   canCapsuleMode: boolean = false;
   canCloudMode: boolean = true;
+  canOtaMode: boolean = false;
   isTokenValidated: boolean = false;
   appName: Promise<string>;
   alert: Alert;
+  brand: string = "";
+  model: string = "";
+  serial: string = "";
+  loading: Loading;
 
   constructor(
     private stateStore: StateStore,
@@ -47,6 +56,8 @@ export class DeviceCreatePage {
     public navCtrl: NavController,
     public themeService: ThemeService,
     public viewCtrl: ViewController,
+    private transfer: FileTransfer,
+    private popupService: PopupService,
   ) {
     this.subs = [];
     this.appName = this.appVersion.getAppName();
@@ -54,10 +65,10 @@ export class DeviceCreatePage {
   }
 
   ionViewDidLoad() {
-    this.checkNetworkService.pause();
+    this.checkNetworkService.pause();    
   }
 
-  ionViewWillEnter() {
+  ionViewWillEnter() {   
     this.subs.push(
       this.queryDeviceInfo()
         .pipe(repeatWhen(attampes => attampes.pipe(delay(3000))))
@@ -67,14 +78,20 @@ export class DeviceCreatePage {
       this.deviceInfo$
         .subscribe(deviceInfo => {
           this.canLocalMode = deviceInfo && (deviceInfo.TenxLocal === "1" || deviceInfo.TenxLocal === "2");
+          this.canSupportMode = deviceInfo && (deviceInfo.TenxLocal === "3" || deviceInfo.TenxLocal === "4");
           this.canGpsMode = deviceInfo && deviceInfo.TenxGps === "1";
           this.canBroadcast = deviceInfo && deviceInfo.TenxBroadcast === "1";
           this.canLocalBroadcast = deviceInfo && deviceInfo.TenxLocalBroadcast === "1";
           this.canCapsuleMode = deviceInfo && deviceInfo.TenxCapsule === "1";
-          this.canCloudMode = deviceInfo && deviceInfo.TenxLocal !== "2" && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
+          this.canCloudMode = deviceInfo && (deviceInfo.TenxLocal === "1" || deviceInfo.TenxLocal === "3") && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
+          this.canCapsuleMode = deviceInfo && deviceInfo.TenxCapsule === "1";
+          this.canOtaMode = deviceInfo && deviceInfo.TenxOta === "1";
+          this.brand = deviceInfo && deviceInfo.Brand;
+          this.model = deviceInfo && deviceInfo.Model;
+          this.serial = deviceInfo && deviceInfo.serial;
         })
     );
-  }
+  }  
 
   private queryDeviceInfo() {
     return defer(() => this.appTasks.queryDeviceInfoTask())
@@ -122,6 +139,11 @@ export class DeviceCreatePage {
       .then(() => this.closePage());
   }
 
+  onSupportMode() {
+    this.navCtrl.push('SupportModePage', { brand: this.brand, model: this.model, serial: this.serial })
+      .then(() => this.closePage());
+  }
+
   onGpsMode() {
     this.navCtrl.push('GpsDevicePage')
       .then(() => this.closePage());
@@ -142,13 +164,55 @@ export class DeviceCreatePage {
       .then(() => this.closePage());
   }
 
+  onOtaMode() {
+    this.navCtrl.push('OtaServicePage')
+      .then(() => this.closePage());
+  }
+
+  onOta() {
+    this.loading = this.popupService.makeLoading({
+      content: this.translate.instant('PROVISION_LOADING.CONNECTING')
+    });
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    let options: FileUploadOptions = {
+      fileKey: 'Dev12T_20181221_OTA',
+      fileName: 'Dev12T_20181221_OTA.bin',
+      chunkedMode: false,
+      mimeType: "bin",
+      headers: {}
+    };
+
+    fileTransfer.upload('../assets/ota/Dev12T_20181221_OTA.bin', 'http://192.168.1.1:32051/EasyOTA', options)
+      .then((data) => {
+        console.log(data + " Uploaded Successfully");
+        this.loading.dismiss();
+        this.popupService.makeToast({
+          message: this.translate.instant("Image uploaded successfully"),
+          duration: 3000
+        });
+      }, (err) => {
+        console.log(err);
+        this.loading.dismiss();
+
+        this.popupService.makeToast({
+          message: this.translate.instant(err),
+          duration: 3000
+        });
+      });
+  }  
+
   closePage() {
     this.viewCtrl.dismiss();
     this.canLocalMode = false;
+    this.canSupportMode = false;
     this.canGpsMode = false;
     this.canBroadcast = false;
     this.canCapsuleMode = false;
     this.canCloudMode = true;
+    this.brand = "";
+    this.model = "";
+    this.serial = "";
   }
 
   private showAlert() {

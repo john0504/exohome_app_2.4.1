@@ -55,6 +55,7 @@ import { PageRouteManager } from '../components/page-nav/page-route-manager';
 import { ssidConfirmReducer } from '../pages/ssid-confirm/ssid-confirm';
 import { deviceCreateReducer } from '../pages/device-create/device-create';
 import { localModeReducer } from '../pages/local-mode-device-item/local-mode-device-item';
+import { supportModeReducer } from '../pages/support-mode/support-mode';
 
 import { ComponentProvider, ModelManagerService } from '../modules/information-model';
 import mixpanel from 'mixpanel-browser';
@@ -97,16 +98,13 @@ export class MyApp implements OnInit, OnDestroy {
   testModeDatetime: number;
 
   appPages: Array<any> = [
-    // { title: 'APP.HOME', component: 'HomePage' },
     { title: 'APP.HOME', component: 'LargeListPage' },
     { title: 'Medium Grid', component: 'MediumGridPage' },
     { title: 'Medium List', component: 'MediumListPage' },
-    // { title: 'Small Grid', component: 'SmallGridPage' },
-    // { title: 'Small List', component: 'SmallListPage' },
-    // { title: 'Single Accordion', component: 'SingleAccordionPage' },
     { title: 'APP.MY_GROUPS', component: 'MyGroupsPage' },
     { title: 'APP.BLUETOOTH', component: 'BluetoothListPage' },
     { title: 'APP.BLUETOOTH_MEMORY', component: 'BluetoothDevicePage' },
+    { title: 'APP.BLUETOOTH_LED', component: 'BleLedListPage' },
     { title: 'APP.SETTINGS', component: 'SettingsPage' },
   ];
 
@@ -176,6 +174,7 @@ export class MyApp implements OnInit, OnDestroy {
       ssidConfirm: ssidConfirmReducer,
       deviceCreate: deviceCreateReducer,
       localMode: localModeReducer,
+      supportMode: supportModeReducer,
     };
     this.reduxModule.configureStore(pageReducers);
     this.reduxModule.setLoginPage(MyModalWrapper);

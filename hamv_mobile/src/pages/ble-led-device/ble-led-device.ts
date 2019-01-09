@@ -4,8 +4,7 @@ import { IonicPage, NavController, Platform, ViewController } from 'ionic-angula
 import { Insomnia } from '@ionic-native/insomnia';
 import { BLE } from '@ionic-native/ble';
 import { Subscription } from 'rxjs/Subscription';
-import { defer } from 'rxjs/observable/defer';
-import { delay, repeatWhen } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
 
 import { ThemeService } from '../../providers/theme-service';
 import { isEqual } from 'lodash';
@@ -21,15 +20,13 @@ import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
-  selector: 'page-bluetooth-device',
-  templateUrl: 'bluetooth-device.html'
+  selector: 'page-ble-led-device',
+  templateUrl: 'ble-led-device.html'
 })
-export class BluetoothDevicePage {
+export class BleLedDevicePage {
 
   private subs: Array<Subscription>;
-  private retryTime = 5000;
   isShowLog = 0;
-  private lostNotifyCount = 0;
   _deviceList = [];
   logs = [];
   bleList = [];
@@ -96,13 +93,6 @@ export class BluetoothDevicePage {
         this.isShowLog = 0;
       }
     });
-    this.storage.get('retryTime').then((retryTime) => {
-      if (retryTime) {
-        this.retryTime = retryTime;
-      } else {
-        this.retryTime = 5000;
-      }
-    });
     this.storage.get('connectDevices').then((connectDevices) => {
       if (connectDevices) {
         this.bleList = connectDevices;
@@ -111,19 +101,10 @@ export class BluetoothDevicePage {
         });
         this.scanDevice();
       } else {
-        this.navCtrl.setRoot('BluetoothListPage').then(() => {
+        this.navCtrl.setRoot('BleLedListPage').then(() => {
           this.viewCtrl.dismiss();
         });
       }
-    });
-  }
-
-  refreshData() {
-    this._deviceList.forEach((deviceItem) => {
-      this.subs.push(
-        defer(() => this.pollingService(deviceItem))
-          .subscribe()
-      );
     });
   }
 
@@ -160,18 +141,16 @@ export class BluetoothDevicePage {
                   this.printLog(deviceItem.deviceName, "property", JSON.stringify(service));
                   deviceItem.txServiceId = service.service;
                   deviceItem.txCharacteristicId = service.characteristic;
-                  this.startNotification(deviceItem);
                 }
                 break;
               case "Notify": this.printLog(deviceItem.deviceName, "property", JSON.stringify(service));
                 deviceItem.rxServiceId = service.service;
                 deviceItem.rxCharacteristicId = service.characteristic;
-                this.startNotification(deviceItem);
                 break;
             }
           });
         },
-        error => {
+        () => {
           this.printLog(deviceItem.deviceName, "disconnect", JSON.stringify(deviceItem.deviceId));
           this.bleService.disconnect(deviceItem.deviceId);
         });
@@ -180,19 +159,17 @@ export class BluetoothDevicePage {
 
   private callBluetoothTask(deviceItem, command): Promise<any> {
     this.printLog(deviceItem.deviceName, "send", JSON.stringify(command));
-    return this.writeService(deviceItem, JSON.stringify(command));
+    return this.writeService(deviceItem, command);
   }
 
-  private sendBluetoothCommands(deviceItem, request, command): Promise<any> {
-    let cmd = {};
-    cmd[request] = command;
-    return this.callBluetoothTask(deviceItem, cmd);
+  private sendBluetoothCommands(deviceItem, command): Promise<any> {
+    return this.callBluetoothTask(deviceItem, command);
   }
 
   sendCommands(deviceItem, commands) {
     let cmd = {};
     cmd[commands.key] = commands.value;
-    this.sendBluetoothCommands(deviceItem, "data", cmd);
+    this.sendBluetoothCommands(deviceItem, commands.value);
     deviceItem.viewState = Object.assign({}, deviceItem.viewState, cmd);
     this.viewStateService.setViewState(deviceItem._deviceSn, deviceItem.viewState);
   }
@@ -271,33 +248,21 @@ export class BluetoothDevicePage {
     }
   }
 
-  private writeService(deviceItem, string): Promise<any> {
+  private writeService(deviceItem, value): Promise<any> {
+    var arrayBuffer = new ArrayBuffer(1);
+    var dataView = new DataView(arrayBuffer);
+    dataView.setUint8(0, value);
     return this.bleService.write(
       deviceItem.deviceId,
       deviceItem.txServiceId,
       deviceItem.txCharacteristicId,
-      this.stringToBytes(string))
+      arrayBuffer)
       .then((data) => {
         this.printLog(deviceItem.deviceName, "response", JSON.stringify(data));
-        if (deviceItem.model != "TlgBox") {
-          deviceItem.connectCount = 0;
-        }
         this.cd.detectChanges();
       }, (error) => {
         this.printLog(deviceItem.deviceName, "writeError", JSON.stringify(error));
       });
-  }
-
-  private stringToBytes(string) {
-    var array = new Uint8Array(string.length);
-    for (var i = 0, l = string.length; i < l; i++) {
-      array[i] = string.charCodeAt(i);
-    }
-    return array.buffer;
-  }
-
-  private bytesToString(buffer) {
-    return String.fromCharCode.apply(null, new Uint8Array(buffer));
   }
 
   private makeDeviceItem(device): any {
@@ -313,7 +278,7 @@ export class BluetoothDevicePage {
         profile: {
           esh: {
             class: 0, esh_version: "4.0.0", device_id: "1",
-            brand: "HITACHI", model: ""
+            brand: "HITACHI", model: "bleled"
           },
           module: {
             firmware_version: "0.6.3", mac_address: "AC83F3A04298",
@@ -324,143 +289,16 @@ export class BluetoothDevicePage {
           }
         },
         properties: { displayName: device.name },
-        fields: [],
-        status: {}
+        fields: ["H00", "H01", "H02", "H03"],
+        status: { "H00": 0, "H01": 1, "H02": 1, "H03": 65 }
       },
       _deviceSn: "",
-      viewState: { isConnected: false },
+      viewState: { isConnected: true },
       showDetails: false,
       popitPopular: [],
       popitExpanded: []
     };
     return deviceItem;
-  }
-
-  startNotification(deviceItem) {
-    let count = 0;
-    let message = "";
-    let sub = defer(() => this.sendBluetoothCommands(deviceItem, "request", "info"))
-      .pipe(repeatWhen(attampes => attampes.pipe(delay(3000))))
-      .subscribe();
-    // this.subs.push(
-    //   defer(() => this.sendBluetoothCommands(deviceItem, "request", "info"))
-    //     .pipe(repeatWhen(attampes => attampes.pipe(delay(this.retryTime))))
-    //     .subscribe());
-    this.subs.push(
-      this.bleService.startNotification(
-        deviceItem.deviceId,
-        deviceItem.rxServiceId,
-        deviceItem.rxCharacteristicId
-      ).subscribe((buffer) => {
-        this.printLog(deviceItem.deviceName, "buffer", this.bytesToString(buffer));
-        message += this.bytesToString(buffer);
-        let endzero = false;
-        let array = new Uint8Array(buffer);
-        array.forEach(byte => {
-          if (byte === 0x7B) {
-            count++;
-          } else if (byte === 0x7D) {
-            count--;
-          }
-          if (byte === 0x00) {
-            endzero = true;
-          }
-        });
-        if (count === 0) {
-          this.lostNotifyCount = 0;
-          if (endzero) {
-            message = message.substring(0, message.length - 1);
-          }
-
-          let jsonObj;
-          try {
-            jsonObj = JSON.parse(message);
-            if (jsonObj.online == 1) {
-              this.printLog(deviceItem.deviceName, "message", message);
-              deviceItem.connectCount = 0;
-            }
-            if (jsonObj.change) {
-              this.printLog(deviceItem.deviceName, "change", message);
-              deviceItem._device.status = jsonObj.change;
-              this.updateLayout(deviceItem);
-              deviceItem.viewState = this.updateViewState(deviceItem);
-              this.sendBluetoothCommands(deviceItem, "response", "ok");
-              deviceItem.viewState.isConnected = true;
-              this.cd.detectChanges();
-            }
-            switch (jsonObj.response) {
-              case "info":
-                sub.unsubscribe();
-                if (deviceItem._device.profile.esh.model == "") {
-                  this.printLog(deviceItem.deviceName, "info", message);
-                  deviceItem._device.profile.esh.model = jsonObj ? jsonObj.data.profile.esh.model : "";
-                  deviceItem._device.fields = jsonObj ? jsonObj.data.fields : [];
-                  deviceItem._deviceSn = deviceItem._device.device;
-                  this.updateLayout(deviceItem);
-                  deviceItem.viewState = this.updateViewState(deviceItem);
-                  this.cd.detectChanges();
-                }
-                break;
-            }
-            switch (jsonObj.request) {
-              case "status_change":
-                this.printLog(deviceItem.deviceName, "status_change", message);
-                deviceItem._device.status = jsonObj.data;
-                this.updateLayout(deviceItem);
-                deviceItem.viewState = this.updateViewState(deviceItem);
-                this.sendBluetoothCommands(deviceItem, "response", "ok");
-                deviceItem.viewState.isConnected = true;
-                this.cd.detectChanges();
-                break;
-            }
-          } catch (e) {
-            this.printLog(deviceItem.deviceName, "error", message);
-            if (deviceItem._device.profile.esh.model == "") {
-              this.sendBluetoothCommands(deviceItem, "request", "info");
-            }
-          }
-          message = "";
-          count = 0;
-        } else if (count < 0) {
-          count = 0;
-          message = "";
-        } else {
-          this.lostNotifyCount++;
-          if (this.lostNotifyCount >= 10) {
-            this.lostNotifyCount = 0;
-            count = 0;
-            message = "";
-          }
-        }
-      }, (error) => {
-        this.printLog(deviceItem.deviceName, "readError", JSON.stringify(error));
-      })
-    );
-  }
-
-  private pollingService(deviceItem): Promise<any> {
-    if (deviceItem.connectCount > 3 || !deviceItem.viewState.isConnected) {
-      deviceItem.connectCount = 0;
-      this.scanDevice();
-      this.printLog(deviceItem.deviceName, "Start disconnect", deviceItem.deviceId);
-      return this.bleService.disconnect(deviceItem.deviceId).then(() => {
-        deviceItem.viewState.isConnected = false;
-        this.printLog(deviceItem.deviceName, "Disconnect done", deviceItem.deviceId);
-      });
-    } else {
-      deviceItem.connectCount++;
-    }
-
-    return this.bleService.isConnected(deviceItem.deviceId).then(
-      () => {
-        deviceItem.viewState.isConnected = true;
-        this.sendBluetoothCommands(deviceItem, "online", deviceItem.connectCount);
-      },
-      () => {
-        this.printLog(deviceItem.deviceName,
-          "is not connected (" + deviceItem.connectCount + ")",
-          deviceItem.deviceId);
-      });
   }
 
   linkDevice(device) {
@@ -470,10 +308,5 @@ export class BluetoothDevicePage {
     this._deviceList.push(deviceItem);
     this.printLog(deviceItem.deviceName, "", deviceItem.deviceId);
     deviceItem.connectCount = 0;
-    this.subs.push(
-      defer(() => this.pollingService(deviceItem))
-        .pipe(repeatWhen(attampes => attampes.pipe(delay(this.retryTime))))
-        .subscribe()
-    );
   }
 }
