@@ -92,8 +92,8 @@ export const appConfig: AppConfig = {
       ghName: 'gh_name',
     },
     ble: {      
-      bleProductName: 'AirBox',
-      bleName: 'BLE-XXXX',
+      bleProductName: '藍牙燈泡',
+      bleName: 'apm5283',
     },
   }
 };

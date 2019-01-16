@@ -62,6 +62,8 @@ export class BleLedDevicePage {
 
   ionViewDidEnter() {
     this.loadStorage();
+    // let device = { name: "APM LED", device: "000", service: "111", characteristic: "222" };
+    // this.linkDevice(device);
   }
 
   ionViewWillLeave() {
@@ -169,6 +171,14 @@ export class BleLedDevicePage {
   sendCommands(deviceItem, commands) {
     let cmd = {};
     cmd[commands.key] = commands.value;
+    if (commands.key == "H01") {      
+      cmd["H02"] = commands.value;
+      if (commands.value > 10) {
+        cmd["H03"] = commands.value;
+      }      
+    } else if (commands.key == "H03") {
+      cmd["H02"] = commands.value;
+    }
     this.sendBluetoothCommands(deviceItem, commands.value);
     deviceItem.viewState = Object.assign({}, deviceItem.viewState, cmd);
     this.viewStateService.setViewState(deviceItem._deviceSn, deviceItem.viewState);
@@ -290,7 +300,7 @@ export class BleLedDevicePage {
         },
         properties: { displayName: device.name },
         fields: ["H00", "H01", "H02", "H03"],
-        status: { "H00": 0, "H01": 1, "H02": 1, "H03": 65 }
+        status: { "H00": 1, "H01": 70, "H02": 70, "H03": 70 }
       },
       _deviceSn: "",
       viewState: { isConnected: true },

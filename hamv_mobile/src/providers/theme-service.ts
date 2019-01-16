@@ -16,7 +16,7 @@ import { appConfig } from '../app/app.config';
 const configFilename = 'config.json';
 const logoFilename = 'logo.png';
 const navbarLogoFilename = 'logo_navbar.png';
-const templateFilename = 'theme-custom-template.css';
+// const templateFilename = 'theme-custom-template.css';
 const themeFilename = 'theme-custom.css';
 
 @Injectable()
@@ -101,23 +101,23 @@ export class ThemeService {
 
     let promise = this.useLocal();
 
-    promise
-      .then(() => this.checkCloud())
-      .then(isNew => {
-        if (isNew) {
-          this.makeTheme();
-          this.getImageFromCloud({
-            endpoint: this.logoEndpoint,
-            filename: logoFilename,
-          })
-            .then(fileEntry => this.updateLogoFile(fileEntry));
-          this.getImageFromCloud({
-            endpoint: this.navbarLogoEndpoint,
-            filename: navbarLogoFilename,
-          })
-            .then(fileEntry => this.updateNavbarLogoFile(fileEntry));
-        }
-      });
+    // promise
+    //   .then(() => this.checkCloud())
+    //   .then(isNew => {
+    //     if (isNew) {
+    //       this.makeTheme();
+    //       this.getImageFromCloud({
+    //         endpoint: this.logoEndpoint,
+    //         filename: logoFilename,
+    //       })
+    //         .then(fileEntry => this.updateLogoFile(fileEntry));
+    //       this.getImageFromCloud({
+    //         endpoint: this.navbarLogoEndpoint,
+    //         filename: navbarLogoFilename,
+    //       })
+    //         .then(fileEntry => this.updateNavbarLogoFile(fileEntry));
+    //     }
+    //   });
 
     return promise;
   }
@@ -134,29 +134,29 @@ export class ThemeService {
     this.renderer.appendChild(document.querySelector('head'), link);
   }
 
-  private checkCloud() {
-    return this.getConfigFromCloud()
-      .then(config => {
-        if (config.timestamp === this.config.timestamp) return false;
-        this.config = config;
-        return true;
-      });
-  }
+  // private checkCloud() {
+  //   return this.getConfigFromCloud()
+  //     .then(config => {
+  //       if (config.timestamp === this.config.timestamp) return false;
+  //       this.config = config;
+  //       return true;
+  //     });
+  // }
 
-  private copyFile(path, filename) {
-    return this.file.checkFile(this.file.cacheDirectory, filename)
-      .then(bool => {
-        if (bool) {
-          return this.file.removeFile(this.file.cacheDirectory, filename);
-        }
-      })
-      .then(() => this.file.copyFile(
-        path,
-        filename,
-        this.file.cacheDirectory,
-        filename
-      ));
-  }
+  // private copyFile(path, filename) {
+  //   return this.file.checkFile(this.file.cacheDirectory, filename)
+  //     .then(bool => {
+  //       if (bool) {
+  //         return this.file.removeFile(this.file.cacheDirectory, filename);
+  //       }
+  //     })
+  //     .then(() => this.file.copyFile(
+  //       path,
+  //       filename,
+  //       this.file.cacheDirectory,
+  //       filename
+  //     ));
+  // }
 
   private getConfigFromCloud(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -181,38 +181,38 @@ export class ThemeService {
       });
   }
 
-  private getImageFromCloud(params): Promise<any> {
-    return this.http.get(params.endpoint, { responseType: 'blob' })
-      .toPromise()
-      .then(blob => this.writeFile(params.filename, blob))
-      .catch(e => this.copyFile(
-        this.file.applicationDirectory + 'www/assets/img/',
-        params.filename,
-      ));
-  }
+  // private getImageFromCloud(params): Promise<any> {
+  //   return this.http.get(params.endpoint, { responseType: 'blob' })
+  //     .toPromise()
+  //     .then(blob => this.writeFile(params.filename, blob))
+  //     .catch(e => this.copyFile(
+  //       this.file.applicationDirectory + 'www/assets/img/',
+  //       params.filename,
+  //     ));
+  // }
 
   private getFileFromLocal(filename): Promise<any> {
     return this.file.resolveDirectoryUrl(this.file.cacheDirectory)
       .then(directoryEntry => this.file.getFile(directoryEntry, filename, {}));
   }
 
-  private hexToRgb(hex: string): string {
-    return hex
-      .slice(1)
-      .match(/.{1,2}/g)
-      .map(hex => parseInt(hex, 16))
-      .join();
-  }
+  // private hexToRgb(hex: string): string {
+  //   return hex
+  //     .slice(1)
+  //     .match(/.{1,2}/g)
+  //     .map(hex => parseInt(hex, 16))
+  //     .join();
+  // }
 
-  private makeTheme(): Promise<any> {
-    return this.file.readAsText(this.file.applicationDirectory + 'www/assets/css/', templateFilename)
-      .then(template => {
-        const primaryColor = this.hexToRgb(this.primaryColor);
-        const style = template.replace(/\$primaryColor/g, primaryColor);
-        return this.writeFile(themeFilename, style);
-      })
-      .then(fileEntry => this.updateThemeFile(fileEntry));
-  }
+  // private makeTheme(): Promise<any> {
+  //   return this.file.readAsText(this.file.applicationDirectory + 'www/assets/css/', templateFilename)
+  //     .then(template => {
+  //       const primaryColor = this.hexToRgb(this.primaryColor);
+  //       const style = template.replace(/\$primaryColor/g, primaryColor);
+  //       return this.writeFile(themeFilename, style);
+  //     })
+  //     .then(fileEntry => this.updateThemeFile(fileEntry));
+  // }
 
   private setConfigToLocal(jsonString): Promise<FileEntry> {
     return this.writeFile(configFilename, jsonString);
