@@ -86,7 +86,6 @@ scrollable-tabs {
 
       &.active {
         span {
-          background-color: color($colors, secondary);
           border-bottom: 4px solid #FFFFFF;
           cursor: default;
           font-weight: 900;

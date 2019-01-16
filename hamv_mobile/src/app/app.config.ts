@@ -79,7 +79,7 @@ export const appConfig: AppConfig = {
     },
     theme: {
       primaryColor: '#00baff',
-      productName: 'Product Name',
+      productName: '裝置',
       wifiName: 'WifiName-XXXX',
     },
     amazonAlexa: {

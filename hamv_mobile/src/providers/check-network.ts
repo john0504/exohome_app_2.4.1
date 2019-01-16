@@ -39,14 +39,14 @@ export class CheckNetworkService {
 
   private toggleToast(show: boolean) {
     if (show && !this.noNetworkToast) {
-      const notFoundMsg = this.translate.instant('CHECK_NETWORKS.NOT_FOUND');
-      this.noNetworkToast = this.popupService.makeToast({
-        message: notFoundMsg,
-        position: 'top',
-      });
+      // const notFoundMsg = this.translate.instant('CHECK_NETWORKS.NOT_FOUND');
+      // this.noNetworkToast = this.popupService.makeToast({
+      //   message: notFoundMsg,
+      //   position: 'top',
+      // });
     } else if (!show && this.noNetworkToast) {
-      this.noNetworkToast.dismiss();
-      this.noNetworkToast = null;
+      // this.noNetworkToast.dismiss();
+      // this.noNetworkToast = null;
     }
   }
 
