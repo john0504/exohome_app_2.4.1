@@ -98,9 +98,9 @@ export class MyApp implements OnInit, OnDestroy {
   testModeDatetime: number;
 
   appPages: Array<any> = [
-    { title: 'APP.HOME', component: 'LargeListPage' },
-    { title: 'APP.MY_GROUPS', component: 'MyGroupsPage' },
     { title: 'APP.BLUETOOTH_LED', component: 'BleLedListPage' },
+    { title: 'APP.MY_GROUPS', component: 'MyGroupsPage' },
+    { title: 'APP.LIST', component: 'LargeListPage' },
     { title: 'APP.SETTINGS', component: 'SettingsPage' },
   ];
 
@@ -257,7 +257,7 @@ export class MyApp implements OnInit, OnDestroy {
   }
 
   goHomePage() {
-    this.navCtrl.setRoot('LargeListPage');
+    this.navCtrl.setRoot('BleLedListPage');
   }
 
   isCurrentPage(p): boolean {

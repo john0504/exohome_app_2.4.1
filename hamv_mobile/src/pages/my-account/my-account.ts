@@ -119,6 +119,6 @@ export class MyAccountPage {
 
   private afterWork() {
     this.vsService.clearAll();
-    this.navCtrl.setRoot('PopitListPage');
+    this.navCtrl.setRoot('BleLedListPage');
   }
 }
