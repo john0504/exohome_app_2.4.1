@@ -44,7 +44,7 @@
       <button ion-button color="orange" class="full-button" full round *ngIf="canGpsMode && canContinue" (click)="onGpsMode()" full>{{ 'DEVICE_CREATE.GPS_MODE' | translate }}</button>
       <button ion-button color="orange" class="full-button" full round *ngIf="canCapsuleMode && canContinue" (click)="onCapsuleMode()" full>{{ 'DEVICE_CREATE.CAPSULE_MODE' | translate }}</button>
       <!-- <button ion-button color="orange" class="full-button" full round *ngIf="canOtaMode && canContinue" (click)="onOtaMode()" full>{{ 'DEVICE_CREATE.OTA_MODE' | translate }}</button> -->
-      <button ion-button color="orange" class="full-button" full round *ngIf="canContinue" (click)="onOta()" full>OTA</button>
+      <!-- <button ion-button color="orange" class="full-button" full round *ngIf="canContinue" (click)="onOta()" full>OTA</button> -->
     </div>
     <div>
       <button ion-button color="primary" class="bottom-button full-button" [disabled]="!canContinue || !canCloudMode"  (click)="onNext()" full>{{ 'DEVICE_CREATE.CLOUD_MODE' | translate }}</button>
