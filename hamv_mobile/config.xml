@@ -34,7 +34,7 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
         <config-file parent="/resources" target="./res/values/strings.xml">
             <string name="fb_app_id">194158767928038</string>
-            <string name="fb_app_name">HAMV-TENX</string>
+            <string name="fb_app_name">HAMV-CECT</string>
         </config-file>
     </platform>
     <platform name="ios">

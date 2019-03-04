@@ -119,7 +119,7 @@
     "@ionic-native-mocks/network": "^2.0.6",
     "@ionic-native-mocks/safari-view-controller": "^2.0.6",
     "@ionic/app-scripts": "3.2.0",
-    "@types/jasmine": "^2.8.4",
+    "@types/jasmine": "2.8.4",
     "@types/jasminewd2": "~2.0.2",
     "@types/js-yaml": "^3.5.30",
     "@types/lodash": "4.14.61",
