@@ -44,6 +44,8 @@ import { AppEngineModule, ReduxModule } from 'app-engine';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { QRScanner } from '@ionic-native/qr-scanner';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
+import { LocationTracker } from '../providers/location-tracker';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -106,6 +108,8 @@ export function createTranslateLoader(http: HttpClient) {
     CalendarService,
     Geolocation,
     QRScanner,
+    BackgroundGeolocation,
+    LocationTracker,
   ]
 })
 export class AppModule { }

@@ -30,6 +30,7 @@ page-device-history {
   }
 
   .main-content {
+    background-color: color($colors, darkGrey);
     -webkit-overflow-scrolling: touch;
     contain: size style layout;
     height: 100%;

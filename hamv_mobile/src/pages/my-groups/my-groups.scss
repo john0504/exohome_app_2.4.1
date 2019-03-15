@@ -29,6 +29,7 @@ page-my-groups {
       text-align: center;
       padding-top: 8px;
       .ungroup-title-text {
+        color: color($colors, primary);
         margin: 8px;
         font-weight: 700;
       }
@@ -40,7 +41,7 @@ page-my-groups {
   .dnd {
     &::before {
       content: attr(data-line);
-      color: color($colors, grey);
+      color: color($colors, dark);
       text-align: center;
       display: block;
       padding: 20px 0;
@@ -52,13 +53,23 @@ page-my-groups {
     .device-action {
       touch-action: none;
     }
+    device-bag {
+      color: color($colors, primary);
+      .device-header {
+        .device-title {
+          .device-title-text {
+            color: color($colors, primary);            
+          }
+        }
+      }
+    }
   }
   .finger-over {
     background-color: color($colors, lightGrey);
   }
   .gu-transit {
     .device-header {
-      background-color: color($colors, primary);
+      background-color: color($colors, dark);      
     }
   }
 }

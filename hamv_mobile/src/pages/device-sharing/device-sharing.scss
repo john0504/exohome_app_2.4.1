@@ -1,2 +1,11 @@
-page-device-sharing {
+page-device-sharing {  
+  $background-transparent: transparent;
+  $box-shadow-none: none;
+  $font-bold: 900;
+  $font-bold-light: $font-bold - 200;
+  $font-title: 1.3rem;
+  color: color($colors, dark);
+  .container {
+    color: color($colors, dark);
+  }
 }

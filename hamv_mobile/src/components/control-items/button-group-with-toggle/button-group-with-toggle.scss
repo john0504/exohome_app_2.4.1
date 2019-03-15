@@ -3,7 +3,7 @@ button-group-with-toggle {
   $background-transparent: transparent;
   $font-bold: 900;
   $font-bold-light: $font-bold - 200;
-  $font-title: 1.3rem;
+  $font-title: 1.7rem;
   $text-right: right;
 
   .text-disabled {
@@ -79,7 +79,7 @@ button-group-with-toggle {
       }
 
       &.control-item-active {
-        border-color: color($colors, primary);
+        border-color: color($colors, darkGrey);
         border-style: solid;
         border-width: 1px;
         box-shadow: $box-shadow-none;

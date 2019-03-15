@@ -20,6 +20,7 @@ page-signup {
       text-align: center;
       margin: 0px;
       font-weight: 600;
+      color: color($colors, dark);
     }
   }
   .divider {
@@ -30,6 +31,7 @@ page-signup {
     justify-content: flex-start;
     align-items: center;
     .description {
+      color: color($colors, darkGrey2);
       margin-left: 8px;
     }
   }
@@ -48,5 +50,8 @@ page-signup {
     p, p a {
       font-size: 1.3rem;
     }
+  }
+  ion-content {
+    background-image: url('../assets/img/background-login.png');
   }
 }

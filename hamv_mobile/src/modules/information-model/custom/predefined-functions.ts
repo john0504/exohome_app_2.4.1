@@ -288,6 +288,84 @@ export const functionMap = {
       text: round(val * 10, 2) + '',
     };
   },
+  time: (val) => {
+    if (val === undefined || val === null || val === -32767) {
+      return {
+        value: val,
+        text: '--',
+      };
+    }
+    if (val === 0) {
+      return {
+        value: val,
+        text: 'INFORMATION_MODEL.NONE',
+      };
+    }
+    return {
+      value: val,
+      text: round(val, 2) + ' HR',
+    };
+  },
+  time_min: (val) => {
+    if (val === undefined || val === null || val === -32767) {
+      return {
+        value: val,
+        text: '--',
+      };
+    }
+    if (val === 0) {
+      return {
+        value: val,
+        text: 'INFORMATION_MODEL.NONE',
+      };
+    }
+    if (val / 60 >= 1) {
+      return {
+        value: val,
+        text: round(val / 60, 0) + ' HR',
+      };
+    }
+    return {
+      value: val,
+      text: round(val % 60, 0) + ' MIN',
+    };
+  },
+  energy: (val) => {
+    if (val === undefined || val === null || val === -32767) {
+      return {
+        value: val,
+        text: '-- kwh',
+      };
+    }
+    return {
+      value: val,
+      text: round(val, 2) + ' kwh',
+    };
+  },
+  power: (val) => {
+    if (val === undefined || val === null || val === -32767) {
+      return {
+        value: val,
+        text: '-- kwh',
+      };
+    }
+    return {
+      value: val,
+      text: round(val * 0.1, 2) + ' kwh',
+    };
+  },
+  energy_price: (val) => {
+    if (val === undefined || val === null || val === -32767) {
+      return {
+        value: val,
+        text: '-- NTD',
+      };
+    }
+    return {
+      value: val,
+      text: round(val, 2) + ' NTD',
+    };
+  },
 };
 
 function round(value: number, precision: number) {

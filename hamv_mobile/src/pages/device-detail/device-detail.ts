@@ -6,10 +6,10 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   StateStore,
   Account,
-  // AppTasks
+  AppTasks
 } from 'app-engine';
 import {
-  // Loading,
+  Loading,
   IonicPage,
   NavParams,
   ViewController,
@@ -24,7 +24,8 @@ import { first } from 'rxjs/operators';
 import { debounceImmediate } from '../../app/app.extends';
 import { DeviceCore } from '../../item-models/device/device-core';
 import { DeviceCoreInjector } from '../../item-models/device/device-core-injector';
-// import { PopupService } from '../../providers/popup-service';
+import { PopupService } from '../../providers/popup-service';
+import { ViewStateService } from '../../providers/view-state-service';
 
 @IonicPage()
 @Component({
@@ -40,7 +41,9 @@ export class DeviceDetailPage {
   deviceCore: DeviceCore;
   deviceSn: string;
   account: Account;
-  // loading: Loading;
+  loading: Loading;
+  viewState: any;
+  moreControl: string;
 
   constructor(
     private actionSheetCtrl: ActionSheetController,
@@ -51,14 +54,24 @@ export class DeviceDetailPage {
     public navCtrl: NavController,
     public params: NavParams,
     public viewCtrl: ViewController,
-    // private appTasks: AppTasks,
-    // private popupService: PopupService,
+    private appTasks: AppTasks,
+    private popupService: PopupService,
+    public viewStateService: ViewStateService,
   ) {
     this.deviceSn = this.params.get('deviceSn');
     this.subs = [];
+    this.viewState = {
+      showDetails: false,
+    };
+    this.viewState = Object.assign(this.viewState, this.viewStateService.getViewState(this.deviceSn));
     this.account$ = this.stateStore.account$;
     this.devices$ = this.stateStore.devices$;
     this.deviceCore = this.dcInjector.create();
+    if (!this.viewState.showDetails) {
+      this.moreControl = this.translate.instant('APP.ADVANCE');
+    } else {
+      this.moreControl = this.translate.instant('APP.BACK');
+    }
   }
 
   @HostListener('window:model-loaded', ['$event'])
@@ -68,9 +81,9 @@ export class DeviceDetailPage {
 
   ionViewDidLoad() {
     this.account$.pipe(first()).subscribe(account => this.account = account);
-    // this.loading = this.popupService.makeLoading({
-    //   content: this.translate.instant('DEVICE_DETAIL.GET_RANGE')
-    // });
+    this.loading = this.popupService.makeLoading({
+      content: this.translate.instant('DEVICE_DETAIL.GET_RANGE')
+    });
   }
 
   ionViewWillEnter() {
@@ -81,40 +94,48 @@ export class DeviceDetailPage {
     );
   }
 
-  private processValues(devices) {
-    if (this.validateDevices(devices)) {
-      const device = devices[this.deviceSn];
-      this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
-      this.deviceCore.selfUpdate();
-    } else {
-      this.viewCtrl.dismiss();
-    }
-  }
-
   // private processValues(devices) {
   //   if (this.validateDevices(devices)) {
   //     const device = devices[this.deviceSn];
-  //     if (device.profile.esh.model) {
-  //       this.appTasks.getDeviceModelInfo(device.profile.esh.model).then((result: any) => {
-  //         this.loading.dismiss();
-  //         this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
-  //         this.deviceCore.status.sn = this.deviceSn;
-  //         this.deviceCore.status.range = result;
-  //         this.deviceCore.selfUpdate();
-  //       }).catch((error: any) => {
-  //         this.loading.dismiss();
-  //         this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
-  //         this.deviceCore.status.sn = this.deviceSn;
-  //         this.deviceCore.selfUpdate();
-  //       });
-  //     } else {
-  //       this.loading.dismiss();
-  //       this.viewCtrl.dismiss();
-  //     }
+  //     this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+  //       this.deviceCore.selfUpdate();
   //   } else {
   //     this.viewCtrl.dismiss();
   //   }
   // }
+
+  private processValues(devices) {
+    if (this.validateDevices(devices)) {
+      const device = devices[this.deviceSn];
+      if (device.fields_range && JSON.stringify(device.fields_range) != '[]') {
+        this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+        this.deviceCore.status.sn = this.deviceSn;
+        this.deviceCore.status.range = device.fields_range;
+        this.deviceCore.selfUpdate();
+        this.loading && this.loading.dismiss();
+      } else {
+        if (device.profile.esh.model) {
+          this.appTasks.getDeviceModelInfo(device.profile.esh.model).then((result: any) => {
+            this.loading && this.loading.dismiss();
+            this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+            this.deviceCore.status.sn = this.deviceSn;
+            this.deviceCore.status.range = result;
+            this.deviceCore.selfUpdate();
+          }).catch((error: any) => {
+            this.loading && this.loading.dismiss();
+            this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
+            this.deviceCore.status.sn = this.deviceSn;
+            this.deviceCore.selfUpdate();
+          });
+        } else {
+          this.loading && this.loading.dismiss();
+          this.viewCtrl.dismiss();
+        }
+      }
+    } else {
+      this.viewCtrl.dismiss();
+    }
+  }
 
   private validateDevices(devices) {
     return this.deviceSn && devices && devices[this.deviceSn];
@@ -131,31 +152,44 @@ export class DeviceDetailPage {
     const buttons: Array<any> = [];
 
     buttons.push({
+      icon: "calendar",
+      cssClass: 'action-sheet',
       text: this.translate.instant('DEVICE_DETAIL.SCHEDULES'),
       handler: () => this.openSchedules()
     });
     buttons.push({
+      icon: "settings",
+      cssClass: 'action-sheet',
       text: this.translate.instant('DEVICE_DETAIL.SETTINGS'),
       handler: () => this.openSettings()
     });
     if (this.deviceCore.isOwner(this.account.account)) {
       buttons.push({
+        icon: "share",
+        cssClass: 'action-sheet',
         text: this.translate.instant('DEVICE_DETAIL.SHARE'),
         handler: () => this.openSharing()
       });
     }
     if (this.deviceCore.hasHistoryComponents) {
       buttons.push({
+        icon: "stats",
+        cssClass: 'action-sheet',
         text: this.translate.instant('DEVICE_DETAIL.HISTORY'),
         handler: () => this.navCtrl.push('DeviceHistoryPage', { deviceSn: this.deviceSn })
       });
     }
     buttons.push({
+      icon: "close",
+      cssClass: 'action-sheet-cancel',
       text: this.translate.instant('DEVICE_DETAIL.CANCEL'),
       role: 'cancel',
     });
 
-    const actionSheet = this.actionSheetCtrl.create({ buttons });
+    const actionSheet = this.actionSheetCtrl.create({
+      cssClass: 'action-sheet-page',
+      buttons
+    });
     actionSheet.present();
   }
 
@@ -200,5 +234,15 @@ export class DeviceDetailPage {
       }
     });
     return isVisable;
+  }
+
+  toggleDetails() {
+    this.viewState.showDetails = !this.viewState.showDetails;
+    this.viewStateService.setViewState(this.deviceSn, this.viewState);
+    if (!this.viewState.showDetails) {
+      this.moreControl = this.translate.instant('APP.ADVANCE');
+    } else {
+      this.moreControl = this.translate.instant('APP.BACK');
+    }
   }
 }

@@ -5,8 +5,12 @@ gdpr-alert {
     flex-direction: column;
     align-items: center;
     .gdpr-title {
+      color: color($colors, dark);
       font-weight: 600;
       font-size: 13pt;
+    }
+    .gdpr-message{
+      color: color($colors, dark);
     }
   }
   .divider {

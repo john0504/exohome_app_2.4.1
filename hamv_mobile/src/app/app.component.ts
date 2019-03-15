@@ -54,12 +54,15 @@ import { PageRouteManager } from '../components/page-nav/page-route-manager';
 import { ssidConfirmReducer } from '../pages/ssid-confirm/ssid-confirm';
 import { deviceCreateReducer } from '../pages/device-create/device-create';
 import { localModeReducer } from '../pages/local-mode-device-item/local-mode-device-item';
+import { supportModeReducer } from '../pages/support-mode/support-mode';
 
 import { ComponentProvider, ModelManagerService } from '../modules/information-model';
 import mixpanel from 'mixpanel-browser';
 import './app.extends';
 
 import {
+  ActionSheetButton,
+  ActionSheetRange,
   ButtonGroupWithToggle,
   RangeWithToggle,
   LargeToggleWithRange,
@@ -67,6 +70,9 @@ import {
   SimpleButtonGroup,
   MultiButtonGroup,
   SimpleRange,
+  ImageToggle,
+  ImageRange,
+  PopupText,
   SimpleText,
   ColorText,
   SimpleToggle,
@@ -98,6 +104,7 @@ export class MyApp implements OnInit, OnDestroy {
   appPages: Array<any> = [
     { title: 'APP.HOME', component: 'MediumGridPage' },
     { title: 'APP.MY_GROUPS', component: 'MyGroupsPage' },
+    { title: 'APP.WARRANTY', component: 'WarrantyPage' },
     { title: 'APP.SETTINGS', component: 'SettingsPage' },
   ];
 
@@ -162,6 +169,7 @@ export class MyApp implements OnInit, OnDestroy {
       ssidConfirm: ssidConfirmReducer,
       deviceCreate: deviceCreateReducer,
       localMode: localModeReducer,
+      supportMode: supportModeReducer,
     };
     this.reduxModule.configureStore(pageReducers);
     this.reduxModule.setLoginPage(MyModalWrapper);
@@ -230,6 +238,8 @@ export class MyApp implements OnInit, OnDestroy {
   }
 
   private registerComponents() {
+    this.cp.registerComponent('action-sheet-button', ActionSheetButton);
+    this.cp.registerComponent('action-sheet-range', ActionSheetRange);
     this.cp.registerComponent('button-group-with-toggle', ButtonGroupWithToggle);
     this.cp.registerComponent('range-with-toggle', RangeWithToggle);
     this.cp.registerComponent('large-toggle-with-range', LargeToggleWithRange);
@@ -237,6 +247,9 @@ export class MyApp implements OnInit, OnDestroy {
     this.cp.registerComponent('button-group', SimpleButtonGroup);
     this.cp.registerComponent('multi-button-group', MultiButtonGroup);
     this.cp.registerComponent('range', SimpleRange);
+    this.cp.registerComponent('image-toggle', ImageToggle);
+    this.cp.registerComponent('image-range', ImageRange);
+    this.cp.registerComponent('popup-text', PopupText);
     this.cp.registerComponent('text', SimpleText);
     this.cp.registerComponent('color-text', ColorText);
     this.cp.registerComponent('toggle', SimpleToggle);

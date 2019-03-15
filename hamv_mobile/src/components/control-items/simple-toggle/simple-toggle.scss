@@ -2,6 +2,8 @@ simple-toggle {
   $background-transparent: transparent;
   $font-bold: 900;
   $padding-none: 0;
+  $font-title: 1.3rem;
+  color: color($colors, dark);
 
   .none-padding {
     padding: $padding-none;
@@ -41,7 +43,7 @@ simple-toggle {
   }
 
   .toggle-title {
-    font-size: 1.3rem;
+    font-size: $font-title + 0.4rem;
     font-weight: $font-bold;
   }
 }

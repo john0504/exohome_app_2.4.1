@@ -1,0 +1,20 @@
+<div class="popit-control-buttons">
+  <ion-icon 
+    *ngIf="state?.currentValueItem?.icon"
+    [name]="state?.currentValueItem?.icon + '-title'"
+    (click)="buttonClick(disabled || state.disableState)"
+    [ngClass]="{'text-disabled': disabled || state.disableState}"
+  ></ion-icon>
+  <span 
+    class="title-text" 
+    [ngClass]="{'text-disabled': disabled || state.disableState}"
+    (click)="buttonClick(disabled || state.disableState)"
+    *ngIf="!state?.currentValueItem?.icon"
+  >{{ state?.currentValueItem?.text | translate }}</span>
+</div>
+<div class="main-block">
+  <span class="title-text" 
+    [ngClass]="{'text-disabled': disabled || state.disableState}"
+    (click)="buttonClick(disabled || state.disableState)"
+  >{{ title | translate }}</span>
+</div>

@@ -26,7 +26,10 @@
     "BLUETOOTH_SETTING": "BLUETOOTH SETTING",
     "TEST_MODE_COUNT":"Press {{ value }} more times to turn on the test mode",
     "TEST_MODE_OPEN":"Turn on the test mode",
-    "TEST_MODE_CLOSE":"Turn off the test mode"
+    "TEST_MODE_CLOSE":"Turn off the test mode",
+    "BACK": "BACK",
+    "ADVANCE": "ADVANCE",
+    "WARRANTY": "WARRANTY"
   },
   "APP_START": {
     "FORGOT_PWD": "Forgot Password",
@@ -150,7 +153,8 @@
     "UPDATE_STARTED_MSG": "Your device will be temporarily inaccessible while the update happens, and will return to available once the update is complete.",
     "UPDATE_STARTED": "Update started",
     "UPDATING": "Updating...",
-    "DEVICE_MACHINE_TYPE": "MACHINE TYPE"
+    "ELECTRICITY_PRICE_SETTING": "ELECTRICITY PRICE SETTING(NTD/kwh)",
+    "PRICE_HAS_UPDATED": "Your electricity price has been updated."
   },
   "DEVICE_SHARING": {
     "ADD_GUEST_MSG": "Your {{ familyName }} is ready! To get started, create an account and claim your device here, {{ url }}",
@@ -222,7 +226,9 @@
     "PERIOD_DAY": "D",
     "PERIOD_WEEK": "W",
     "PERIOD_MONTH": "M",
-    "PERIOD_YEAR": "Y"
+    "PERIOD_YEAR": "Y",
+    "AVERAGE": "Average",
+    "TOTAL": "Total"
   },
   "HOME": {
     "ALL": "All",
@@ -250,7 +256,7 @@
     "CENTER": "CENTER",
     "COOL": "COOL",
     "DEHUMIDIFIER": "DEHUMIDIFIER",
-    "FAN_SPEED": "FAN SPEED",
+    "FAN_SPEED": "SPEED",
     "FAN": "FAN",
     "HEAT": "HEAT",
     "HIGH": "HIGH",
@@ -280,9 +286,31 @@
     "VOC_VALUE": "VOC VALUE",
     "EMWD_LEVEL": "EMWD LEVEL",
     "WEEK": "WEEK",
-    "SLEEP_MODE": "SLEEP MODE",
+    "SLEEP_MODE": "SLEEP",
     "ROOM_TEMPERATURE": "ROOM TEMPERATURE",
-    "AIR_CLEAR": "AIR CLEAR"
+    "AIR_CLEAR": "AIR CLEAR",
+    "MODE" : "MODE",
+    "NONE" : "NONE",
+    "AUTO_CONTROL": "AUTO",
+    "SMALL": "SMALL",
+    "SET_TIMER": "TIMER",
+    "PLEASE_OPEN_POWER": "Please Turn On",
+    "SET_TEMPERAUTE": "Set Temp.",
+    "FILTER": "FILTER",
+    "NORMAL": "NORMAL",
+    "NEED_CLEANING": "NEED CLEANING",
+    "FAST_RUNNING": "FAST RUNNING",
+    "POWER_SAVING": "POWER SAVING",
+    "BRIGHT": "BRIGHT",
+    "DARK": "DARK",
+    "FULL_OFF": "FULL OFF",
+    "ENERGY_USED": "ENERGY USED",
+    "ENERGY_USED_RESET": "ENERGY USED RESET",
+    "RESET": "RESET",
+    "FILTER_HOUR": "FILTER HOUR",
+    "ERROR_MSG": "ERROR CODE : {{ errorCode }}",
+    "CANCEL": "CANCEL",
+    "ENERGY_PRICE": "ELECTRICITY PRICE TRIAL"
   },
   "LANGUAGE": {
     "BACK": "Back",
@@ -379,13 +407,18 @@
     "SHOW_INFO": "Your device is updating and will be temporarily unavailable until this process is complete.",
     "UPDATING": "UPDATING..."
   },
+  "PRE_DEVICE_CREATE": {
+    "PRE_DEVICE_CREATE": "Installation guide",
+    "TITLE": "How to compair device?",
+    "DESCRIPTION": "Please open the top cover of the remote control and press and hold the 'body mold' for 3 seconds until the smart cloud module indicator light flashes rapidly.",    
+    "CONTINUE": "CONTINUE"
+  },
   "PROVISION_DONE": {
     "ADD_PRODUCT": "Add {{ productName }}",
     "DONE": "DONE",
     "MY_NEW_PRODUCT": "My New {{ productName }}",
     "READY_FOR_USE": "Your <a ion-text color=\"bluish\">{{ productName}}</a> is now connected and ready to use.",
     "RENAME_DEVICE": "Would you like to name your device?",
-    "DEVICE_MACHINE_TYPE": "Scan your device machine type",
     "SUCCESS": "Success!"
   },
   "PROVISION_FAILURE": {
@@ -511,6 +544,15 @@
     "SECURITY": "SECURITY",
     "SET_WIFI": "Set Up Wi-Fi Network",
     "START_CONNECTION": "START CONNECTION"
+  },
+  "WARRANTY": {
+    "WARRANTY": "WARRANTY",
+    "DEVICE_MACHINE_TYPE": "SCAN DEVICE",
+    "TITLE": "How to get the warranty?",
+    "REGISTER": "REGISTER",
+    "DESCRIPTION": "Please fine the QR-code on the device as the picture, and press START SCAN.",    
+    "QR_CODE": "START SCAN",
+    "SCAN_PLEASE" : "SCAN PLEASE"
   },
   "WIFI_AP_MANAGE": {
     "PAGE_TITLE": "Saved Networks"

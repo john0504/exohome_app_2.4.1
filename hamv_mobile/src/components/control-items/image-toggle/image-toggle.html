@@ -1,0 +1,18 @@
+<ion-grid class="toggle-grid">
+  <ion-row align-items-center>
+    <ion-col col-2 class="none-padding">
+      <span class="toggle-title">{{ title | translate }}</span>
+    </ion-col>
+    <ion-col col-10 class="toggle-items none-padding">
+      <div class="toggle-status" [ngClass]="{'text-disabled': disabled}">
+        <span class="item-text">{{ (state?.currentValueItem?.text | translate) | replace: state.currentValueItem?.value }}</span>        
+      </div>      
+      <ion-icon 
+        *ngIf="state?.currentValueItem?.icon"
+        [name]="state?.currentValueItem?.icon"
+        (click)="goChange(disabled || state.disableState)"
+        [ngClass]="{'text-disabled': disabled}"
+      ></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>

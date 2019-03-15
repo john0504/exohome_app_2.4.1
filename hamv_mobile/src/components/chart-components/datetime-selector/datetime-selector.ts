@@ -36,7 +36,7 @@ export class DatetimeSelector {
     this.changePeriod();
   }
 
-  public changePeriod(period: string = 'day', callback?) {
+  public changePeriod(period: string = 'month', callback?) {
     if (period === this.period) return;
     this.period = period;
     this.changeRange(0, true, callback);

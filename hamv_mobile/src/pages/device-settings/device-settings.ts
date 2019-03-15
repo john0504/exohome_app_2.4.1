@@ -23,6 +23,8 @@ import { debounceImmediate } from '../../app/app.extends';
 import { PopupService } from '../../providers/popup-service';
 import { DeviceCore } from '../../item-models/device/device-core';
 import { DeviceCoreInjector } from '../../item-models/device/device-core-injector';
+import { LocationTracker } from '../../providers/location-tracker';
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -39,9 +41,10 @@ export class DeviceSettingsPage {
   account: Account;
   deviceCore: DeviceCore;
   deviceName: string;
+  electricityPrice: number;
+  oldElectricityPrice: number;
   isOwner: boolean = false;
   isVersionLoading: boolean = false;
-  deviceMachineType: string;
 
   constructor(
     private alertCtrl: AlertController,
@@ -53,6 +56,8 @@ export class DeviceSettingsPage {
     public navCtrl: NavController,
     public params: NavParams,
     public viewCtrl: ViewController,
+    public locationTracker: LocationTracker,
+    private storage: Storage,
   ) {
     this.deviceSn = this.params.get('deviceSn');
     this.subs = [];
@@ -66,6 +71,7 @@ export class DeviceSettingsPage {
       this.appTasks.wsRequestGetTask(this.deviceSn);
       this.account$.pipe(first()).subscribe(account => this.account = account);
     }
+    this.getElectricityPrice();
   }
 
   ionViewWillEnter() {
@@ -105,18 +111,6 @@ export class DeviceSettingsPage {
     if (!this.deviceName) {
       this.deviceName = this.deviceCore.displayName;
     }
-  }  
-
-  getMachineCodeCallback = (params) => {
-    return new Promise(() => {
-      if (params) {
-        this.deviceMachineType = params;
-      }
-    });
-  }
-
-  onQRcode() {
-    this.navCtrl.push('ScanPage', { callback: this.getMachineCodeCallback });
   }
 
   saveDevice() {
@@ -281,5 +275,37 @@ export class DeviceSettingsPage {
     }
     const alert = this.alertCtrl.create(options);
     alert.present();
+  }
+
+  start() {
+    this.locationTracker.startTracking();
+  }
+
+  stop() {
+    this.locationTracker.stopTracking();
+  }
+
+  getElectricityPrice() {
+    return this.storage.get('electricityPrice' + this.deviceSn)
+      .then((electricityPrice) => {
+        if (electricityPrice) {
+          this.electricityPrice = electricityPrice;
+          this.oldElectricityPrice = this.electricityPrice;
+        } else {
+          this.electricityPrice = 3.0;
+          this.oldElectricityPrice = this.electricityPrice;
+        }
+      });
+  }
+
+  canSavePrice(): boolean {
+    return this.electricityPrice && this.electricityPrice > 0 && this.oldElectricityPrice != this.electricityPrice;
+  }
+
+  savePrice() {
+    this.storage.set('electricityPrice' + this.deviceSn, this.electricityPrice);
+    this.oldElectricityPrice = this.electricityPrice;
+    const alertTitle = this.translate.instant('DEVICE_SETTINGS.PRICE_HAS_UPDATED');
+    this.showMessageAlert(alertTitle);
   }
 }

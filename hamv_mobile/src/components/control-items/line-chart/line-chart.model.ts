@@ -42,7 +42,7 @@ export class LineChartModel {
     },
     series: [
       {
-        type: 'line',
+        type: 'bar',
         areaStyle: { normal: {} },
         smooth: true,
         symbolSize: 13,
@@ -64,7 +64,7 @@ export class LineChartModel {
       top: 'center',
       z: 100,
       style: {
-        text: 'Average: ' + avg,
+        text: avg,
         font: '1.5rem'
       }
     };
@@ -75,6 +75,29 @@ export class LineChartModel {
       bottom: 30,
       z: 100,
       children: [averageText]
+    };
+
+    return graph;
+  }
+
+  public totalTag(total: string) {
+    const totalText = {
+      type: 'text',
+      left: 'center',
+      top: 'center',
+      z: 100,
+      style: {
+        text: total,
+        font: '1.5rem'
+      }
+    };
+    const graph = {
+      type: 'group',
+      bounding: 'raw',
+      left: 'center',
+      bottom: 30,
+      z: 100,
+      children: [totalText]
     };
 
     return graph;

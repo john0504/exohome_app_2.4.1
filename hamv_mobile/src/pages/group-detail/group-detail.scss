@@ -5,9 +5,10 @@ group-detail {
     border-radius: 0;
     padding: 20px;
     width: 100%;
+    color: color($colors, dark);
   }
   .control-item-divider {
-    border-bottom: 1px solid color($colors, grey);
+    border-bottom: 1px solid color($colors, dark);
     padding-bottom: 15px;
     margin-bottom: 15px;
   }

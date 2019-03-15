@@ -1,6 +1,7 @@
 simple-text {
   $font-bold: 900;
   $font-title: 1.3rem;
+  color: color($colors, dark);
 
   .basic-text {
     font-size: $font-title + 0.4rem;
@@ -19,7 +20,7 @@ simple-text {
     flex-direction: row;
 
     .title-text {
-      font-size: $font-title;
+      font-size: $font-title + 0.4rem;
       font-weight: $font-bold;
     }
 

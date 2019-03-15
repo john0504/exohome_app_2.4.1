@@ -3,11 +3,12 @@ multi-button-group {
   $box-shadow-none: none;
   $font-bold: 900;
   $font-bold-light: $font-bold - 200;
-  $font-title: 1.3rem;
+  $font-title: 1.8rem;
 
   .button-group-title {
     font-size: $font-title;
     font-weight: $font-bold;
+    color: color($colors, dark);
   }
 
   .text-off-status {
@@ -27,13 +28,13 @@ multi-button-group {
       border: 1px solid color($colors, lightGrey);
       color: color($colors, dark);
       flex: 1 0 auto;
-      font-size: $font-title;
+      font-size: $font-title - 0.5rem;
       font-weight: $font-bold-light;
       margin: 0;
       padding: 0 8px;
 
       ion-icon {
-        font-size: $font-title + 0.9rem;
+        font-size: $font-title - 0.5rem;
         padding: 0 5px;
       }
 
@@ -55,7 +56,7 @@ multi-button-group {
       }
 
       &.control-item-active {
-        border-color: color($colors, primary);
+        border-color: color($colors, darkGrey);
         border-style: solid;
         border-width: 1px;
         box-shadow: $box-shadow-none;

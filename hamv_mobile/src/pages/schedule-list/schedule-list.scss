@@ -12,6 +12,7 @@ page-schedule-list {
   }
 
   .schedule-content {
+    color: color($colors, dark);
     .schedule-block {
       background: $background-color;
       border-radius: 10px;
@@ -28,6 +29,7 @@ page-schedule-list {
       }
 
       .schedule-item-title {
+        color: color($colors, primary);
         font-weight: $font-bold;
         margin: 0 5px 0 0;
         overflow: hidden;

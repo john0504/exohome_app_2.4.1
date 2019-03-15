@@ -27,6 +27,9 @@ export class ThemeService {
   private logoFile = {
     nativeURL: 'assets/img/logo.png',
   };
+  private loginLogoFile = {
+    nativeURL: 'assets/img/logo-login.svg',
+  };
   private navbarLogoFile = {
     nativeURL: 'assets/img/logo_navbar.png',
   };
@@ -70,6 +73,10 @@ export class ThemeService {
 
   get logoUrl() {
     return normalizeURL(this.logoFile.nativeURL);
+  }
+
+  get loginLogoUrl() {
+    return normalizeURL(this.loginLogoFile.nativeURL);
   }
 
   get navbarLogoEndpoint() {

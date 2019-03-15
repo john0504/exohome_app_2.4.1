@@ -1,0 +1,57 @@
+image-toggle {
+  $background-transparent: transparent;
+  $font-bold: 900;
+  $padding-none: 0;
+  $font-title: 1.3rem;
+  color: color($colors, dark);
+
+  .none-padding {
+    padding: $padding-none;
+  }
+
+  .text-disabled {
+    color: color($colors, grey);
+  }
+
+  .toggle-items {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .toggle-grid {
+    background-color: $background-transparent;
+    padding: $padding-none;
+  }
+
+  .toggle-status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .item-text {
+      font-size: 1.7rem;
+      font-weight: 900;
+      margin-right: 8px;
+    }
+  }
+
+  ion-icon {
+    width: 5rem;
+    height: 5rem;
+    font-size: $font-title + 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: color($colors, white);
+  }   
+
+  .toggle-title {
+    color: color($colors, primary);
+    font-size: 1.3rem;
+    font-weight: $font-bold;
+  }
+}

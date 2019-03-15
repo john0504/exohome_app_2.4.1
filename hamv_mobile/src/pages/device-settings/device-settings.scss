@@ -8,16 +8,24 @@ page-device-settings {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    color: color($colors, dark);
+    ion-item {
+      ion-input {        
+        color: color($colors, dark);
+      }
+    }
     .control-item-text {
       font-size: 1.4rem;
       font-weight: bold;
+      color: color($colors, dark);
     }
     .safe-side {
       flex-grow: 1;
     }
     .danger-side {
       border-radius: 5px;
-      background: map-get($colors, lightGrey);
+      background: map-get($colors, lightGrey);        
+      color: #000000;
     }
   }
 

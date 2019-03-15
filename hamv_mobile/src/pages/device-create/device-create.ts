@@ -25,10 +25,13 @@ export class DeviceCreatePage {
   private subs: Array<Subscription>;
   private deviceInfo$: Observable<any>;
   canContinue: boolean = false;
-  canCloudMode: boolean = true;
+  canSupportMode: boolean = false;
   isTokenValidated: boolean = false;
   appName: Promise<string>;
   alert: Alert;
+  brand: string = "";
+  model: string = "";
+  serial: string = "";
 
   constructor(
     private stateStore: StateStore,
@@ -61,7 +64,10 @@ export class DeviceCreatePage {
     this.subs.push(
       this.deviceInfo$
         .subscribe(deviceInfo => {
-          this.canCloudMode = deviceInfo && deviceInfo.TenxLocal !== "2" && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
+          this.canSupportMode = deviceInfo && (deviceInfo.TenxLocal === "3" || deviceInfo.TenxLocal === "4");
+          this.brand = deviceInfo && deviceInfo.Brand;
+          this.model = deviceInfo && deviceInfo.Model;
+          this.serial = deviceInfo && deviceInfo.serial;
         })
     );
   }
@@ -107,9 +113,17 @@ export class DeviceCreatePage {
       .then(() => this.closePage());
   }
 
+  onSupportMode() {
+    this.navCtrl.push('SupportModePage', { brand: this.brand, model: this.model, serial: this.serial })
+      .then(() => this.closePage());
+  }
+
   closePage() {
     this.viewCtrl.dismiss();
-    this.canCloudMode = true;
+    this.canSupportMode = false;
+    this.brand = "";
+    this.model = "";
+    this.serial = "";
   }
 
   private showAlert() {

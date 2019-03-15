@@ -5,6 +5,7 @@ line-chart {
     align-items: center;
     justify-content: space-around;
     margin: 4px 0;
+    color: color($colors, darkGrey2);
   }
   echarts-core [echarts] {
     height: 350px;
@@ -19,7 +20,7 @@ line-chart {
     border-radius: 2rem;
     background-color: color($colors, transparent);
     border: 1px solid color($colors, primary);
-    color: color($colors, darkGrey);
+    color: color($colors, darkGrey2);
     &[disabled] {
       background-color: color($colors, transparent);
       border: none;
@@ -31,7 +32,7 @@ line-chart {
   .filter-button {
     background-color: color($colors, transparent);
     border: 1px solid color($colors, transparent);
-    color: color($colors, dark);
+    color: color($colors, darkGrey2);
     flex: 1 0 auto;
     font-size: 1.3rem;
     font-weight: 700;

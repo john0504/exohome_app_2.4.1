@@ -2,6 +2,7 @@ button-group-control {
   .all-devices-button {
     margin: 10px 15px;
     width: calc(100% - 30px);
+    color: color($colors, dark);
 
     span {
       font-weight: 700;

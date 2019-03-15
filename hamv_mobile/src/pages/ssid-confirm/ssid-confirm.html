@@ -34,27 +34,27 @@
       </svg>
       <p align="center">{{ 'SSID_CONFIRM.NETWORK_INFO' | translate }}</p>
       <ion-item color="lightGrey" *ngIf="useText">
-        <ion-label floating color="darkGrey">SSID</ion-label>
+        <ion-label floating color="black">SSID</ion-label>
         <ion-input [(ngModel)]="wifiAp.ssid" (ngModelChange)="fulfillPassword()" name="ssid" type="text" #ssid="ngModel" maxlength="30" myTabIndex="1">
         </ion-input>
       </ion-item>
       <ion-item color="lightGrey" *ngIf="!useText">
-        <ion-label stacked color="darkGrey">SSID</ion-label>
+        <ion-label stacked color="black">SSID</ion-label>
         <ion-select [(ngModel)]="selectAp" name="ssidSelect" #ssidSelect="ngModel" placeholder="{{ ('SSID_CONFIRM.CHOOSE' | translate) }}" (ngModelChange)="wifiApSelected()"
           (ionFocus)="isSelectFocus = true;" (ionBlur)="isSelectFocus = false;" [compareWith]="compareFn" cancelText="{{ 'SSID_CONFIRM.CANCEL' | translate }}" okText="{{ 'SSID_CONFIRM.OK' | translate }}">
           <ion-option *ngFor="let ap of wifiAps" [value]="ap">{{ ap.ssid }}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item color="lightGrey" *ngIf="needPassword()" class="input-with-eye-toggle">
-        <ion-label floating color="darkGrey">{{ 'SSID_CONFIRM.PASSWORD' | translate }}</ion-label>
+        <ion-label floating color="black">{{ 'SSID_CONFIRM.PASSWORD' | translate }}</ion-label>
         <ion-input [(ngModel)]="wifiAp.password" name="password" [type]="inputType" #password="ngModel" maxlength="30" myTabIndex="2" clearOnEdit="false">
         </ion-input>
         <button (click)="onShowHidePassword()" ion-button icon-only clear item-right type="button">
-          <ion-icon [name]="iconName" color="dark"></ion-icon>
+          <ion-icon [name]="iconName" color="black"></ion-icon>
         </button>
       </ion-item>
       <ion-item color="lightGrey" *ngIf="useText">
-        <ion-label floating color="darkGrey">{{ 'SSID_CONFIRM.SECURITY' | translate }}</ion-label>
+        <ion-label floating color="black">{{ 'SSID_CONFIRM.SECURITY' | translate }}</ion-label>
         <ion-select [(ngModel)]="wifiAp.sec" (ngModelChange)="clearPassword()" name="security" #security="ngModel" cancelText="{{ 'SSID_CONFIRM.CANCEL' | translate }}" okText="{{ 'SSID_CONFIRM.OK' | translate }}">
           <ion-option value="wpa2" selected="true">WPA2</ion-option>
           <ion-option value="wpa">WPA</ion-option>

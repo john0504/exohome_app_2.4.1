@@ -1,4 +1,4 @@
-.theme-custom .group-action,
+/* .theme-custom .group-action,
 .theme-custom .gu-transit .device-header,
 .theme-custom .popit-fab,
 .theme-custom .range-bar-active,
@@ -34,7 +34,7 @@
 .theme-custom page-schedule-edit .schedule-content .schedule-main-content .control-button.control-item-active,
 .theme-custom simple-button-group .popit-control-buttons .control-button.control-item-active,
 .theme-custom button-group-with-toggle .sub-block .control-button.control-item-active {
-  border-color: rgb($primaryColor);
+  border-color: #f4f4f4;
 }
 
 .theme-custom simple-button-group .popit-control-buttons .control-button.control-item-active[disabled],
@@ -62,4 +62,4 @@
 .theme-custom ion-checkbox[color="primary"] .checkbox-checked {
   border-color: rgb($primaryColor);
   background-color: rgb($primaryColor);
-}
+} */

@@ -47,6 +47,7 @@ page-schedule-edit {
     border-bottom: 1px solid color($colors, grey);
   }
   .schedule-content {
+    color: color($colors, dark);
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -55,7 +56,7 @@ page-schedule-edit {
     }
     .schedule-main-content {
       align-content: stretch;
-      background: #F0F4F4;
+      // background: #F0F4F4;
       border-radius: 5px;
       display: flex;
       flex-direction: column;
@@ -77,8 +78,11 @@ page-schedule-edit {
       ion-label {
         font-size: 12px;
         font-weight: $font-bold;
-        color: #000000;
+        color: color($colors, dark);
         margin: 0 0 8px 0;
+      }
+      ion-input {
+        color: color($colors, dark);
       }
       .item-block {
         &:first-child {
@@ -90,6 +94,9 @@ page-schedule-edit {
         flex-direction: row;
         justify-content: space-between;
         margin: $item-margin;
+        ion-label {
+          color: color($colors, dark);
+        }
         >button {
           background-color: $background-transparent;
           padding: 0;
@@ -107,6 +114,9 @@ page-schedule-edit {
         .title-text {
           font-size: $font-title;
           font-weight: $font-bold;
+        }
+        ion-label {
+          color: color($colors, dark);
         }
         .toggle-block {
           @extend .flex-basic;
@@ -143,7 +153,7 @@ page-schedule-edit {
           color: color($colors, grey);
         }
         &.control-item-active {
-          border-color: color($colors, primary);
+          border-color: color($colors, darkGrey);
           border-style: solid;
           border-width: 1px;
           box-shadow: $box-shadow-none;

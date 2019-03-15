@@ -1,6 +1,7 @@
 [
-    "information_model.yaml",
-    "ac_model.yaml",
-    "AirTFT1.yaml",
-    "YS-3591ACW.yaml"
+    "type1-1.yaml",
+    "type1-2.yaml",
+    "RAS.yaml",
+    "RAD.yaml",
+    "RPI.yaml"
 ]

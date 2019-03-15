@@ -1,0 +1,304 @@
+---
+familyName: type1-2
+familyMembers:
+- type1-2.*
+images:
+  thumbnail:
+    uri: "assets/img/RAS.png"
+  banner:
+    uri: "assets/img/RAS.png"
+controlLayout:
+  primary:
+  - AC_POWER
+  - AC_PIC_TEMP
+  - AC_IMAGE_MODE
+  - AC_IMAGE_FAN_SPEED
+  - AC_IMAGE_SET_TIMER
+  secondary:
+  - AC_ROOM_TEMP
+  - AC_SLEEP_MODE
+  - AC_AIR_CLEAR
+scheduleLayout:
+  primary:
+  - AC_TEMP
+  - AC_MODE
+  - AC_FAN_SPEED
+  - AC_TIMER
+  - AC_SLEEP_MODE
+  - AC_AIR_CLEAR
+deviceId: 1
+components:
+  AC_POWER_AND_TEMP:
+    type: large-toggle-with-range
+    title: ''
+    models:
+    - key: H03
+      values:
+        min: 10
+        max: 40
+        step: 1
+        default: 25
+        func: tempCelsius
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+    - key: H00
+      values:
+      - value: 0
+        text: 'INFORMATION_MODEL.OFF'
+      - value: 1
+        text: 'INFORMATION_MODEL.ON'
+  AC_POWER:
+    type: image-toggle
+    title: ''
+    models:    
+    - key: H00
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.PLEASE_OPEN_POWER
+        icon: icon-power-off
+      - value: 1
+        text: ''
+        icon: icon-power-on
+  AC_PIC_TEMP:
+    type: image-range
+    title: INFORMATION_MODEL.SET_TEMPERAUTE
+    models:
+    - key: H03
+      values:
+      - value: 16
+        text: ''
+        icon: img16
+      - value: 17
+        text: ''
+        icon: img17
+      - value: 18
+        text: ''
+        icon: img18
+      - value: 19
+        text: ''
+        icon: img19
+      - value: 20
+        text: ''
+        icon: img20
+      - value: 21
+        text: ''
+        icon: img21
+      - value: 22
+        text: ''
+        icon: img22
+      - value: 23
+        text: ''
+        icon: img23
+      - value: 24
+        text: ''
+        icon: img24
+      - value: 25
+        text: ''
+        icon: img25
+      - value: 26
+        text: ''
+        icon: img26
+      - value: 27
+        text: ''
+        icon: img27
+      - value: 28
+        text: ''
+        icon: img28
+      - value: 29
+        text: ''
+        icon: img29
+      - value: 30
+        text: ''
+        icon: img30
+      - value: 31
+        text: ''
+        icon: img31
+      - value: 32
+        text: ''
+        icon: img32
+      disable:
+      - conditions:
+        - key: H01
+          op: eq
+          target: 2
+      - conditions:
+        - key: H01
+          op: eq
+          target: 3
+  AC_MODE:
+    type: button-group
+    title: INFORMATION_MODEL.MODE
+    models:
+    - key: H01
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.COOL
+      - value: 1
+        text: INFORMATION_MODEL.DEHUMIDIFIER
+      - value: 2
+        text: INFORMATION_MODEL.FAN
+      - value: 3
+        text: INFORMATION_MODEL.AUTO_CONTROL
+      - value: 4
+        text: INFORMATION_MODEL.HEAT
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  AC_IMAGE_MODE:
+    type: action-sheet-button
+    title: INFORMATION_MODEL.MODE
+    models:
+    - key: H01
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.COOL
+        icon: icon-snow
+      - value: 1
+        text: INFORMATION_MODEL.DEHUMIDIFIER
+        icon: icon-water
+      - value: 2
+        text: INFORMATION_MODEL.FAN
+        icon: icon-wind
+      - value: 3
+        text: INFORMATION_MODEL.AUTO_CONTROL
+        icon: icon-auto
+      - value: 4
+        text: INFORMATION_MODEL.HEAT
+        icon: icon-sun
+  AC_IMAGE_FAN_SPEED:
+    type: action-sheet-button
+    title: INFORMATION_MODEL.FAN_SPEED
+    models:
+    - key: H02
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.AUTO
+      - value: 1
+        text: INFORMATION_MODEL.SILENT
+      - value: 2
+        text: INFORMATION_MODEL.SMALL
+      - value: 3
+        text: INFORMATION_MODEL.WEAK
+      - value: 4
+        text: INFORMATION_MODEL.HIGH
+  AC_IMAGE_SET_TIMER:
+    type: action-sheet-range
+    title: INFORMATION_MODEL.SLEEP_MODE
+    models:
+    - key: H0C
+      values:
+        min: 1
+        max: 8
+        step: 1
+        func: time
+  AC_FAN_SPEED:
+    type: button-group
+    title: FAN SPEED
+    models:
+    - key: H02
+      values:
+      - value: 0
+        text: "0"
+      - value: 1
+        text: "1"
+      - value: 2
+        text: "2"
+      - value: 3
+        text: "3"
+      - value: 4
+        text: "4"
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  AC_TEMP:
+    type: range
+    title: INFORMATION_MODEL.TEMPERATURE
+    models:
+    - key: H03
+      values:
+        min: 10
+        max: 40
+        step: 1        
+        func: tempCelsius
+      default: 25
+  AC_TEST:
+    type: popup-text
+    title: INFORMATION_MODEL.ROOM_TEMPERATURE
+    models:
+    - key: H04
+      values:
+        func: tempCelsius
+  AC_ROOM_TEMP:
+    type: text
+    title: INFORMATION_MODEL.ROOM_TEMPERATURE
+    models:
+    - key: H04
+      values:
+        func: tempCelsius
+  AC_SLEEP_MODE:
+    type: toggle
+    title: INFORMATION_MODEL.SLEEP_MODE
+    models:
+    - key: H05
+      values:
+      - value: 0
+        text: 'INFORMATION_MODEL.OFF'
+      - value: 1
+        text: 'INFORMATION_MODEL.ON'
+        icon: ios-moon-outline
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  AC_AIR_CLEAR:
+    type: toggle
+    title: INFORMATION_MODEL.AIR_CLEAR
+    models:
+    - key: H08
+      values:
+      - value: 0
+        text: 'INFORMATION_MODEL.OFF'
+      - value: 1
+        text: 'INFORMATION_MODEL.ON'
+        icon: ios-cloud-outline
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  AC_TIMER:
+    type: range-with-toggle
+    title: INFORMATION_MODEL.TIMER
+    models:
+    - key: H0C
+      values:
+        min: 1
+        max: 8
+        step: 1
+        func: text
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+    - key: H0C
+      values:
+      - value: 0
+        text: 'INFORMATION_MODEL.OFF'
+        icon: timer
+      - value: "*"
+        text: ''
+      default: 1
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0

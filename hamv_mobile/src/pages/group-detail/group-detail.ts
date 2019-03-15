@@ -71,7 +71,7 @@ export class GroupDetailPage {
       name: '__my_devices_group__',
       devices: allDevicesSn,
       properties: {
-        displayName: 'All Devices'
+        displayName: this.translate.instant('MY_DEVICES.ALL_DEVICES')
       },
     };
     return allDevicesObj;
@@ -110,5 +110,13 @@ export class GroupDetailPage {
       message: this.translate.instant('GROUP_DETAIL.ERROR_MSG'),
       position: 'top'
     });
+  }
+
+  isVisable(m) {
+    let isVisable = true;
+    if (m.type == 'text' || m.type == 'popup-text') {
+      isVisable = false;
+    }
+    return isVisable;
   }
 }

@@ -42,3 +42,50 @@ ion-menu {
     background-image: url('');
   }
 }
+.popup-page {
+  color: rgb(255, 255, 255);  
+  .toast-container {    
+    background-color: rgb(255, 0, 0);
+  }
+}
+.action-sheet-page {
+  .action-sheet-title {
+    text-align: center;
+  }
+  .action-sheet {
+    text-align: center;
+    background-color: rgb(220, 221, 221);
+    font-size: 1.6rem;
+    .button-inner {
+      justify-content: center;
+      ion-icon {
+        position: absolute;
+        left: 30px;
+      }
+    } 
+  }
+  .action-sheet-select {
+    background-color: rgb(220, 221, 221);
+    font-size: 1.6rem;
+    color: rgb(242, 125, 0);
+    .button-inner {
+      justify-content: center;
+      ion-icon {
+        position: absolute;
+        left: 30px;
+      }
+    } 
+  }
+  .action-sheet-cancel {
+    background: rgb(220, 221, 221);
+    font-size: 1.6rem;
+    color: rgb(214, 28, 56);
+    .button-inner {
+      justify-content: center;
+      ion-icon {
+        position: absolute;
+        left: 30px;
+      }
+    } 
+  }
+}

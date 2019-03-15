@@ -7,13 +7,13 @@
     <ion-list>
       <form #loginForm="ngForm" novalidate (ngSubmit)="onLogin(loginForm)">
         <div class="header-image">
-          <img [src]="themeService.logoUrl">
+          <img [src]="themeService.loginLogoUrl">
         </div>
         <div class="header-t">
           <h1 color="primary">{{ 'LOGIN.SIGN_IN' | translate }}</h1>
         </div>
-        <ion-item *ngIf="!isUserLoggedIn()">
-          <ion-label floating color="darkGrey">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
+        <ion-item *ngIf="!isUserLoggedIn()" class="email">
+          <ion-label fixed color="darkGrey2">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
           <ion-input [(ngModel)]="login.username" name="username" type="email" #username="ngModel" spellcheck="false" autocapitalize="off"
             maxlength="100" [pattern]="userV" required myTabIndex="1">
           </ion-input>
@@ -23,17 +23,17 @@
           <h2>{{ login.username }}</h2>
         </ion-item>
         <ion-item class="input-with-eye-toggle">
-          <ion-label floating color="darkGrey">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
+          <ion-label fixed color="darkGrey2">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
           <ion-input [(ngModel)]="login.password" name="password" [type]="inputType" #password="ngModel" [pattern]="pwV" minlength="8"
             maxlength="20" required myTabIndex="2" clearOnEdit="false">
           </ion-input>
           <button (click)="onShowHidePassword()" ion-button icon-only clear item-right type="button">
-            <ion-icon [name]="iconName" color="dark"></ion-icon>
+            <ion-icon [name]="iconName" color="darkGrey2"></ion-icon>
           </button>
         </ion-item>
         <div class="divider">
         </div>
-        <button ion-button color="primary" class="full-button" [disabled]="!loginForm.valid" type="submit" round full>{{ 'LOGIN.SIGN_IN' | translate }}</button>
+        <button ion-button color="secondary" class="full-button" [disabled]="!loginForm.valid" type="submit" round full>{{ 'LOGIN.SIGN_IN' | translate }}</button>
         <div class="divider"></div>
       </form>
       <button ion-button class="full-button" color="fbBlue" round full fb-login>{{ 'LOGIN.SIGN_IN_WITH_FB' | translate }}</button>

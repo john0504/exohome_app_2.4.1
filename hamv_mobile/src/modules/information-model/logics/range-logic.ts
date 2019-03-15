@@ -49,7 +49,7 @@ export class RangeLogic extends LogicBase<RangeLogicState> {
     return currentValue;
   }
 
-  private getValueItem(index: any): ValueItem {
+  public getValueItem(index: any): ValueItem {
     if (this.values instanceof Array) {
       return this.values[index] ? this.values[index] : this._defaultValueItem;
     } else if (this.values.func) {

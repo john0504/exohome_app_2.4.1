@@ -30,14 +30,6 @@
         <ion-input [(ngModel)]="newDeviceName" type="text" placeholder="{{ ('PROVISION_DONE.MY_NEW_PRODUCT') | translate: { productName: themeService.productName } }}" maxlength="128">
         </ion-input>
       </ion-item>
-      <ion-item color="lightGrey">
-        <ion-label color="primary" stacked>
-          <p><b>{{ 'PROVISION_DONE.DEVICE_MACHINE_TYPE' | translate }}</b></p>
-        </ion-label>
-        <ion-input disabled="true" [(ngModel)]="deviceMachineType" type="text" maxlength="128">
-        </ion-input>
-      </ion-item>
-      <button ion-button color="orange" class="full-button" full round (click)="onQRcode()" full>QR Code</button>
     </div>    
     <div>
       <button ion-button color="primary" class="bottom-button full-button" (click)="onNext()" full>{{ 'PROVISION_DONE.DONE' | translate }}</button>

@@ -1,0 +1,231 @@
+---
+familyName: type1-1
+familyMembers:
+- type1-1.*
+controlLayout:
+  primary:
+  - AC_POWER_AND_TEMP
+  secondary:
+  - AC_MODE
+  - AC_FAN_SPEED
+  - AC_TIMER
+  - AC_ROOM_TEMP
+  - AC_SLEEP_MODE
+  - AC_AIR_CLEAR
+scheduleLayout:
+  primary:
+  - AC_TEMP
+  - AC_MODE
+  - AC_FAN_SPEED
+  - AC_TIMER
+  - AC_SLEEP_MODE
+  - AC_AIR_CLEAR
+deviceId: 1
+components:
+  AC_POWER_AND_TEMP:
+    type: large-toggle-with-range
+    title: ''
+    models:
+    - key: H03
+      values:
+        min: 10
+        max: 35
+        step: 1
+        default: 25
+        func: tempCelsius
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+    - key: H00
+      values:
+      - value: 0
+        text: 'INFORMATION_MODEL.OFF'
+      - value: 1
+        text: 'INFORMATION_MODEL.ON'
+  AC_MODE:
+    type: button-group
+    title: INFORMATION_MODEL.AC_MODE
+    models:
+    - key: H01
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.COOL
+      - value: 1
+        text: INFORMATION_MODEL.DEHUMIDIFIER
+      - value: 2
+        text: INFORMATION_MODEL.FAN
+      - value: 3
+        text: INFORMATION_MODEL.AUTO
+      - value: 4
+        text: INFORMATION_MODEL.HEAT
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  AC_FAN_SPEED:
+    type: button-group
+    title: INFORMATION_MODEL.FAN_SPEED
+    models:
+    - key: H02
+      values:
+      - value: 0
+        text: "0"
+      - value: 1
+        text: "1"
+      - value: 2
+        text: "2"
+      - value: 3
+        text: "3"
+      - value: 4
+        text: "4"
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  AC_TEMP:
+    type: range
+    title: INFORMATION_MODEL.TEMPERATURE
+    models:
+    - key: H03
+      values:
+        min: 10
+        max: 35
+        step: 1
+        func: tempCelsius
+      default: 25
+  AC_ROOM_TEMP:
+    type: text
+    title: INFORMATION_MODEL.ROOM_TEMPERATURE
+    models:
+    - key: H04
+      values:
+        func: tempCelsius
+  AC_SLEEP_MODE:
+    type: toggle
+    title: INFORMATION_MODEL.SLEEP_MODE
+    models:
+    - key: H05
+      values:
+      - value: 0
+        text: 'INFORMATION_MODEL.OFF'
+      - value: 1
+        text: 'INFORMATION_MODEL.ON'
+        icon: ios-moon-outline
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  AC_AIR_CLEAR:
+    type: toggle
+    title: INFORMATION_MODEL.AIR_CLEAR
+    models:
+    - key: H08
+      values:
+      - value: 0
+        text: 'INFORMATION_MODEL.OFF'
+      - value: 1
+        text: 'INFORMATION_MODEL.ON'
+        icon: ios-cloud-outline
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  AC_TIMER:
+    type: range-with-toggle
+    title: INFORMATION_MODEL.TIMER
+    models:
+    - key: H0C
+      values:
+        min: 1
+        max: 8
+        step: 1
+        func: text
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+    - key: H0C
+      values:
+      - value: 0
+        text: 'INFORMATION_MODEL.OFF'
+        icon: timer
+      - value: "*"
+        text: ''
+      default: 1
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+integration:
+  traits:
+  - id: ac1
+    type: light
+    append_name: " power"
+    description: Smart AC power
+    attributes:
+      on_off:
+        key: H00
+        values:
+          on: 1
+          off: 0
+  - id: ac2
+    type: fan
+    append_name: " fan"
+    description: Smart AC fan
+    attributes:
+      fan_speed:
+        key: H02
+        values:
+        - speed_name: very low
+          value: 0
+          speed_values:
+          - speed_synonym:
+            - very low
+            - speed zero
+            - zero
+            lang: en
+        - speed_name: low
+          value: 1
+          speed_values:
+          - speed_synonym:
+            - low
+            - speed one
+            - one
+            lang: en
+        - speed_name: medium
+          value: 2
+          speed_values:
+          - speed_synonym:
+            - medium
+            - speed two
+            - two
+            lang: en
+        - speed_name: high
+          value: 3
+          speed_values:
+          - speed_synonym:
+            - high
+            - speed three
+            - three
+            lang: en
+        - speed_name: very high
+          value: 4
+          speed_values:
+          - speed_synonym:
+            - very high
+            - speed four
+            - four
+            lang: en
+        reversible:
+          key: H06
+          values:
+            normal: 1
+            reverse: 2

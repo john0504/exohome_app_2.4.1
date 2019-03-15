@@ -37,6 +37,7 @@ import { DataTransform } from '../../chart-components/data-transform';
 import { EchartsDatasetTransform } from '../../chart-components/transform/echarts-dataset-transform';
 import { ValueReplacerPipe } from '../../../modules/information-model/pipes/value-replacer/value-replacer';
 import { LineChartModel } from './line-chart.model';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'line-chart',
@@ -48,6 +49,7 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
   title: string = '';
   logics: Array<ChartLogic>;
   states: Array<ChartLogicState>;
+  deviceSn: string;
   private _ims: InformationModelService;
 
   private debounceTrigger: Subject<any> = new Subject();
@@ -56,7 +58,9 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
   dtSelector: DatetimeSelector;
   transform: DataTransform;
   aggregateMethod: string = 'avg';
-  period = 1;
+  period: number = 1;
+  electricityPrice: number = 1;
+  isPrice = false;
 
   _noData: boolean = true;
   _mergeOptions;
@@ -73,6 +77,7 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
     ims: InformationModelService,
     private appTasks: AppTasks,
     private translate: TranslateService,
+    private storage: Storage,
   ) {
     super(ims, 'line-chart', null);
     this._lineChartModel = new LineChartModel();
@@ -91,8 +96,11 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
         debounceTime(500),
         switchMap(() => {
           const promises = this.states.map(state => {
-            const deviceSn = this.data && this.data.deviceSn;
-            return this.requestData(deviceSn, state.key);
+            this.deviceSn = this.data && this.data.deviceSn;
+            if (this.isPrice) {
+              this.getElectricityPrice();
+            }
+            return this.requestData(this.deviceSn, state.key);
           });
           return defer(() => Promise.all(promises))
             .pipe(
@@ -126,6 +134,9 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
     const state = logic.processUIState(currentValueState, key, model);
     this.states[index] = state;
     this.period = model.options ? model.options.period : 1;
+    if (model.options && model.options.price == 1) {
+      this.isPrice = true;
+    }
   }
 
   protected processDisableState(disableState, key: string, index: number, model: ControlItemModel) {
@@ -190,20 +201,24 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
       historicalData.forEach(element => {
         const v = this.getDataValue(element.value, this.aggregateMethod);
         if (typeof v === 'number') {
-          element.value[this.aggregateMethod] = element.value[this.aggregateMethod] / this.period;
+          element.value[this.aggregateMethod] = element.value[this.aggregateMethod] * this.period * this.electricityPrice;
           sum += element.value[this.aggregateMethod];
           count++;
         }
       });
       this._noData = count <= 0;
-      let avgText = "";
+      // let avgText = "";
+      let totalText = "";
       if (this._noData) {
-        avgText = this._modelCallback(-32767, index);
-      } else {
-        avgText = this._modelCallback(sum / count, index);
-      }
-      const g = this._lineChartModel.averageTag(avgText);
+        // avgText =  this.translate.instant('HISTORICAL_CHART.AVERAGE') + " : " + this._modelCallback(-32767, index);
+        totalText = this.translate.instant('HISTORICAL_CHART.TOTAL') + " : " + this._modelCallback(-32767, index);
 
+      } else {
+        // avgText = this.translate.instant('HISTORICAL_CHART.AVERAGE') + " : " + this._modelCallback(sum / count, index);
+        totalText = this.translate.instant('HISTORICAL_CHART.TOTAL') + " : " + this._modelCallback(sum, index);
+      }
+      // const g = this._lineChartModel.averageTag(avgText);
+      const g = this._lineChartModel.totalTag(totalText);
       const echartModel = this.transform.transform({
         historicalData,
         seriesColumnLayout: true,
@@ -230,5 +245,16 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
     } catch {
       return undefined;
     }
+  }
+
+  getElectricityPrice() {
+    return this.storage.get('electricityPrice' + this.deviceSn)
+      .then((electricityPrice) => {
+        if (electricityPrice) {
+          this.electricityPrice = electricityPrice;
+        } else {
+          this.electricityPrice = 3.0;
+        }
+      });
   }
 }

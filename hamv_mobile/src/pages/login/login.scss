@@ -20,7 +20,16 @@ page-login {
       text-align: center;
       margin: 0px;
       font-weight: 600;
+      color: color($colors, darkGrey2);
     }
+  }
+  .email {
+    font-weight: 600;
+    color: color($colors, darkGrey2);
+  }
+  .input-with-eye-toggle {
+    font-weight: 600;
+    color: color($colors, darkGrey2);
   }
   .divider {
     height: 20px;
@@ -40,5 +49,8 @@ page-login {
     p, p a {
       font-size: 1.3rem;
     }
+  }
+  ion-content {
+    background-image: url('../assets/img/background-login.png');
   }
 }

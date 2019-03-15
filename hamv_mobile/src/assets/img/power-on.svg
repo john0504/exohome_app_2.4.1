@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="640px" height="640px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 640 640"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil3 {fill:#00669E}
+    .fil0 {fill:#69CCE6}
+    .fil1 {fill:url(#id0)}
+    .fil2 {fill:url(#id1)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="0.00255118" y1="320" x2="640" y2="320">
+   <stop offset="0" style="stop-opacity:1; stop-color:#55D0D6"/>
+   <stop offset="0.639216" style="stop-opacity:1; stop-color:#AAE7EA"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+  </linearGradient>
+  <radialGradient id="id1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1 -0 -0 1 0 0)" cx="319.999" cy="320" r="29.7638" fx="319.999" fy="320">
+   <stop offset="0" style="stop-opacity:1; stop-color:#FEFEFE"/>
+   <stop offset="0.729412" style="stop-opacity:1; stop-color:#B3E5F2"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#69CCE6"/>
+  </radialGradient>
+ </defs>
+ <g id="圖層_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1320330400">
+   <g>
+    <path class="fil0" d="M417 224c30,27 50,66 50,110 0,81 -66,147 -147,147 -81,0 -147,-66 -147,-147 0,-44 20,-83 50,-110l0 0c4,-4 9,-6 15,-6 12,0 21,10 21,22 0,8 -4,14 -10,18 -21,19 -33,46 -33,76 0,58 46,104 104,104 58,0 104,-46 104,-104 0,-30 -13,-57 -33,-76 -6,-4 -10,-11 -10,-19 0,-11 9,-21 21,-21 6,0 11,2 15,6z"/>
+    <path class="fil0" d="M320 163l0 0c12,0 22,10 22,22l0 134c0,12 -10,22 -22,22l0 0c-12,0 -22,-10 -22,-22l0 -134c0,-12 10,-22 22,-22z"/>
+   </g>
+   <path class="fil1" d="M320 0c177,0 320,143 320,320 0,177 -143,320 -320,320 -177,0 -320,-143 -320,-320 0,-177 143,-320 320,-320zm0 27c162,0 293,131 293,293 0,162 -131,293 -293,293 -162,0 -293,-131 -293,-293 0,-162 131,-293 293,-293z"/>
+   <path class="fil0" d="M320 0c177,0 320,143 320,320 0,177 -143,320 -320,320 -177,0 -320,-143 -320,-320 0,-177 143,-320 320,-320zm0 40c155,0 280,125 280,280 0,155 -125,280 -280,280 -155,0 -280,-125 -280,-280 0,-155 125,-280 280,-280z"/>
+   <path class="fil2" d="M320 40c155,0 280,125 280,280 0,155 -125,280 -280,280 -155,0 -280,-125 -280,-280 0,-155 125,-280 280,-280z"/>
+   <g>
+    <path class="fil3" d="M417 224c30,27 50,66 50,110 0,81 -66,147 -147,147 -81,0 -147,-66 -147,-147 0,-44 20,-83 50,-110l0 0c4,-4 9,-6 15,-6 12,0 21,10 21,22 0,8 -4,14 -10,18 -21,19 -33,46 -33,76 0,58 46,104 104,104 58,0 104,-46 104,-104 0,-30 -13,-57 -33,-76 -6,-4 -10,-11 -10,-19 0,-11 9,-21 21,-21 6,0 11,2 15,6z"/>
+    <path class="fil3" d="M320 163l0 0c12,0 22,10 22,22l0 134c0,12 -10,22 -22,22l0 0c-12,0 -22,-10 -22,-22l0 -134c0,-12 10,-22 22,-22z"/>
+   </g>
+  </g>
+ </g>
+</svg>

@@ -33,14 +33,17 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #1E95C3,
-  secondary:  #1E95C3,
+  primary:    #0A4164,
+  secondary:  #00C4B5,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222,
+  dark:       #f4f4f4,
   brightSkyBlue: #00baff,
   darkBlue: #1e95c3,
-  darkGrey: #2c2c2c,
+  darkGrey: #f4f4f4,
+  black: #000000,
+  darkGrey2: #2c2c2c,
+  // darkGrey: #2c2c2c,
   bluish: #1e95c3,
   warmGrey: #7a7a7a,
   grey: #d2d2d2,
@@ -76,7 +79,7 @@ button[ion-button][disabled] {
 }
 
 ion-content {
-  background-image: url('/assets/img/background2.png');
+  background-image: url('../assets/img/background.png');
 }
 
 .item.item-input {
@@ -141,28 +144,28 @@ $label-md-text-color-focused: initial;
 
 @font-face {
     font-family: 'Nunito Sans';
-    src: url("#{$font-path}/Nunito_Sans/NunitoSans-Regular.ttf") format('truetype');
+    src: url("#{$font-path}/Noto_Sans_TC/NotoSansTC-Regular.otf") format('opentype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Nunito Sans';
-    src: url("#{$font-path}/Nunito_Sans/NunitoSans-SemiBold.ttf") format('truetype');
+    src: url("#{$font-path}/Noto_Sans_TC/NotoSansTC-Thin.otf") format('opentype');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Nunito Sans';
-    src: url("#{$font-path}/Nunito_Sans/NunitoSans-Bold.ttf") format('truetype');
+    src: url("#{$font-path}/Noto_Sans_TC/NotoSansTC-Bold.otf") format('opentype');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Nunito Sans';
-    src: url("#{$font-path}/Nunito_Sans/NunitoSans-Black.ttf") format('truetype');
+    src: url("#{$font-path}/Noto_Sans_TC/NotoSansTC-Black.otf") format('opentype');
     font-weight: 900;
     font-style: normal;
 }
@@ -266,6 +269,27 @@ $font-family-wp-base: 'Nunito Sans', sans-serif;
   }
 }
 @include makeIcon(brand-logo, url(../assets/img/logo.png));
+@include makeIcon(icon-add, url(../assets/img/add.svg));
+@include makeIcon(icon-sub, url(../assets/img/sub.svg));
+@include makeIcon(icon-add-disable, url(../assets/img/add-disable.svg));
+@include makeIcon(icon-sub-disable, url(../assets/img/sub-disable.svg));
+@include makeIcon(icon-power-on, url(../assets/img/power-on.png));
+@include makeIcon(icon-power-off, url(../assets/img/power-off.svg));
+@include makeIcon(icon-auto-on, url(../assets/img/auto-on.svg));
+@include makeIcon(icon-auto-off, url(../assets/img/auto-off.svg));
+@include makeIcon(icon-auto-title, url(../assets/img/auto-title.svg));
+@include makeIcon(icon-wind-on, url(../assets/img/wind-on.svg));
+@include makeIcon(icon-wind-off, url(../assets/img/wind-off.svg));
+@include makeIcon(icon-wind-title, url(../assets/img/wind-title.svg));
+@include makeIcon(icon-sun-on, url(../assets/img/sun-on.svg));
+@include makeIcon(icon-sun-off, url(../assets/img/sun-off.svg));
+@include makeIcon(icon-sun-title, url(../assets/img/sun-title.svg));
+@include makeIcon(icon-water-on, url(../assets/img/water-on.svg));
+@include makeIcon(icon-water-off, url(../assets/img/water-off.svg));
+@include makeIcon(icon-water-title, url(../assets/img/water-title.svg));
+@include makeIcon(icon-snow-on, url(../assets/img/snow-on.svg));
+@include makeIcon(icon-snow-off, url(../assets/img/snow-off.svg));
+@include makeIcon(icon-snow-title, url(../assets/img/snow-title.svg));
 @include makeIcon(schedules, '\e900');
 @include makeIcon(fan, '\e902');
 @include makeIcon(fan-auto, '\e904');

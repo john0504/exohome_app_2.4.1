@@ -1,0 +1,558 @@
+---
+familyName: RPI
+familyMembers:
+- RPI.*
+controlLayout:
+  primary:
+  - AC_POWER
+  - AC_PIC_TEMP
+  - AC_IMAGE_MODE
+  - AC_IMAGE_FAN_SPEED
+  - AC_IMAGE_SET_TIMER
+  - AC_ERROR
+  secondary:
+  - H04R
+  - H0E
+  - H11
+  - H12
+  - H17
+  - H1F
+  - H20
+  - H28R
+  - H28_1
+  - H2F
+  - H30
+  - H1A
+  - H1B
+scheduleLayout:
+  primary:
+  - H01
+  - H02
+  - H03
+  - H05
+  - H06
+  - H07
+  - H08
+  - H0E
+  - H0F
+  - H10
+  - H11
+  - H12
+  - H13
+  - H16
+  - H17
+  - H18
+  - H19
+  - H1A
+  - H1B
+  - H1C
+  - H1D
+  - H1E
+  - H1F
+  - H20
+chartLayout:
+  main:
+  - AC_ENERGY_USED_LINE_CHART
+  - AC_ENERGY_PRICE_LINE_CHART
+deviceId: 1
+components:
+  AC_POWER:
+    type: image-toggle
+    title: ''
+    models:    
+    - key: H00
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.PLEASE_OPEN_POWER
+        icon: icon-power-off
+      - value: 1
+        text: ''
+        icon: icon-power-on
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  AC_PIC_TEMP:
+    type: image-range
+    title: INFORMATION_MODEL.SET_TEMPERAUTE
+    models:
+    - key: H03
+      values:
+      - value: 16
+        text: ''
+        icon: img16
+      - value: 17
+        text: ''
+        icon: img17
+      - value: 18
+        text: ''
+        icon: img18
+      - value: 19
+        text: ''
+        icon: img19
+      - value: 20
+        text: ''
+        icon: img20
+      - value: 21
+        text: ''
+        icon: img21
+      - value: 22
+        text: ''
+        icon: img22
+      - value: 23
+        text: ''
+        icon: img23
+      - value: 24
+        text: ''
+        icon: img24
+      - value: 25
+        text: ''
+        icon: img25
+      - value: 26
+        text: ''
+        icon: img26
+      - value: 27
+        text: ''
+        icon: img27
+      - value: 28
+        text: ''
+        icon: img28
+      - value: 29
+        text: ''
+        icon: img29
+      - value: 30
+        text: ''
+        icon: img30
+      - value: 31
+        text: ''
+        icon: img31
+      - value: 32
+        text: ''
+        icon: img32
+      disable:
+      - conditions:
+        - key: H01
+          op: eq
+          target: 2
+      - conditions:
+        - key: H01
+          op: eq
+          target: 3
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  AC_IMAGE_MODE:
+    type: action-sheet-button
+    title: INFORMATION_MODEL.MODE
+    models:
+    - key: H01
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.COOL
+        icon: icon-snow
+      - value: 1
+        text: INFORMATION_MODEL.DEHUMIDIFIER
+        icon: icon-water
+      - value: 2
+        text: INFORMATION_MODEL.FAN
+        icon: icon-wind
+      - value: 3
+        text: INFORMATION_MODEL.AUTO_CONTROL
+        icon: icon-auto
+      - value: 4
+        text: INFORMATION_MODEL.HEAT
+        icon: icon-sun
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  AC_IMAGE_FAN_SPEED:
+    type: action-sheet-button
+    title: INFORMATION_MODEL.FAN_SPEED
+    models:
+    - key: H02
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.AUTO
+      - value: 1
+        text: INFORMATION_MODEL.SILENT
+      - value: 2
+        text: INFORMATION_MODEL.SMALL
+      - value: 3
+        text: INFORMATION_MODEL.WEAK
+      - value: 4
+        text: INFORMATION_MODEL.HIGH
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  AC_IMAGE_SET_TIMER:
+    type: action-sheet-range
+    title: INFORMATION_MODEL.SLEEP_MODE
+    models:
+    - key: H06
+      values:
+        min: 0
+        max: 1440
+        step: 1
+        func: time_min
+      options: 
+        type: 'uint16'
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  AC_ERROR:
+    type: popup-text
+    title: ''
+    models:
+    - key: H29
+      values:
+        func: text
+  H00:
+    type: toggle
+    title: INFORMATION_MODEL.POWER
+    models:
+    - key: H00
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H01:
+    type: button-group
+    title: INFORMATION_MODEL.MODE
+    models:
+    - key: H01
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.COOL
+      - value: 1
+        text: INFORMATION_MODEL.DEHUMIDIFIER
+      - value: 2
+        text: INFORMATION_MODEL.FAN
+      - value: 3
+        text: INFORMATION_MODEL.AUTO_CONTROL
+      - value: 4
+        text: INFORMATION_MODEL.HEAT
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H02:
+    type: button-group
+    title: INFORMATION_MODEL.FAN_SPEED
+    models:
+    - key: H02
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.AUTO
+      - value: 1
+        text: INFORMATION_MODEL.SILENT
+      - value: 2
+        text: INFORMATION_MODEL.SMALL
+      - value: 3
+        text: INFORMATION_MODEL.WEAK
+      - value: 4
+        text: INFORMATION_MODEL.HIGH
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H03:
+    type: range
+    title: INFORMATION_MODEL.SET_TEMPERAUTE
+    models:
+    - key: H03
+      values:
+        min: 0
+        max: 35
+        step: 1
+        func: tempCelsius
+      options: 
+        type: 'uint'
+      default: 1
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H04R:
+    type: text
+    title: INFORMATION_MODEL.TEMPERATURE
+    models:
+    - key: H04
+      values:
+        func: tempCelsius
+  H06:
+    type: range
+    title: INFORMATION_MODEL.SLEEP_MODE
+    models:
+    - key: H06
+      values:
+        min: 0
+        max: 1440
+        step: 30
+        func: text
+      options: 
+        type: 'uint16'
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H0E:
+    type: toggle
+    title: INFORMATION_MODEL.VERTICAL_SWING
+    models:
+    - key: H0E
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H11:
+    type: button-group
+    title: INFORMATION_MODEL.HORIZONTAL_SWING
+    models:
+    - key: H11
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.AUTO
+      - value: 1
+        text: INFORMATION_MODEL.RIGHT
+      - value: 2
+        text: INFORMATION_MODEL.RIGHT_CENTER
+      - value: 3
+        text: INFORMATION_MODEL.CENTER
+      - value: 4
+        text: INFORMATION_MODEL.LEFT_CENTER
+      - value: 5
+        text: INFORMATION_MODEL.LEFT
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H12:
+    type: toggle
+    title: INFORMATION_MODEL.FILTER
+    models:
+    - key: H12
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.NORMAL
+      - value: 1
+        text: INFORMATION_MODEL.NEED_CLEANING
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+      - conditions:
+        - key: H12
+          op: eq
+          target: 0
+  H17:
+    type: toggle
+    title: INFORMATION_MODEL.ANTI_MOLD
+    models:
+    - key: H17
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H1A:
+    type: toggle
+    title: INFORMATION_MODEL.FAST_RUNNING
+    models:
+    - key: H1A
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H1B:
+    type: toggle
+    title: INFORMATION_MODEL.POWER_SAVING
+    models:
+    - key: H1B
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+      - conditions:
+        - key: H06
+          op: gt
+          target: 0
+  H1E:
+    type: toggle
+    title: INFORMATION_MODEL.SOUND
+    models:
+    - key: H1E
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.ON
+      - value: 1
+        text: INFORMATION_MODEL.OFF
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H1F:
+    type: button-group
+    title: INFORMATION_MODEL.BRIGHTNESS
+    models:
+    - key: H1F
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.BRIGHT
+      - value: 1
+        text: INFORMATION_MODEL.DARK
+      - value: 2
+        text: INFORMATION_MODEL.OFF
+      - value: 3
+        text: INFORMATION_MODEL.FULL_OFF
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H20:
+    type: button-group
+    title: INFORMATION_MODEL.MOISTURIZING
+    models:
+    - key: H20
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.NONE
+      - value: 1
+        text: INFORMATION_MODEL.WEAK
+      - value: 2
+        text: INFORMATION_MODEL.HIGH
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+  H28R:
+    type: text
+    title: INFORMATION_MODEL.ENERGY_USED
+    models:
+    - key: H28
+      values:
+        func: power
+  H28_1:
+    type: toggle
+    title: INFORMATION_MODEL.ENERGY_USED_RESET
+    models:
+    - key: H28
+      values:
+      - value: 0
+        text: '0'
+      - value: "*"
+        text: INFORMATION_MODEL.RESET
+      default: 1
+      disable:
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+      - conditions:
+        - key: H28
+          op: eq
+          target: 0
+  H30:
+    type: range-with-toggle
+    title: INFORMATION_MODEL.FILTER_HOUR
+    models:
+    - key: H30
+      values:
+        min: 0
+        max: 1
+        step: 1
+        func: time
+      options: 
+        type: 'uint16'
+      disable:
+      - conditions:
+        - key: H30
+          op: gte
+          target: 1
+    - key: H30
+      values:
+      - value: 0
+        text: '0'
+      - value: "*"
+        text: ''
+      default: 1
+      disable:
+      - conditions:
+        - key: H29
+          op: gt
+          target: 0
+      - conditions:
+        - key: H30
+          op: eq
+          target: 0
+chartComponents:
+  AC_ENERGY_USED_LINE_CHART:
+    type: line-chart
+    title: INFORMATION_MODEL.ENERGY_USED
+    models:
+    - key: H28
+      values:
+        min: 0
+        max: 100
+        step: 1
+        func: energy
+      options: 
+        period: 0.1
+  AC_ENERGY_PRICE_LINE_CHART:
+    type: line-chart
+    title: INFORMATION_MODEL.ENERGY_PRICE
+    models:
+    - key: H28
+      values:
+        min: 0
+        max: 100
+        step: 1
+        func: energy_price
+      options: 
+        period: 0.1
+        price: 1

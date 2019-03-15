@@ -2,10 +2,10 @@
   <div class="container">
     <div class="main">
       <div class="header-image">
-        <img [src]="themeService.logoUrl">
+        <img [src]="themeService.loginLogoUrl">
       </div>
       <ion-list>
-        <button ion-button color="primary" class="full-button" (click)="goSignup()" round full>{{ 'APP_START.SIGN_UP_WITH_EMAIL' | translate }}</button>
+        <button ion-button color="secondary" class="full-button" (click)="goSignup()" round full>{{ 'APP_START.SIGN_UP_WITH_EMAIL' | translate }}</button>
         <div class="divider">
         </div>
         <button ion-button class="full-button" color="fbBlue" round full fb-login>{{ 'APP_START.SIGN_UP_WITH_FB' | translate }}</button>
@@ -18,7 +18,7 @@
   <div class="container">
     <form #loginForm="ngForm" novalidate class="main" (ngSubmit)="onLogin(loginForm)">
       <div class="header-image-1">
-        <img [src]="themeService.logoUrl">
+        <img [src]="themeService.loginLogoUrl">
       </div>
       <ion-list>
         <div class="header-t">

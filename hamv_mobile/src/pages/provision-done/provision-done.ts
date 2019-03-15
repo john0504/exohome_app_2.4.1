@@ -26,7 +26,6 @@ export class ProvisionDonePage {
   private unregister;
   private deviceSn;
   newDeviceName: string;
-  deviceMachineType: string;
 
   constructor(
     private appTasks: AppTasks,
@@ -55,18 +54,6 @@ export class ProvisionDonePage {
   ionViewWillUnload() {
     this.checkNetworkService.resume();
     this.unregister && this.unregister();
-  }
-
-  getMachineCodeCallback = (params) => {
-    return new Promise(() => {
-      if (params) {
-        this.deviceMachineType = params;
-      }
-    });
-  }
-
-  onQRcode() {
-    this.navCtrl.push('ScanPage', { callback: this.getMachineCodeCallback });
   }
 
   onNext() {

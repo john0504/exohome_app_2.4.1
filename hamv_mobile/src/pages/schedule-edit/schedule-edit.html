@@ -11,8 +11,8 @@
 <ion-content>
   <div class="schedule-content">
     <ion-list class="schedule-main-content">
+      <ion-label stacked>{{ 'SCHEDULE_EDIT.SCHEDULE_NAME' | translate }}</ion-label>
       <ion-item>
-        <ion-label stacked>{{ 'SCHEDULE_EDIT.SCHEDULE_NAME' | translate }}</ion-label>
         <ion-input [(ngModel)]="schedule.name" color="list-blue" placeholder="{{ ('SCHEDULE_EDIT.MY_SCHEDULE') | translate }}" type="text"
           maxlength="40"></ion-input>
       </ion-item>

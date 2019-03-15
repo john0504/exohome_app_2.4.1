@@ -1,4 +1,6 @@
 page-device-detail {
+  $font-title: 1.3rem;
+  $font-bold: 900;
   .item-md,
   .item-ios {
     padding-left: 0;
@@ -17,19 +19,76 @@ page-device-detail {
       transition: 500ms;
     }
   }
-  .banner-image {
-    width: 100%;
-    max-height: 200px;
-  }
   .main-content {
-    margin: 5px;
-    padding: 0 16px 16px 16px;
+    padding: 0 0 0 0;
     display: flex;
     flex-direction: column;
+    .sub-content {
+      margin-top: 5%;
+      padding: 20px 30px 0 30px;
+    }
+    .image-control {
+      padding: 20px 30px 0 30px;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      margin: -40% 0 0 -50%;
+    }
+    .sub-content2 {
+      padding: 100px 30px 0 30px;
+    }
+    .group-control {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      background-color: rgb(56, 75, 109);
+      &.off {
+        bottom: 0px;
+      }
+    }
     .control-item-divider {
       padding-bottom: 15px;
       margin-bottom: 15px;
-      border-bottom: 1px solid color($colors, grey);
+      border-bottom: 1px solid color($colors, dark);
+    }
+    .more-button {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 0px;
+      margin-left: -5px;
+      margin-right: -5px;
+      border-bottom: 2px solid rgb(60,97,142);
+      ion-icon {
+        font-size: $font-title + 1.4rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        color: color($colors, dark);
+      }
+      .text-on-status {
+        color: rgb(242, 125, 0);
+      }
+    }
+    .more-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .title-text {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        font-size: $font-title + 0.5rem;
+        font-weight: $font-bold;
+        color: color($colors, dark);
+      }
+      .text-on-status {
+        color: rgb(242, 125, 0);
+      }
     }
   }
 }

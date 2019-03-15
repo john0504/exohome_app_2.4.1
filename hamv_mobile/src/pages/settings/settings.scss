@@ -10,6 +10,7 @@ page-settings {
     font-size: 1.4rem;
     font-weight: 900;
     width: 100%;
+    color: color($colors, dark);
 
     &:not(:first-child) {
       margin-top: 36px;

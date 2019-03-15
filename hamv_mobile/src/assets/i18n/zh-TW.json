@@ -26,7 +26,10 @@
     "BLUETOOTH_SETTING": "藍牙設定",
     "TEST_MODE_COUNT":"再按{{ value }}次開啟測試模式",
     "TEST_MODE_OPEN":"開啟測試模式",
-    "TEST_MODE_CLOSE":"關閉測試模式"
+    "TEST_MODE_CLOSE":"關閉測試模式",
+    "BACK": "返回",
+    "ADVANCE": "進階",
+    "WARRANTY": "產品保固"
   },
   "APP_START": {
     "FORGOT_PWD": "忘記密碼?",
@@ -150,7 +153,8 @@
     "UPDATE_STARTED_MSG": "您的裝置直到更新完成前將會暫時無法使用。",
     "UPDATE_STARTED": "開始更新",
     "UPDATING": "更新中...",
-    "DEVICE_MACHINE_TYPE": "機型"
+    "ELECTRICITY_PRICE_SETTING": "電價設定(新臺幣元/度)",
+    "PRICE_HAS_UPDATED": "電價更新成功"
   },
   "DEVICE_SHARING": {
     "ADD_GUEST_MSG": "您的 {{ familyName }} 已經準備好了! 從 {{ url }} 創建帳號並且新增裝置開始吧。",
@@ -222,7 +226,9 @@
     "PERIOD_DAY": "日",
     "PERIOD_WEEK": "週",
     "PERIOD_MONTH": "月",
-    "PERIOD_YEAR": "年"
+    "PERIOD_YEAR": "年",
+    "AVERAGE": "平均",
+    "TOTAL": "總和"
   },
   "HOME": {
     "ALL": "全部",
@@ -253,7 +259,7 @@
     "FAN_SPEED": "風速",
     "FAN": "送風",
     "HEAT": "暖氣",
-    "HIGH": "高速",
+    "HIGH": "強",
     "HORIZONTAL_SWING": "水平擺動",
     "LEFT_CENTER": "左中",
     "LEFT": "左",
@@ -266,13 +272,13 @@
     "QUICK": "快",
     "RIGHT_CENTER": "中右",
     "RIGHT": "右",
-    "SILENT": "靜音",
+    "SILENT": "靜",
     "SOUND": "聲音",
     "SUPER_QUICK": "極快",
     "TEMPERATURE": "溫度",
     "TIMER": "計時器",
     "VERTICAL_SWING": "垂直擺動",
-    "WEAK": "弱風",
+    "WEAK": "弱",
     "HUMIDITY": "濕度",
     "CO2_VALUE": "CO2值",
     "PM25_VALUE": "PM2.5值",
@@ -280,9 +286,31 @@
     "EMWD_LEVEL": "電磁波強度",
     "WEEK": "一週",
     "HOUR": "小時",
-    "SLEEP_MODE": "舒眠模式",
+    "SLEEP_MODE": "舒眠",
     "ROOM_TEMPERATURE": "室溫",
-    "AIR_CLEAR": "空氣清淨"
+    "AIR_CLEAR": "空氣清淨",
+    "MODE" : "功能",
+    "NONE" : "無",
+    "AUTO_CONTROL": "自控",
+    "SMALL": "微",
+    "SET_TIMER": "定時",
+    "PLEASE_OPEN_POWER": "請開啟電源",
+    "SET_TEMPERAUTE": "設定溫度",
+    "FILTER": "濾網",
+    "NORMAL": "正常",
+    "NEED_CLEANING": "須清洗",
+    "FAST_RUNNING": "快速運轉",
+    "POWER_SAVING": "節電運轉",
+    "BRIGHT": "亮",
+    "DARK": "暗",
+    "FULL_OFF": "全關",
+    "ENERGY_USED": "累積用電量",
+    "ENERGY_USED_RESET": "累積用電量重置",
+    "RESET": "重置",
+    "FILTER_HOUR": "濾網時數",
+    "ERROR_MSG": "錯誤代碼 : {{ errorCode }}",
+    "CANCEL": "取消",
+    "ENERGY_PRICE": "電價試算"
   },
   "LANGUAGE": {
     "BACK": "上一頁",
@@ -379,13 +407,18 @@
     "SHOW_INFO": "您的裝置正在更新中，直到更新完畢前，此裝置將會暫時無法使用。",
     "UPDATING": "更新中..."
   },
+  "PRE_DEVICE_CREATE": {
+    "PRE_DEVICE_CREATE": "安裝導引",
+    "TITLE": "如何配對?",
+    "DESCRIPTION": "請打開遙控器上蓋，按住「機體防霉」3秒直到智慧型雲端模組顯示燈快速閃爍。",    
+    "CONTINUE": "繼續"
+  },
   "PROVISION_DONE": {
     "ADD_PRODUCT": "新增 {{ productName }}",
     "DONE": "完成",
     "MY_NEW_PRODUCT": "我的新{{ productName }}",
     "READY_FOR_USE": "您的 <a ion-text color=\"bluish\">{{ productName}}</a> 已經連接且可以使用.",
     "RENAME_DEVICE": "想要命名您的裝置嗎?",
-    "DEVICE_MACHINE_TYPE": "掃描裝置機型",
     "SUCCESS": "成功!"
   },
   "PROVISION_FAILURE": {
@@ -511,6 +544,15 @@
     "SECURITY": "安全性",
     "SET_WIFI": "設定 Wi-Fi 網路",
     "START_CONNECTION": "開始連線"
+  },
+  "WARRANTY": {
+    "WARRANTY": "產品保固",
+    "DEVICE_MACHINE_TYPE": "掃描裝置",
+    "TITLE": "如何獲得保固?",
+    "REGISTER": "前往註冊",
+    "DESCRIPTION": "請找到機構上的二維條碼，如上方圖片所示，並點選開始掃描。",    
+    "QR_CODE": "開始掃描",
+    "SCAN_PLEASE" : "請掃描"
   },
   "WIFI_AP_MANAGE": {
     "PAGE_TITLE": "已儲存網路"

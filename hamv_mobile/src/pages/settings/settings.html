@@ -10,7 +10,7 @@
 </ion-header>
 <ion-content>
   <div class="page-spaces" ion-fixed>
-    <span class="section-text">{{ 'SETTINGS.CONNECTIONS' | translate }}</span>
+    <!-- <span class="section-text">{{ 'SETTINGS.CONNECTIONS' | translate }}</span>
     <button ion-button color="primary" full round icon-left (click)="goAmazonEchoPage()" margin-top>
       <i class="fab fa-amazon text-icon"></i>
       {{ 'SETTINGS.AMAZON_ECHO' | translate }}
@@ -21,12 +21,14 @@
     <button ion-button color="primary" full round icon-left (click)="goGoogleHomePage()" margin-vertical>
       <i class="fab fa-google text-icon"></i>
       {{ 'SETTINGS.GOOGLE_HOME' | translate }}
-    </button>
+    </button> -->
+    <span class="section-text">{{ 'MY_ACCOUNT.MY_LANGUAGE' | translate }}</span>
+    <language-selector margin-top></language-selector>    
     <span class="section-text">{{ 'SETTINGS.ACCOUNT' | translate }}</span>
-    <button ion-button color="primary" full round icon-left (click)="goMyAccountPage()" margin-top>
+    <!-- <button ion-button color="primary" full round icon-left (click)="goMyAccountPage()" margin-top>
       <i class="fas fa-user-circle text-icon"></i>
       {{ 'SETTINGS.MY_ACCOUNT' | translate }}
-    </button>
+    </button> -->
     <button ion-button color="primary" full round icon-left *ngIf="!appConfig.app.disableLog" send-log-report margin-top>
       <i class="far fa-envelope-open text-icon"></i>
       {{ 'SETTINGS.SEND_FEEDBACK' | translate }}

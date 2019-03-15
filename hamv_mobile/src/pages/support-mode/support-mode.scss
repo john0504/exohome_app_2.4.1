@@ -1,0 +1,81 @@
+support-mode {
+  $font-title: 1.3rem;
+  $font-bold: 900;
+  .item-md,
+  .item-ios {
+    padding-left: 0;
+  }
+  .device-state {
+    width: 100%;
+    height: 4rem;
+    margin: 0;
+    transition: 500ms;
+    visibility: 1;
+    font-size: 1.8rem;
+    font-weight: 600;
+    &.online {
+      height: 0;
+      visibility: 0;
+      transition: 500ms;
+    }
+  }
+  .main-content {
+    padding: 0 0 0 0;
+    display: flex;
+    flex-direction: column;
+    .sub-content {
+      padding: 20px 30px 0 30px;
+    }
+    .sub-content2 {
+      padding: 100px 30px 0 30px;
+    }
+    .group-control {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      background-color: rgb(56, 75, 109);
+      &.off {
+        bottom: 0px;
+      }
+    }
+    .control-item-divider {
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid color($colors, dark);
+    }
+    .more-button {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 8px;
+      ion-icon {
+        font-size: $font-title + 1.0rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        color: color($colors, dark);
+      }
+      .text-on-status {
+        color: rgb(242, 125, 0);
+      }
+    }
+    .more-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .title-text {
+        font-size: $font-title + 0.5rem;
+        font-weight: $font-bold;
+        color: color($colors, dark);
+      }
+      .text-on-status {
+        color: rgb(242, 125, 0);
+      }
+    }
+  }
+}
