@@ -49,6 +49,7 @@ ion-menu {
   }
 }
 .action-sheet-page {
+  $font-title: 1.3rem;
   .action-sheet-title {
     text-align: center;
   }
@@ -61,6 +62,9 @@ ion-menu {
       ion-icon {
         position: absolute;
         left: 30px;
+        width: $font-title + 1.4rem;
+        height: $font-title + 1.4rem;
+        font-size: $font-title + 1.4rem;
       }
     } 
   }
@@ -73,6 +77,9 @@ ion-menu {
       ion-icon {
         position: absolute;
         left: 30px;
+        width: $font-title + 1.4rem;
+        height: $font-title + 1.4rem;
+        font-size: $font-title + 1.4rem;
       }
     } 
   }
@@ -85,6 +92,9 @@ ion-menu {
       ion-icon {
         position: absolute;
         left: 30px;
+        width: $font-title + 1.4rem;
+        height: $font-title + 1.4rem;
+        font-size: $font-title + 1.4rem;
       }
     } 
   }
