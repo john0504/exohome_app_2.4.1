@@ -95,12 +95,14 @@ export class ScheduleAdapterService {
 
     const c = new Date();
     const curTs = c.getTime();
-    c.setUTCHours(startHour);
-    c.setUTCMinutes(startMinute);
-    c.setUTCSeconds(1);
+    if (startHour) {
+      c.setUTCHours(startHour);
+      c.setUTCMinutes(startMinute);
+      c.setUTCSeconds(1);
+    }
 
     let startTs = c.getTime();
-    const startDateShift: boolean = curTs >= startTs;
+    const startDateShift: boolean = curTs > startTs;
     const isOverlapping = this.isOverlapping(utcSchedule);
     if ((isOverlapping && !executeNow) || (!isOverlapping && startDateShift)) {
       startTs += 86400000; //24 * 60 * 60 * 1000;
@@ -109,8 +111,15 @@ export class ScheduleAdapterService {
     const rs = new Date(startTs);
     const weekday = rs.getUTCDay() <= 0 ? 7 : rs.getUTCDay();
     const e = rs;
-    e.setUTCHours(endHour);
-    e.setUTCMinutes(endMinute);
+    if (endHour) {
+      e.setUTCHours(endHour);
+      e.setUTCMinutes(endMinute);
+      e.setUTCSeconds(59);
+    } else {
+      e.setUTCHours(startHour);
+      e.setUTCMinutes(startMinute);
+      e.setUTCSeconds(59);
+    }
 
     let endTs = e.getTime();
 
@@ -124,8 +133,7 @@ export class ScheduleAdapterService {
 
     const result = cloneDeep(utcSchedule);
     result.days = [weekday];
-    result.active_until = ts;
-
+    result.active_until = ts + 60;
     return result;
   }
 

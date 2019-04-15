@@ -16,8 +16,8 @@
         <ion-input [(ngModel)]="schedule.name" color="list-blue" placeholder="{{ ('SCHEDULE_EDIT.MY_SCHEDULE') | translate }}" type="text"
           maxlength="40"></ion-input>
       </ion-item>
-      <div class="schedule-time-set">
-        <button ion-item (click)="startDt.open()" detail-none>
+      <div class="schedule-time-set">        
+        <button ion-item (click)="startDt.open()" detail-none *ngIf="!disableStart">
           <ion-label>
             <ion-label>{{ 'SCHEDULE_EDIT.START_TIME' | translate }}</ion-label>
             <h1 ion-text color="list-blue">{{ (schedule.start | remarkTime) || '--:--' }}</h1>
@@ -25,7 +25,7 @@
           <ion-datetime #startdt [(ngModel)]="schedule.start" cancelText="{{ 'SCHEDULE_EDIT.CANCEL' | translate }}" doneText="{{ 'SCHEDULE_EDIT.DONE' | translate }}"
             pickerFormat="h:mm A" displayFormat="H:mm" hidden></ion-datetime>
         </button>
-        <button ion-item (click)="endDt.open()" detail-none>
+        <button ion-item (click)="endDt.open()" detail-none *ngIf="!disableEnd">
           <ion-label>
             <ion-label>{{ 'SCHEDULE_EDIT.END_TIME' | translate }}</ion-label>
             <h1 ion-text color="list-blue">{{ (schedule.end | remarkTime) || '--:--' }}</h1>
@@ -33,6 +33,20 @@
           <ion-datetime #enddt [(ngModel)]="schedule.end" cancelText="{{ 'SCHEDULE_EDIT.CANCEL' | translate }}" doneText="{{ 'SCHEDULE_EDIT.DONE' | translate }}"
             pickerFormat="h:mm A" displayFormat="H:mm" hidden></ion-datetime>
         </button>
+      </div>
+      <div class="repeat-time-toggle">
+        <span class="title-text">{{ 'SCHEDULE_EDIT.ENABLE_START_TIME' | translate }}</span>
+        <div class="toggle-block">
+          <ion-label *ngIf="!disableStart" class="toggle-status">{{ 'SCHEDULE_EDIT.ON' | translate }}</ion-label>
+          <ion-toggle color="primary" [(ngModel)]="!disableStart" (ngModelChange)="setStart()"></ion-toggle>
+        </div>
+      </div>
+      <div class="repeat-time-toggle">
+        <span class="title-text">{{ 'SCHEDULE_EDIT.ENABLE_END_TIME' | translate }}</span>
+        <div class="toggle-block">
+          <ion-label *ngIf="!disableEnd" class="toggle-status">{{ 'SCHEDULE_EDIT.ON' | translate }}</ion-label>
+          <ion-toggle color="primary" [(ngModel)]="!disableEnd" (ngModelChange)="setEnd()"></ion-toggle>
+        </div>
       </div>
       <div class="repeat-time-toggle">
         <span class="title-text">{{ 'SCHEDULE_EDIT.REPEAT' | translate }}</span>

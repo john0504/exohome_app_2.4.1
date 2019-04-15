@@ -29,7 +29,8 @@
     "TEST_MODE_CLOSE":"Turn off the test mode",
     "BACK": "BACK",
     "ADVANCE": "ADVANCE",
-    "WARRANTY": "WARRANTY"
+    "WARRANTY": "WARRANTY",
+    "REPAIR": "ONLINE REPAIR"
   },
   "APP_START": {
     "FORGOT_PWD": "Forgot Password",
@@ -106,7 +107,8 @@
     "GPS_MODE": "GPS MODE",
     "LOCAL_MODE": "LOCAL MODE",
     "LOCAL_MODE_DEVICE": "Local mode device",
-    "LOCAL_MODE_LEAVE": "Leave local mode"
+    "LOCAL_MODE_LEAVE": "Leave local mode",
+    "SERIAL": "WiFi MAC ( SN )：<a ion-text color=\"bluish\">{{ serial }}</a>"
   },
   "DEVICE_DETAIL": {
     "HISTORY": "History",
@@ -228,7 +230,8 @@
     "PERIOD_MONTH": "M",
     "PERIOD_YEAR": "Y",
     "AVERAGE": "Average",
-    "TOTAL": "Total"
+    "TOTAL": "Total",
+    "NOTICE": "Note: The price of the trial is for reference only."
   },
   "HOME": {
     "ALL": "All",
@@ -310,7 +313,8 @@
     "FILTER_HOUR": "FILTER HOUR",
     "ERROR_MSG": "ERROR CODE : {{ errorCode }}",
     "CANCEL": "CANCEL",
-    "ENERGY_PRICE": "ELECTRICITY PRICE TRIAL"
+    "ENERGY_PRICE": "ELECTRICITY PRICE TRIAL",
+    "NET_ALERT": "FILTER MUST BE CLEANED"
   },
   "LANGUAGE": {
     "BACK": "Back",
@@ -463,7 +467,9 @@
     "SETTINGS": "Settings",
     "START_NOW": "Start Now",
     "START_TIME": "START TIME",
-    "TITLE": "{{ action }} Schedule"
+    "TITLE": "{{ action }} Schedule",
+    "ENABLE_START_TIME": "ENABLE START TIME",
+    "ENABLE_END_TIME": "ENABLE END TIME"
   },
   "SCHEDULE_LIST": {
     "CREATE_A_SCHEDULE": "Create a Schedule",
@@ -553,6 +559,23 @@
     "DESCRIPTION": "Please fine the QR-code on the device as the picture, and press START SCAN.",    
     "QR_CODE": "START SCAN",
     "SCAN_PLEASE" : "SCAN PLEASE"
+  },
+  "REPAIR": {    
+    "REPAIR":"REPAIR",
+    "PERSONAL_DATA" : "PERSONAL DATA",
+    "NAME" : "NAME",
+    "PHONE" : "PHONE",
+    "MOBILE" : "MOBILE PHONE",
+    "EMAIL" : "E-MAIL",
+    "CITY" : "CITY",
+    "REGION" : "REGION",
+    "REPAIR_DATA" : "REPAIR DATA",
+    "MACHINE_CODE" : "MACHINE CODE",
+    "MALFUNCTION" : "MALFUNCTION",
+    "MALFUNCTION_DESCRIPTION" : "MALFUNCTION DESCRIPTION",
+    "SEND" : "SEND OUT REPAIR INFORMATION",
+    "WHERE_IS_MACHINE_CODE" : "WHERE IS MY MACHINE CODE?",    
+    "MACHINE_CODE_DESCRIPTION" : "The machine code is a set of 6 code letters and numbers, which is indicated in the Hitachi Product Warranty. This code can be entered into the form for service personnel to check."
   },
   "WIFI_AP_MANAGE": {
     "PAGE_TITLE": "Saved Networks"

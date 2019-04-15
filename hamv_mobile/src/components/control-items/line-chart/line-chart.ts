@@ -57,7 +57,7 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
 
   dtSelector: DatetimeSelector;
   transform: DataTransform;
-  aggregateMethod: string = 'avg';
+  aggregateMethod: string = 'sum';
   period: number = 1;
   electricityPrice: number = 1;
   isPrice = false;
@@ -175,13 +175,15 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
         sampling_size = '1d';
         break;
       case 'year':
-        sampling_size = '30d';
+        sampling_size = '1d';
         break;
     }
+    var start_time = range.startTime + 8 * 60 * 60 * 1000;
+    var end_time = range.endTime + 8 * 60 * 60 * 1000;
     return this.appTasks
       .getHistoricalData(deviceSn, key, {
-        start_time: range.startTime + 'ms',
-        end_time: range.endTime + 'ms',
+        start_time: start_time + 'ms',
+        end_time: end_time + 'ms',
         order_by: 'asc',
         sampling_size,
         aggregate: this.aggregateMethod
@@ -194,8 +196,32 @@ export class LineChart extends UIComponentBase implements OnInit, OnDestroy {
       this._options = cloneDeep(this._lineChartModel.basicModel);
       return;
     }
-    results.forEach((historicalData, index) => {
 
+    let my_results = [];
+    let my_results_datas = [];
+    if (this.dtSelector.period == 'year' && this.aggregateMethod == 'sum') {
+      var sum = 0;
+      var last_time = "";
+      results.forEach((historicalData) => {
+        historicalData.forEach(element => {
+          let date = JSON.stringify(element.time).substring(9, 11);
+          if (date == "01" && last_time != "") {
+            my_results_datas.push({ "time": last_time, "value": sum == 0 ? "none" : { "sum": sum } });
+            sum = 0;
+          }
+          if (element.value != "none") {
+            sum += element.value["sum"];
+          }
+          last_time = element.time;
+        });
+      });
+      my_results_datas.push({ "time": last_time, "value": sum == 0 ? "none" : { "sum": sum } });
+      my_results.push(my_results_datas);
+    } else {
+      my_results = results;
+    }
+
+    my_results.forEach((historicalData, index) => {
       let count = 0;
       let sum = 0;
       historicalData.forEach(element => {

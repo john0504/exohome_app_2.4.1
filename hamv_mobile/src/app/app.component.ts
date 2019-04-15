@@ -105,6 +105,7 @@ export class MyApp implements OnInit, OnDestroy {
     { title: 'APP.HOME', component: 'MediumGridPage' },
     { title: 'APP.MY_GROUPS', component: 'MyGroupsPage' },
     { title: 'APP.WARRANTY', component: 'WarrantyPage' },
+    { title: 'APP.REPAIR', component: 'RepairPage' },
     { title: 'APP.SETTINGS', component: 'SettingsPage' },
   ];
 

@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'REPAIR.REPAIR' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="container" padding>
+    <div padding-bottom>
+      <h2>{{ 'REPAIR.PERSONAL_DATA' | translate }}</h2>
+      <hr class="line" />
+      <ion-item>
+        <ion-icon name="person" item-left></ion-icon>
+        <ion-input [(ngModel)]="name" type="text" placeholder="{{ ('REPAIR.NAME') | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="call" item-left></ion-icon>
+        <ion-input [(ngModel)]="phone" type="text" placeholder="{{ ('REPAIR.PHONE') | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="phone-portrait" item-left></ion-icon>
+        <ion-input [(ngModel)]="mobile" type="text" placeholder="{{ ('REPAIR.MOBILE') | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="mail" item-left></ion-icon>
+        <ion-input [(ngModel)]="email" type="text" placeholder="{{ ('REPAIR.EMAIL') | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pin" item-left></ion-icon>
+        <ion-input [(ngModel)]="city" type="text" placeholder="{{ ('REPAIR.CITY') | translate }}"></ion-input>
+        <ion-input [(ngModel)]="region" type="text" placeholder="{{ ('REPAIR.REGION') | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="" item-left></ion-icon>
+        <ion-input [(ngModel)]="address1" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="" item-left></ion-icon>
+        <ion-input [(ngModel)]="address2" type="text"></ion-input>
+      </ion-item>
+      <h2>{{ 'REPAIR.REPAIR_DATA' | translate }}</h2>
+      <hr class="line" />
+      <ion-item (click)="onMachineCode()">
+        <ion-icon name="barcode" item-left></ion-icon>
+        <ion-input [(ngModel)]="machineCode" type="text" placeholder="{{ ('REPAIR.MACHINE_CODE') | translate }}" disabled="true"></ion-input>
+        <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="malfunction" type="text" placeholder="{{ ('REPAIR.MALFUNCTION') | translate }}"></ion-input>
+        <ion-icon name="ios-arrow-forward" item-right></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="description" type="text" placeholder="{{ ('REPAIR.MALFUNCTION_DESCRIPTION') | translate }}"></ion-input>
+      </ion-item>
+    </div>
+    <div>
+      <button ion-button color="primary" class="bottom-button full-button" (click)="onNext()"
+        full>{{ 'REPAIR.SEND' | translate }}</button>
+    </div>
+  </div>
+  <extra-page-space></extra-page-space>
+</ion-content>

@@ -214,9 +214,16 @@ components:
           target: 0
   AC_ERROR:
     type: popup-text
-    title: ''
+    title: INFORMATION_MODEL.ERROR_MSG
     models:
     - key: H29
+      values:
+        func: text
+  AC_NET_ALERT:
+    type: popup-text
+    title: INFORMATION_MODEL.NET_ALERT
+    models:
+    - key: H03
       values:
         func: text
   H00:

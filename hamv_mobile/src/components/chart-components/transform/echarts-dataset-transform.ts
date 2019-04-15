@@ -71,6 +71,8 @@ export class EchartsDatasetTransform implements DataTransform {
       return moment(date).format('ddd');
     } else if (timePeriodFilter === 'month') {
       return moment(date).format('Do');
+    } else if (timePeriodFilter === 'year') {
+      return moment(date).format('MMM');
     }
     return moment(date).format('M/DD');
   }

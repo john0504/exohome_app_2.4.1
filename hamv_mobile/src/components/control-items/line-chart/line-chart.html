@@ -4,16 +4,20 @@
       <ion-icon name="ios-arrow-back"></ion-icon>
     </button>
     <div class="range-text" [innerHtml]="dtSelector.rangeItem.rangeText"></div>
-    <button class="range-button" ion-button clear round icon-only (click)="changeRange(1)" [disabled]="!dtSelector.canForward()">
+    <button class="range-button" ion-button clear round icon-only (click)="changeRange(1)"
+      [disabled]="!dtSelector.canForward()">
       <ion-icon name="ios-arrow-forward"></ion-icon>
     </button>
   </div>
   <echarts-core [options]="_options" [merge]="_mergeOptions" [empty]="_noData"></echarts-core>
+  <div class="notice-area" *ngIf="isPrice">{{ 'HISTORICAL_CHART.NOTICE' | translate }}</div>
   <div class="control-area">
-    <button class="filter-button" ion-button clear round [ngClass]="{'filter-button-active': dtSelector.period === 'month'}" (click)="changePeriod('month')">
+    <button class="filter-button" ion-button clear round
+      [ngClass]="{'filter-button-active': dtSelector.period === 'month'}" (click)="changePeriod('month')">
       {{ 'HISTORICAL_CHART.PERIOD_MONTH' | translate }}
     </button>
-    <button class="filter-button" ion-button clear round [ngClass]="{'filter-button-active': dtSelector.period === 'year'}" (click)="changePeriod('year')">
+    <button class="filter-button" ion-button clear round
+      [ngClass]="{'filter-button-active': dtSelector.period === 'year'}" (click)="changePeriod('year')">
       {{ 'HISTORICAL_CHART.PERIOD_YEAR' | translate }}
     </button>
   </div>

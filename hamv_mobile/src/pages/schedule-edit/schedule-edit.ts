@@ -38,6 +38,8 @@ export class ScheduleEditPage {
   action: string;
   schedule: Schedule;
   isOneShot: boolean = false;
+  disableStart: boolean = false;
+  disableEnd: boolean = false;
   buttons: Array<Object> = [
     {
       value: 1,
@@ -129,6 +131,16 @@ export class ScheduleEditPage {
         }
         this.schedule = this.scheduleCore.schedule;
         this.isOneShot = this.scheduleCore.isOneShot;
+        const currentDate: Date = new Date();
+        const startHour = currentDate.getHours() + 1;
+        if (this.schedule.start == "NaN:NaN") {
+          this.disableStart = true;
+          this.schedule.start = AppUtils.getFormatTime(startHour);
+        }
+        if (this.schedule.end == "NaN:NaN") {
+          this.disableEnd = true;
+          this.schedule.end = AppUtils.getFormatTime(startHour + 1);
+        }
       }).catch((error: any) => {
         this.loading.dismiss();
         this.deviceCore = this.dcInjector.bind(this.deviceCore, device);
@@ -140,6 +152,16 @@ export class ScheduleEditPage {
         }
         this.schedule = this.scheduleCore.schedule;
         this.isOneShot = this.scheduleCore.isOneShot;
+        const currentDate: Date = new Date();
+        const startHour = currentDate.getHours() + 1;
+        if (this.schedule.start == "NaN:NaN") {
+          this.disableStart = true;
+          this.schedule.start = AppUtils.getFormatTime(startHour);
+        }
+        if (this.schedule.end == "NaN:NaN") {
+          this.disableEnd = true;
+          this.schedule.end = AppUtils.getFormatTime(startHour + 1);
+        }
       });
     } else {
       this.loading.dismiss();
@@ -184,6 +206,20 @@ export class ScheduleEditPage {
   setRepeatData() {
     this.isOneShot = !this.isOneShot;
     this.scheduleCore.setOneShot(this.isOneShot);
+  }
+
+  setStart() {
+    this.disableStart = !this.disableStart;
+    if (this.disableStart && this.disableEnd) {
+      this.disableEnd = false;
+    }
+  }
+
+  setEnd() {
+    this.disableEnd = !this.disableEnd;
+    if (this.disableStart && this.disableEnd) {
+      this.disableStart = false;
+    }
   }
 
   deleteScheduleConfirm() {
@@ -276,6 +312,13 @@ export class ScheduleEditPage {
       this.deviceCore.sendCommands(this.scheduleCore.esh);
     }
 
+    if (this.disableStart) {
+      this.scheduleCore.schedule.start = '';
+    }
+
+    if (this.disableEnd) {
+      this.scheduleCore.schedule.end = '';
+    }
     let p = this.calenderService
       .saveCalendar({
         deviceSn: this.deviceSn,

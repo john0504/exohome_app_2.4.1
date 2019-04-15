@@ -29,7 +29,8 @@
     "TEST_MODE_CLOSE":"關閉測試模式",
     "BACK": "返回",
     "ADVANCE": "進階",
-    "WARRANTY": "產品保固"
+    "WARRANTY": "產品保固",
+    "REPAIR": "線上報修"
   },
   "APP_START": {
     "FORGOT_PWD": "忘記密碼?",
@@ -106,7 +107,8 @@
     "GPS_MODE": "GPS模式",
     "LOCAL_MODE": "遙控器模式",
     "LOCAL_MODE_DEVICE": "本機裝置",
-    "LOCAL_MODE_LEAVE": "離開本機模式"
+    "LOCAL_MODE_LEAVE": "離開本機模式",
+    "SERIAL": "WiFi MAC ( SN )：<a ion-text color=\"bluish\">{{ serial }}</a>"
   },
   "DEVICE_DETAIL": {
     "HISTORY": "歷史",
@@ -228,7 +230,8 @@
     "PERIOD_MONTH": "月",
     "PERIOD_YEAR": "年",
     "AVERAGE": "平均",
-    "TOTAL": "總和"
+    "TOTAL": "總和",
+    "NOTICE": "注意事項：電價試算內容僅供參考"
   },
   "HOME": {
     "ALL": "全部",
@@ -310,7 +313,8 @@
     "FILTER_HOUR": "濾網時數",
     "ERROR_MSG": "錯誤代碼 : {{ errorCode }}",
     "CANCEL": "取消",
-    "ENERGY_PRICE": "電價試算"
+    "ENERGY_PRICE": "電價試算",
+    "NET_ALERT": "濾網須清洗"
   },
   "LANGUAGE": {
     "BACK": "上一頁",
@@ -424,7 +428,7 @@
   "PROVISION_FAILURE": {
     "ADD_PRODUCT": "新增 {{ productName }}",
     "CHECK_MSG": "請檢查您的裝置狀態以及網路設定後繼續。",
-    "CONNECTION_ERROR": "連線錯誤",
+    "CONNECTION_ERROR": "連線異常",
     "ERROR_MSG": "在設定您的 <a ion-text color=\"bluish\">{{ productName }}</a> 時發生錯誤。",
     "CHECK_DEVICE_STATUS": "檢查裝置狀態",
     "NO_DEVICE_TITLE": "找不到裝置",
@@ -463,7 +467,9 @@
     "SETTINGS": "設定",
     "START_NOW": "現在開始",
     "START_TIME": "起始時間",
-    "TITLE": "{{ action }}排程"
+    "TITLE": "{{ action }}排程",
+    "ENABLE_START_TIME": "致能起始時間",
+    "ENABLE_END_TIME": "致能結束時間"
   },
   "SCHEDULE_LIST": {
     "CREATE_A_SCHEDULE": "新增排程",
@@ -553,6 +559,23 @@
     "DESCRIPTION": "請找到機構上的二維條碼，如上方圖片所示，並點選開始掃描。",    
     "QR_CODE": "開始掃描",
     "SCAN_PLEASE" : "請掃描"
+  },
+  "REPAIR": {
+    "REPAIR":"線上報修",
+    "PERSONAL_DATA" : "個人資料",
+    "NAME" : "姓名",
+    "PHONE" : "電話",
+    "MOBILE" : "行動電話",
+    "EMAIL" : "電子信箱",
+    "CITY" : "縣市",
+    "REGION" : "區域",
+    "REPAIR_DATA" : "報修內容",
+    "MACHINE_CODE" : "輸入機號",
+    "MALFUNCTION" : "故障現象",
+    "MALFUNCTION_DESCRIPTION" : "故障內容簡述",
+    "SEND" : "送出報修資料",
+    "WHERE_IS_MACHINE_CODE" : "我的產品機號在哪裡?",    
+    "MACHINE_CODE_DESCRIPTION" : "機體號碼為一組6碼字母與數字，標示於日立產品保證書中，可將此機碼輸入表單以便服務人員查詢。"
   },
   "WIFI_AP_MANAGE": {
     "PAGE_TITLE": "已儲存網路"

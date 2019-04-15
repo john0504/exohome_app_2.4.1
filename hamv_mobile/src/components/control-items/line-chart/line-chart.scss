@@ -7,6 +7,13 @@ line-chart {
     margin: 4px 0;
     color: color($colors, darkGrey2);
   }
+  .notice-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 4px 0;
+    color: color($colors, warningRed);
+  }
   echarts-core [echarts] {
     height: 350px;
   }

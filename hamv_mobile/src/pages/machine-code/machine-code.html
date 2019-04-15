@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{ 'REPAIR.REPAIR' | translate }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <div class="main">
+      <h1 align="center">{{ 'REPAIR.WHERE_IS_MACHINE_CODE' | translate }}</h1>
+      <div class="container" padding>
+        <div padding margin-bottom class="kanban-side step">
+          <h3 align="center">{{ 'REPAIR.MACHINE_CODE_DESCRIPTION' | translate }}</h3>
+          <img src="assets/img/guarantee-card.png">
+        </div>
+      </div>
+      <ion-item>
+        <ion-icon name="barcode" item-left></ion-icon>
+        <ion-input [(ngModel)]="machineCode" type="text" placeholder="{{ ('REPAIR.MACHINE_CODE') | translate }}">
+        </ion-input>
+      </ion-item>
+    </div>
+    <div>
+      <button ion-button color="primary" class="bottom-button full-button" (click)="closePage()" full>OK</button>
+    </div>
+  </div>
+  <extra-page-space></extra-page-space>
+</ion-content>

@@ -61,7 +61,7 @@ export class PopupText extends UIComponentBase {
   }
 
   private setPopup(errorCode) {
-    const errorCodeMsg = this.translate.instant('INFORMATION_MODEL.ERROR_MSG', { errorCode: errorCode });
+    const errorCodeMsg = this.translate.instant(this.title, { errorCode: errorCode });
     this.toast = this.popupService.makeToast({
       message: errorCodeMsg,
       cssClass: 'popup-page',

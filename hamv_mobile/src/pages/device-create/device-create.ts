@@ -67,7 +67,7 @@ export class DeviceCreatePage {
           this.canSupportMode = deviceInfo && (deviceInfo.TenxLocal === "3" || deviceInfo.TenxLocal === "4");
           this.brand = deviceInfo && deviceInfo.Brand;
           this.model = deviceInfo && deviceInfo.Model;
-          this.serial = deviceInfo && deviceInfo.serial;
+          this.serial = deviceInfo && deviceInfo.serial.substring(0, 12);
         })
     );
   }
