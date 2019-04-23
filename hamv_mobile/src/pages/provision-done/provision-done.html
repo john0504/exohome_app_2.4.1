@@ -27,7 +27,8 @@
         <ion-label color="primary" stacked>
           <p><b>{{ 'PROVISION_DONE.RENAME_DEVICE' | translate }}</b></p>
         </ion-label>
-        <ion-input [(ngModel)]="newDeviceName" type="text" placeholder="{{ ('PROVISION_DONE.MY_NEW_PRODUCT') | translate: { productName: themeService.productName } }}" maxlength="128">
+        <!-- <ion-input [(ngModel)]="newDeviceName" type="text" placeholder="{{ ('PROVISION_DONE.MY_NEW_PRODUCT') | translate: { productName: themeService.productName } }}" maxlength="128"> -->
+            <ion-input [(ngModel)]="newDeviceName" type="text" placeholder="{{ model }}" maxlength="128">
         </ion-input>
       </ion-item>
     </div>    

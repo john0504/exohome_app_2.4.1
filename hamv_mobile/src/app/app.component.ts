@@ -71,6 +71,7 @@ import {
   MultiButtonGroup,
   SimpleRange,
   ImageToggle,
+  ImageCircleText,
   ImageRange,
   PopupText,
   SimpleText,
@@ -249,6 +250,7 @@ export class MyApp implements OnInit, OnDestroy {
     this.cp.registerComponent('multi-button-group', MultiButtonGroup);
     this.cp.registerComponent('range', SimpleRange);
     this.cp.registerComponent('image-toggle', ImageToggle);
+    this.cp.registerComponent('image-circle-text', ImageCircleText);
     this.cp.registerComponent('image-range', ImageRange);
     this.cp.registerComponent('popup-text', PopupText);
     this.cp.registerComponent('text', SimpleText);

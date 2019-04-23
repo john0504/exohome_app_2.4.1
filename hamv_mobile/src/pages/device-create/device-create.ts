@@ -109,7 +109,7 @@ export class DeviceCreatePage {
   }
 
   onNext() {
-    this.navCtrl.push('SsidConfirmPage')
+    this.navCtrl.push('SsidConfirmPage', { model: this.model })
       .then(() => this.closePage());
   }
 

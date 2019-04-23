@@ -1,0 +1,110 @@
+image-circle-text {
+  $font-bold: 900;
+  $font-title: 1.3rem;
+
+  .basic-text {
+    font-size: $font-title + 0.4rem;
+    font-weight: $font-bold;
+    margin-right: 8px;
+  }
+
+  .text-disabled {
+    color: color($colors, grey);
+  }
+
+  .range-main-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .range-value-block {
+      @extend .range-main-block;
+      justify-content: flex-end;
+      text-align: right;
+
+      .range-item-text {
+        @extend .basic-text;
+      }
+
+      ion-icon {
+        font-size: $font-title + 0.9rem;
+        color: color($colors, dark);
+      }
+    }
+  }
+
+  .range-sub-block {
+    display: table;
+    .range-sub-block-title {
+      position: absolute;
+      margin-left: 30%;
+      margin-top: 22%;
+      font-size: 4vw;
+      color: color($colors, dark);
+    }
+    .range-sub-block-value {
+      position: absolute;
+      margin-left: 28%;
+      margin-top: 20%;
+      color: color($colors, dark);
+      font-size: 25vw;
+      font-weight: bold;
+    }
+    ion-icon {
+      font-size: $font-title + 5rem;
+      color: color($colors, dark);
+    }
+    img {      
+      width: 90%;
+      margin-left: 5%;
+    }
+  }
+  .range-control-block {
+    margin-top: 5%;
+    margin-left: 15%;
+    .range-title-text {
+      font-size: $font-title + 0.2rem;
+      color: color($colors, dark);
+    }
+    .text-in-color {
+      margin-top: -5%;
+      font-size: $font-title + 1.6rem;
+      color: color($colors, dark);
+    }
+    .text-in-green {
+      color: #0DB02B;
+      margin-left: 6vw;
+    }
+    .text-in-yellow {
+      color: #F5E617;
+      margin-left: 6vw;
+    }
+    .text-in-orange {
+      color: #ED6E00;
+      margin-left: 6vw;
+    }
+    .text-in-red {
+      color: #EB2629;
+      margin-left: 6vw;
+    }
+    .text-in-deepred {
+      color: #A63F5B;
+      margin-left: 6vw;
+    }
+    .text-in-purple {
+      color: #964594;
+      margin-left: 6vw;
+    }
+    .text-in-dark {
+      color: #737373;
+      margin-left: 9vw;
+    }
+    .text-disabled {
+      color: color($colors, grey);
+    }
+    ion-icon {
+      width: 25vw;
+    }
+  }
+}

@@ -9,6 +9,7 @@ page-my-groups {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: color($colors, dark);
     .no-groups-image {
       align-items: center;
       display: flex;

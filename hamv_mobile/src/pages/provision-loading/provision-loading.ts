@@ -28,7 +28,7 @@ export class ProvisionLoadingPage {
   private unregister;
   private pToken: string;
   private serial: string;
-
+  model: string = "";
   constructor(
     private appEngine: AppEngine,
     private stateStore: StateStore,
@@ -41,6 +41,7 @@ export class ProvisionLoadingPage {
     public themeService: ThemeService,
     public viewCtrl: ViewController,
   ) {
+    this.model = this.params.get('model');
     this.stateStore.account$
       .pipe(
         first(),
@@ -66,10 +67,10 @@ export class ProvisionLoadingPage {
             flatMap(newDevice => this.provision(newDevice)),
           )
           .subscribe(({ serial }) => {
-            this.navCtrl.push('ProvisionDonePage', { deviceSn: serial })
+            this.navCtrl.push('ProvisionDonePage', { deviceSn: serial, model: this.model })
               .then(() => this.viewCtrl.dismiss());
           }, (error) => {
-            this.navCtrl.push('ProvisionFailurePage', { deviceSn: this.serial });
+            this.navCtrl.push('ProvisionFailurePage', { deviceSn: this.serial, model: this.model });
             this.viewCtrl.dismiss();
           });
       })

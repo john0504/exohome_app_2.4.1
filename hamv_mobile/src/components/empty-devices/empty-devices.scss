@@ -10,6 +10,7 @@ empty-devices {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color: color($colors, dark);
 
     .no-devices-image {
       align-items: center;

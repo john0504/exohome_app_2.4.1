@@ -53,7 +53,6 @@ export class ImageRange extends UIComponentBase {
   }
 
   sendValueUp() {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaa");
     const index = this.state.currentIndex;
     const max = this.state.status.max;
     const min = this.state.status.min;
@@ -65,7 +64,6 @@ export class ImageRange extends UIComponentBase {
   }
 
   sendValueDown() {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaa");
     const index = this.state.currentIndex;
     if (index > 0) {
       this.sendValue({ value: index - 1 });

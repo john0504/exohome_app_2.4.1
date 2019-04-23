@@ -1,0 +1,35 @@
+<div class="range-sub-block">
+  <div class="range-sub-block-title">{{ title | translate }}</div>
+  <div class="range-sub-block-value">
+    <span>{{ (state?.currentValueItem?.text | translate) | replace: state.currentValueItem?.value }}</span>
+  </div>
+  <img src="assets/img/rang.png">
+</div>
+<div class="range-control-block">
+  <ion-row align-items-center>
+    <ion-col col-3></ion-col>
+    <ion-col col-4>
+      <br>
+      <br>
+      <span class="range-title-text">{{ 'INFORMATION_MODEL.PM25_VALUE' | translate }}</span>
+    </ion-col>
+    <ion-col col-4>
+      <ion-row align-items-center>
+        <ion-icon [name]="getColorIcon(state2.currentValueItem?.value)"></ion-icon>
+      </ion-row>
+      <ion-row align-items-center>
+        <span class="text-in-color" [ngClass]="getColorClass(state2.currentValueItem?.value)">
+          {{ (state2?.currentValueItem?.text | translate) | replace: state2.currentValueItem?.value }}
+        </span>
+      </ion-row>
+      <!-- <ion-row align-items-center>
+        <ion-icon [name]="getColorIcon(testvalue)"></ion-icon>
+      </ion-row>
+      <ion-row align-items-center>
+        <span class="text-in-color" [ngClass]="getColorClass(testvalue)">
+          {{ '0'+testvalue }}
+        </span>
+      </ion-row> -->
+    </ion-col>
+  </ion-row>
+</div>

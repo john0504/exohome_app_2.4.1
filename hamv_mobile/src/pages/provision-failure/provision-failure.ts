@@ -30,6 +30,7 @@ export class ProvisionFailurePage {
 
   private unregister;
   private serial: string;
+  model: string = "";
 
   constructor(
     private alertCtrl: AlertController,
@@ -45,6 +46,7 @@ export class ProvisionFailurePage {
     public viewCtrl: ViewController,
   ) {
     this.serial = this.params.get('deviceSn');
+    this.model = this.params.get('model');
   }
 
   ionViewDidLoad() {
@@ -73,7 +75,7 @@ export class ProvisionFailurePage {
         };
         const goNext = () => {
           loading.dismiss();
-          this.navCtrl.push('ProvisionDonePage', { deviceSn: serial });
+          this.navCtrl.push('ProvisionDonePage', { deviceSn: serial, model: this.model });
           this.viewCtrl.dismiss();
         };
         this.appTasks.wsRequestSetPropertiesTask(serial, newProperties)

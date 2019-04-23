@@ -18,32 +18,32 @@
     <div *ngIf="!viewState.showDetails">
       <div *ngFor="let m of deviceCore.primaryControllers; let i = index;" class="sub-content">
         <ui-component (exoChange)="deviceCore.send($event)" [(ngModel)]="deviceCore.status"
-          [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="isVisable(m) && i == 0"></ui-component>
+          [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="i == 0"></ui-component>
       </div>
       <div *ngFor="let m of deviceCore.primaryControllers; let i = index;" class="image-control">
         <ui-component (exoChange)="deviceCore.send($event)" [(ngModel)]="deviceCore.status"
-          [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="isVisable(m) && i == 1"></ui-component>
+          [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="i == 1"></ui-component>
       </div>
     </div>
     <ion-row class="group-control" [ngClass]="{'off': !viewState.showDetails}">
       <ion-col col-3 class="toggle-items none-padding">
         <div *ngFor="let m of deviceCore.primaryControllers; let i = index;">
           <ui-component (exoChange)="deviceCore.send($event)" [(ngModel)]="deviceCore.status"
-            [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="isVisable(m) && i == 2">
+            [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="i == 2">
           </ui-component>
         </div>
       </ion-col>
       <ion-col col-3 class="toggle-items none-padding">
         <div *ngFor="let m of deviceCore.primaryControllers; let i = index;">
           <ui-component (exoChange)="deviceCore.send($event)" [(ngModel)]="deviceCore.status"
-            [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="isVisable(m) && i == 3">
+            [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="i == 3">
           </ui-component>
         </div>
       </ion-col>
       <ion-col col-3 class="toggle-items none-padding">
         <div *ngFor="let m of deviceCore.primaryControllers; let i = index;">
           <ui-component (exoChange)="deviceCore.send($event)" [(ngModel)]="deviceCore.status"
-            [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="isVisable(m) && i == 4">
+            [disabled]="!deviceCore.isAvailable" [model]="m" color="primary" *ngIf="i == 4">
           </ui-component>
         </div>
       </ion-col>

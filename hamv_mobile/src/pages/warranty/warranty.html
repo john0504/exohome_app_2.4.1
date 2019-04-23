@@ -17,7 +17,7 @@
         <span class="describe-text">{{ 'WARRANTY.DESCRIPTION' | translate }}</span>
       </div>
     </div>
-    <div class="container2">
+    <!-- <div class="container2">
       <ion-item color="lightGrey">
         <ion-label stacked>
           <p><b>{{ 'WARRANTY.DEVICE_MACHINE_TYPE' | translate }}</b></p>
@@ -25,11 +25,11 @@
         <ion-input disabled="true" [(ngModel)]="deviceMachineType" type="text" placeholder="{{ ('WARRANTY.SCAN_PLEASE') | translate }}" maxlength="128">
         </ion-input>
       </ion-item>
-    </div>
+    </div> -->
     <button ion-button color="orange" class="full-button" full round (click)="onQRcode()" full>{{ 'WARRANTY.QR_CODE' |
       translate }}</button>
-    <button [disabled]="deviceMachineType == ''" ion-button color="primary" full round (click)="goRegister()" margin-top>
+    <!-- <button [disabled]="deviceMachineType == ''" ion-button color="primary" full round (click)="goRegister()" margin-top>
       {{ 'WARRANTY.REGISTER' | translate }}
-    </button>
+    </button> -->
   </div>
 </ion-content>

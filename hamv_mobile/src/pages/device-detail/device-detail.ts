@@ -24,7 +24,7 @@ import { first } from 'rxjs/operators';
 import { debounceImmediate } from '../../app/app.extends';
 import { DeviceCore } from '../../item-models/device/device-core';
 import { DeviceCoreInjector } from '../../item-models/device/device-core-injector';
-import { PopupService } from '../../providers/popup-service';
+// import { PopupService } from '../../providers/popup-service';
 import { ViewStateService } from '../../providers/view-state-service';
 
 @IonicPage()
@@ -55,7 +55,7 @@ export class DeviceDetailPage {
     public params: NavParams,
     public viewCtrl: ViewController,
     private appTasks: AppTasks,
-    private popupService: PopupService,
+    // private popupService: PopupService,
     public viewStateService: ViewStateService,
   ) {
     this.deviceSn = this.params.get('deviceSn');
@@ -81,9 +81,9 @@ export class DeviceDetailPage {
 
   ionViewDidLoad() {
     this.account$.pipe(first()).subscribe(account => this.account = account);
-    this.loading = this.popupService.makeLoading({
-      content: this.translate.instant('DEVICE_DETAIL.GET_RANGE')
-    });
+    // this.loading = this.popupService.makeLoading({
+    //   content: this.translate.instant('DEVICE_DETAIL.GET_RANGE')
+    // });
   }
 
   ionViewWillEnter() {

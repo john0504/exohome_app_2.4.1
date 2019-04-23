@@ -5,7 +5,7 @@ import {
   NavParams,
   Platform
 } from 'ionic-angular';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 
 import {
   AppTasks,
@@ -26,17 +26,19 @@ export class ProvisionDonePage {
   private unregister;
   private deviceSn;
   newDeviceName: string;
+  model: string = "";
 
   constructor(
     private appTasks: AppTasks,
     private platform: Platform,
-    private translate: TranslateService,
+    // private translate: TranslateService,
     public checkNetworkService: CheckNetworkService,
     public params: NavParams,
     public navCtrl: NavController,
     public themeService: ThemeService,
   ) {
     this.deviceSn = this.params.get('deviceSn');
+    this.model = this.params.get('model').toUpperCase();
     Logger.log('deviceSn => ', this.deviceSn);
   }
 
@@ -66,7 +68,8 @@ export class ProvisionDonePage {
   saveDevice() {
     const displayName = this.newDeviceName && this.newDeviceName.trim()
       ? this.newDeviceName.trim()
-      : this.translate.instant('PROVISION_LOADING.MY_NEW_PRODUCT', { productName: this.themeService.productName });
+      // : this.translate.instant('PROVISION_LOADING.MY_NEW_PRODUCT', { productName: this.themeService.productName });
+      : this.model;
 
     return this.appTasks.wsRequestSetPropertiesTask(this.deviceSn, { displayName });
   }

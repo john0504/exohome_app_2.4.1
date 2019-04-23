@@ -19,8 +19,9 @@ simple-range {
     flex-direction: row;
 
     .range-title-text {
-      font-size: $font-title;
+      font-size: $font-title + 0.4rem;
       font-weight: $font-bold;
+      color: color($colors, dark);
     }
 
     .range-value-block {
@@ -30,6 +31,7 @@ simple-range {
 
       .range-item-text {
         @extend .basic-text;
+        color: color($colors, dark);
       }
 
       ion-icon {
@@ -40,15 +42,19 @@ simple-range {
 
   .range-sub-block {
     .range-range-status {
+
       .range-tick {
         display: none;
       }
 
       .range-bar {
         border-radius: 4px;
+      }      
+      .range-bar-active {
+        background-color: #168CD8;
       }
-
       .range-knob {
+        background-color: color($colors, dark);
         outline: none;
       }
     }

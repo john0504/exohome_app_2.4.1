@@ -6,6 +6,7 @@ export { LargeToggleWithRange } from './large-toggle-with-range/large-toggle-wit
 export { LargeToggle } from './large-toggle/large-toggle';
 export { SimpleButtonGroup } from './simple-button-group/simple-button-group';
 export { MultiButtonGroup } from './multi-button-group/multi-button-group';
+export { ImageCircleText } from './image-circle-text/image-circle-text';
 export { ImageRange } from './image-range/image-range';
 export { ImageToggle } from './image-toggle/image-toggle';
 export { SimpleRange } from './simple-range/simple-range';

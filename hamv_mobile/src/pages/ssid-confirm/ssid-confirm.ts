@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Observable, Subscription } from 'rxjs';
 import { defer } from 'rxjs/observable/defer';
@@ -43,6 +43,7 @@ export class SsidConfirmPage {
   vendorVer: string = "";
   vendorName: string = "";
   semiVer: string = "";
+  model: string = "";
 
   constructor(
     private ngRedux: NgRedux<any>,
@@ -52,7 +53,9 @@ export class SsidConfirmPage {
     public navCtrl: NavController,
     public themeService: ThemeService,
     public viewCtrl: ViewController,
+    public params: NavParams,
   ) {
+    this.model = this.params.get('model');
     this.subs = [];
     this.deviceInfo$ = this.ngRedux.select(['ssidConfirm', 'deviceInfo']);
     this.wifiAp = { ssid: '', password: '', sec: WifiSecurityType.WPA2 };
@@ -128,7 +131,7 @@ export class SsidConfirmPage {
       }
     }
     this.storage.set(SSID_LIST, this.ssidList);
-    this.navCtrl.push('ProvisionLoadingPage', { wifiAp: this.wifiAp, method: this.deviceInfo.provision })
+    this.navCtrl.push('ProvisionLoadingPage', { wifiAp: this.wifiAp, method: this.deviceInfo.provision, model: this.model })
       .then(() => this.closePage());
   }
 
@@ -145,7 +148,7 @@ export class SsidConfirmPage {
 
   ionViewDidLoad() {
     this.checkNetworkService.pause();
-    this.setupTestMode();
+    this.setupTestMode();    
   }
 
   ionViewDidEnter() {

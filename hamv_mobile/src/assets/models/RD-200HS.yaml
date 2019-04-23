@@ -1,0 +1,438 @@
+---
+familyName: RD
+familyMembers:
+- RD.*
+images:
+  thumbnail:
+    uri: "assets/img/RD.png"
+  banner:
+    uri: "assets/img/RD.png"
+controlLayout:
+  primary:
+  - RD_POWER
+  - RD_PIC_HUMI_AND_PM25
+  - RD_IMAGE_MODE
+  - RD_IMAGE_FAN_SPEED
+  - RD_IMAGE_FAN_DIRECTION
+  - RD_ERROR
+  secondary:
+  - H03
+  - H0A
+  - H0B
+  - H0C
+  - H0D
+  - H0F
+  - H10
+  - H11
+  - H13
+  - H16
+  - H18
+  - H1D
+  - H1D_1
+scheduleLayout:
+  primary:
+  - H01
+  - H03
+  - H08
+  - H0B
+  - H0C
+  - H0D
+  - H0E
+  - H10
+  - H13
+  - H16
+  - H18
+deviceId: 4
+components:  
+  RD_POWER:
+    type: image-toggle
+    title: ''
+    models:    
+    - key: H00
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.PLEASE_OPEN_POWER
+        icon: icon-power-off
+      - value: 1
+        text: ''
+        icon: icon-power-on
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+  RD_PIC_HUMI_AND_PM25:
+    type: image-circle-text
+    title: INFORMATION_MODEL.NOW_HUMIDITY
+    models:
+    - key: H07
+      values:
+        func: value_text2
+    - key: H24
+      values:
+        func: value_text3
+  RD_IMAGE_MODE:
+    type: action-sheet-button
+    title: INFORMATION_MODEL.MODE
+    models:
+    - key: H01
+      values:
+      - value: 1
+        text: INFORMATION_MODEL.CUSTOM
+      - value: 3
+        text: INFORMATION_MODEL.FAST
+      - value: 4
+        text: INFORMATION_MODEL.AIR_CLEAR
+      - value: 5
+        text: INFORMATION_MODEL.ANTI_MOLD
+      - value: 8
+        text: INFORMATION_MODEL.DRY
+      - value: 9
+        text: INFORMATION_MODEL.COZY
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  RD_IMAGE_FAN_SPEED:
+    type: action-sheet-button
+    title: INFORMATION_MODEL.FAN_SPEED
+    models:
+    - key: H0E
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.SILENT
+      - value: 2
+        text: INFORMATION_MODEL.SMALL
+      - value: 3
+        text: INFORMATION_MODEL.WEAK
+      - value: 4
+        text: INFORMATION_MODEL.HIGH
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  RD_IMAGE_FAN_DIRECTION:
+    type: action-sheet-button
+    title: INFORMATION_MODEL.FAN_SWING
+    models:
+    - key: H08
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  RD_ERROR:
+    type: popup-text
+    title: ''
+    models:
+    - key: H12
+      values:
+        func: text
+  H00:
+    type: toggle
+    title: INFORMATION_MODEL.POWER
+    models:
+    - key: H00
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+  H01:
+    type: button-group
+    title: INFORMATION_MODEL.MODE
+    models:
+    - key: H01
+      values:
+      - value: 1
+        text: INFORMATION_MODEL.CUSTOM
+      - value: 3
+        text: INFORMATION_MODEL.FAST
+      - value: 4
+        text: INFORMATION_MODEL.AIR_CLEAR
+      - value: 5
+        text: INFORMATION_MODEL.ANTI_MOLD
+      - value: 8
+        text: INFORMATION_MODEL.DRY
+      - value: 9
+        text: INFORMATION_MODEL.COZY
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H03:
+    type: range
+    title: INFORMATION_MODEL.HUMIDITY
+    models:
+    - key: H03
+      values:
+        min: 0
+        max: 99
+        step: 1
+        func: humidity
+      options: 
+        type: 'uint'
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H07:
+    type: text
+    title: INFORMATION_MODEL.HUMIDITY
+    models:
+    - key: H07
+      values:
+        func: humidity
+  H08:
+    type: toggle
+    title: INFORMATION_MODEL.AUTO_FAN
+    models:
+    - key: H08
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H0A:
+    type: text
+    title: INFORMATION_MODEL.FULL_WATER_WARNING
+    models:
+    - key: H0A
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.NORMAL
+      - value: 1
+        text: INFORMATION_MODEL.FULL_WATER
+  H0B:
+    type: toggle
+    title: INFORMATION_MODEL.FILTER
+    models:
+    - key: H0B
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.NORMAL
+      - value: 1
+        text: INFORMATION_MODEL.NET_ALERT
+      disable:
+      - conditions:
+        - key: H0B
+          op: eq
+          target: 0
+  H0D:
+    type: toggle
+    title: INFORMATION_MODEL.NEGATIVE_ION
+    models:
+    - key: H0D
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H0E:
+    type: button-group
+    title: INFORMATION_MODEL.FAN_SPEED
+    models:
+    - key: H0E
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.SILENT
+      - value: 2
+        text: INFORMATION_MODEL.SMALL
+      - value: 3
+        text: INFORMATION_MODEL.WEAK
+      - value: 4
+        text: INFORMATION_MODEL.HIGH
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H0F:
+    type: text
+    title: INFORMATION_MODEL.LATERAL_AIR_OUTLET
+    models:
+    - key: H0F
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.NORMAL
+      - value: 1
+        text: INFORMATION_MODEL.LATERAL_AIR
+  H10:
+    type: button-group
+    title: INFORMATION_MODEL.SOUND
+    models:
+    - key: H10
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.MUTE
+      - value: 1
+        text: INFORMATION_MODEL.BUTTON_SOUND
+      - value: 2
+        text: INFORMATION_MODEL.FULL_WATER_AND_BUTTON_SOUND
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H11:
+    type: text
+    title: INFORMATION_MODEL.DEFROST
+    models:
+    - key: H11
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.NORMAL
+      - value: 1
+        text: INFORMATION_MODEL.DEFROST
+  H13:
+    type: toggle
+    title: INFORMATION_MODEL.MILDEW_PROOF
+    models:
+    - key: H13
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H16:
+    type: toggle
+    title: INFORMATION_MODEL.BUTTON_LOCK
+    models:
+    - key: H16
+      values:
+      - value: 0
+        text: INFORMATION_MODEL.OFF
+      - value: 1
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H18:
+    type: toggle
+    title: INFORMATION_MODEL.CONTROL_SOUND
+    models:
+    - key: H18
+      values:
+      - value: 1
+        text: INFORMATION_MODEL.OFF
+      - value: 0
+        text: INFORMATION_MODEL.ON
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+  H1D:
+    type: text
+    title: INFORMATION_MODEL.ENERGY_USED
+    models:
+    - key: H1D
+      values:
+        func: text
+  H1D_1:
+    type: toggle
+    title: INFORMATION_MODEL.ENERGY_USED_RESET
+    models:
+    - key: H1D
+      values:
+      - value: 0
+        text: '0'
+      - value: "*"
+        text: INFORMATION_MODEL.RESET
+      default: 1
+      disable:
+      - conditions:
+        - key: H12
+          op: gt
+          target: 0
+      - conditions:
+        - key: H00
+          op: eq
+          target: 0
+      - conditions:
+        - key: H1D
+          op: eq
+          target: 0

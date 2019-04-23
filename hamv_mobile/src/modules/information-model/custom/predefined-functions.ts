@@ -366,6 +366,49 @@ export const functionMap = {
       text: round(val, 2) + ' NTD',
     };
   },
+  value_text2: (val) => {
+    if (val === undefined || val === null || val === -32767) {
+      return {
+        value: val,
+        text: '--',
+      };
+    }
+    if (val > 9) {
+      return {
+        value: val,
+        text: round(val, 2) + '',
+      };
+    } else{
+      return {
+        value: val,
+        text: '0' + round(val, 2),
+      };
+    }
+  },
+  value_text3: (val) => {
+    if (val === undefined || val === null || val === -32767) {
+      return {
+        value: val,
+        text: '---',
+      };
+    }
+    if (val > 99) {
+      return {
+        value: val,
+        text: round(val, 2) + '',
+      };
+    } else if (val > 9) {
+      return {
+        value: val,
+        text: '0' + round(val, 2),
+      };
+    } else{
+      return {
+        value: val,
+        text: '00' + round(val, 2),
+      };
+    }
+  },
 };
 
 function round(value: number, precision: number) {
