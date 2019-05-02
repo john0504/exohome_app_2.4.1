@@ -1,24 +1,14 @@
-<!-- <div class="range-main-block">
-  <div class="range-value-block" [ngClass]="{'text-disabled': disabled}">
-    <span class="range-item-text">{{ (state?.currentValueItem?.text | translate) | replace:
-      state.currentValueItem?.value }}</span>
-  </div>
-</div> -->
 <div class="range-sub-block">
-  <img [src]="getIconPicture(state.currentValueItem?.icon)" *ngIf="!state.disableState">
-  <img [src]="getIconPicture(state.currentValueItem?.icon)" *ngIf="state.disableState">
-  <!-- <ion-icon [name]="getIconPicture(state.currentValueItem?.icon"></ion-icon> -->
+  <img [src]="getIconPicture(state.currentValueItem?.icon)" placeholder="assets/img/img-none.png">
 </div>
 <div class="range-control-block">
   <ion-row align-items-center>
     <ion-col col-5><span class="range-title-text" [ngClass]="{'text-disabled': disabled || state.disableState}">{{ title | translate }}</span></ion-col>
     <ion-col col-4>
-      <!-- <ion-icon name="icon-add" (click)="sendValueUp()"></ion-icon> -->
       <ion-icon name="icon-add" *ngIf="!disabled && !state.disableState" (click)="sendValueUp()"></ion-icon>
       <ion-icon name="icon-add-disable" *ngIf="disabled || state.disableState"></ion-icon>
     </ion-col>
     <ion-col col-3>
-      <!-- <ion-icon name="icon-sub" (click)="sendValueDown()"></ion-icon> -->
       <ion-icon name="icon-sub" *ngIf="!disabled && !state.disableState" (click)="sendValueDown()"></ion-icon>
       <ion-icon name="icon-sub-disable" *ngIf="disabled || state.disableState"></ion-icon>
     </ion-col>
