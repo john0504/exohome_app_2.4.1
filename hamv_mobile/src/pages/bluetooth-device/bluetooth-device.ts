@@ -28,7 +28,7 @@ export class BluetoothDevicePage {
 
   private subs: Array<Subscription>;
   private retryTime = 5000;
-  isShowLog = 0;
+  private isShowLog = 0;
   private lostNotifyCount = 0;
   _deviceList = [];
   logs = [];
@@ -58,9 +58,9 @@ export class BluetoothDevicePage {
   ionViewDidLoad() {
     this.checkNetworkService.pause();
     this.platform.ready()
-      .then(() => {
-        return this.insomnia.keepAwake();
-      });
+    .then(() => {
+      return this.insomnia.keepAwake();
+    });
   }
 
   ionViewDidEnter() {
@@ -155,18 +155,14 @@ export class BluetoothDevicePage {
             switch (property) {
               case "WriteWithoutResponse":
               case "Write":
+              case "Notify":
                 count++;
-                if (count >= 2) {
+                if (count >= 3) {
                   this.printLog(deviceItem.deviceName, "property", JSON.stringify(service));
-                  deviceItem.txServiceId = service.service;
-                  deviceItem.txCharacteristicId = service.characteristic;
+                  deviceItem.serviceId = service.service;
+                  deviceItem.characteristicId = service.characteristic;
                   this.startNotification(deviceItem);
                 }
-                break;
-              case "Notify": this.printLog(deviceItem.deviceName, "property", JSON.stringify(service));
-                deviceItem.rxServiceId = service.service;
-                deviceItem.rxCharacteristicId = service.characteristic;
-                this.startNotification(deviceItem);
                 break;
             }
           });
@@ -274,8 +270,8 @@ export class BluetoothDevicePage {
   private writeService(deviceItem, string): Promise<any> {
     return this.bleService.write(
       deviceItem.deviceId,
-      deviceItem.txServiceId,
-      deviceItem.txCharacteristicId,
+      deviceItem.serviceId,
+      deviceItem.characteristicId,
       this.stringToBytes(string))
       .then((data) => {
         this.printLog(deviceItem.deviceName, "response", JSON.stringify(data));
@@ -304,10 +300,8 @@ export class BluetoothDevicePage {
     let deviceItem = {
       deviceName: device.name,
       deviceId: device.device,
-      rxServiceId: device.service,
-      rxCharacteristicId: device.characteristic,
-      txServiceId: device.service,
-      txCharacteristicId: device.characteristic,
+      serviceId: device.service,
+      characteristicId: device.characteristic,
       _device: {
         device: device.device + device.service + device.characteristic,
         profile: {
@@ -349,8 +343,8 @@ export class BluetoothDevicePage {
     this.subs.push(
       this.bleService.startNotification(
         deviceItem.deviceId,
-        deviceItem.rxServiceId,
-        deviceItem.rxCharacteristicId
+        deviceItem.serviceId,
+        deviceItem.characteristicId
       ).subscribe((buffer) => {
         this.printLog(deviceItem.deviceName, "buffer", this.bytesToString(buffer));
         message += this.bytesToString(buffer);
@@ -378,15 +372,6 @@ export class BluetoothDevicePage {
             if (jsonObj.online == 1) {
               this.printLog(deviceItem.deviceName, "message", message);
               deviceItem.connectCount = 0;
-            }
-            if (jsonObj.change) {
-              this.printLog(deviceItem.deviceName, "change", message);
-              deviceItem._device.status = jsonObj.change;
-              this.updateLayout(deviceItem);
-              deviceItem.viewState = this.updateViewState(deviceItem);
-              this.sendBluetoothCommands(deviceItem, "response", "ok");
-              deviceItem.viewState.isConnected = true;
-              this.cd.detectChanges();
             }
             switch (jsonObj.response) {
               case "info":

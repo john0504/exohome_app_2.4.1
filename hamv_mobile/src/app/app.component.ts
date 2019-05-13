@@ -104,7 +104,6 @@ export class MyApp implements OnInit, OnDestroy {
     { title: 'APP.MY_GROUPS', component: 'MyGroupsPage' },
     { title: 'APP.BLUETOOTH', component: 'BluetoothListPage' },
     { title: 'APP.BLUETOOTH_MEMORY', component: 'BluetoothDevicePage' },
-    { title: 'APP.BLUETOOTH_LED', component: 'BleLedListPage' },
     { title: 'APP.SETTINGS', component: 'SettingsPage' },
   ];
 
