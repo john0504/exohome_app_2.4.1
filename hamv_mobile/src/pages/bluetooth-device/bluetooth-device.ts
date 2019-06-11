@@ -28,7 +28,7 @@ export class BluetoothDevicePage {
 
   private subs: Array<Subscription>;
   private retryTime = 5000;
-  private isShowLog = 0;
+  isShowLog = 0;
   private lostNotifyCount = 0;
   _deviceList = [];
   logs = [];

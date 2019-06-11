@@ -112,6 +112,7 @@ export class BluetoothListPage {
         deviceName.indexOf("AirSense") != -1 ||
         deviceName.indexOf("Tenx") != -1 ||
         deviceName.indexOf("Datatran_LE") != -1 ||
+        deviceName.indexOf("ALASKA") != -1 ||
         deviceName.indexOf("Nairn") != -1);
   }
 
