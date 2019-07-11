@@ -71,7 +71,7 @@ export const appConfig: AppConfig = {
       max: 10, // Max schedule number per device
     },
     support: {
-      email: '',
+      email: 'service@cectco.com',
     },
     disableLog: false,
     logConfig: {

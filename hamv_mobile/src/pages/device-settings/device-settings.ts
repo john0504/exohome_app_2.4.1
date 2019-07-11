@@ -147,7 +147,7 @@ export class DeviceSettingsPage {
 
   checkForUpdates() {
     const fwVersion = this.deviceCore.firmwareVersion;
-    const deviceModel = this.deviceCore.model;
+    const deviceModel: string = this.deviceCore.model;
     if (!fwVersion || !deviceModel) {
       this.showErrorAlert();
       return;
@@ -155,7 +155,8 @@ export class DeviceSettingsPage {
     let versionNew;
     let targetVersionObj = null;
     this.isVersionLoading = true;
-    this.appTasks.getFirmwareList(deviceModel)
+    let modelList: string[] = [deviceModel, "general"];
+    this.appTasks.getFirmwareList(modelList)
       .then((items: any) => {
         this.isVersionLoading = false;
         items.forEach(element => {

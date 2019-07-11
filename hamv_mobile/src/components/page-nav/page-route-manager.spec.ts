@@ -7,7 +7,7 @@ describe('Service: Page Route Manager', () => {
 
   const example: { [key: string]: PageInterface } = {
     'HomePage': {
-      target: 'PopitListPage',
+      target: 'LargeListPage',
       paramKeys: []
     },
     'AmazonEchoPage': {
@@ -37,7 +37,7 @@ describe('Service: Page Route Manager', () => {
   it('get page', () => {
     instance.config = example;
 
-    expect(instance.getPage('HomePage')).toEqual('PopitListPage');
+    expect(instance.getPage('HomePage')).toEqual('LargeListPage');
     expect(instance.getPage('AmazonEchoPage')).toEqual('AmazonEchoPage');
     expect(instance.getPage('ABCPage')).toEqual('ABCPage');
   });

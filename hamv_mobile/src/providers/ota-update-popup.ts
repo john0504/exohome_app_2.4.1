@@ -74,8 +74,8 @@ export class OtaUpdatePopup {
     }
 
     const devices = this.devicesSn.map(deviceSn => this.devices[deviceSn]);
-    const modelList = devices.map(({ profile: { esh: { model } } }) => model && model.trim());
-
+    let modelList: string[] = devices.map(({ profile: { esh: { model } } }) => model && model.trim());
+    modelList.push("general");
     return this.appTasks.getFirmwareList(modelList)
       .then((firmwares) => {
         return devices.map((device) => {
