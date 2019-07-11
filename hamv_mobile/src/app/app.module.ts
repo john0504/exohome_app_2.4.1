@@ -44,7 +44,6 @@ import { ScheduleCoreInjector } from '../item-models/schedule/schedule-core-inje
 import { AppEngineModule, ReduxModule } from 'app-engine';
 
 import { Geolocation } from '@ionic-native/geolocation';
-import { BLE } from '@ionic-native/ble';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -107,7 +106,6 @@ export function createTranslateLoader(http: HttpClient) {
     ScheduleCoreInjector,
     CalendarService,
     Geolocation,
-    BLE,
   ]
 })
 export class AppModule { }

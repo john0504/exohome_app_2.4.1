@@ -105,12 +105,9 @@ export class MyApp implements OnInit, OnDestroy {
     // { title: 'Small List', component: 'SmallListPage' },
     // { title: 'Single Accordion', component: 'SingleAccordionPage' },
     { title: 'APP.MY_GROUPS', component: 'MyGroupsPage' },
-    // { title: 'APP.BLUETOOTH', component: 'BluetoothListPage' },
-    // { title: 'APP.BLUETOOTH_MEMORY', component: 'BluetoothDevicePage' },
     { title: 'APP.SETTINGS', component: 'SettingsPage' },
   ];
 
-  // bleSettingPage = { title: 'APP.BLUETOOTH_SETTING', component: 'BluetoothSettingPage' };
 
   constructor(
     private app: App,

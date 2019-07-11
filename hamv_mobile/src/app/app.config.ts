@@ -41,10 +41,6 @@ export interface AppConfig {
     googleHome: {
       ghName: string,
     },
-    ble: {
-      bleProductName: string,
-      bleName: string,
-    },
   };
 }
 
@@ -90,10 +86,6 @@ export const appConfig: AppConfig = {
     },
     googleHome: {
       ghName: 'gh_name',
-    },
-    ble: {      
-      bleProductName: 'AirBox',
-      bleName: 'BLE-XXXX',
     },
   }
 };
