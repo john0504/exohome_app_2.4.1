@@ -34,7 +34,6 @@ export class DeviceCreatePage {
   canBroadcast: boolean = false;
   canLocalBroadcast: boolean = false;
   canCapsuleMode: boolean = false;
-  canCloudMode: boolean = true;
   canOtaMode: boolean = false;
   isTokenValidated: boolean = false;
   appName: Promise<string>;
@@ -83,7 +82,6 @@ export class DeviceCreatePage {
           this.canBroadcast = deviceInfo && deviceInfo.TenxBroadcast === "1";
           this.canLocalBroadcast = deviceInfo && deviceInfo.TenxLocalBroadcast === "1";
           this.canCapsuleMode = deviceInfo && deviceInfo.TenxCapsule === "1";
-          this.canCloudMode = deviceInfo && (!deviceInfo.TenxLocal || deviceInfo.TenxLocal === "1" || deviceInfo.TenxLocal === "3") && (!deviceInfo.TenxCloud || deviceInfo.TenxCloud === "1");
           this.canOtaMode = deviceInfo && deviceInfo.TenxOta === "1";
           this.brand = deviceInfo && deviceInfo.Brand;
           this.model = deviceInfo && deviceInfo.Model;
@@ -208,7 +206,6 @@ export class DeviceCreatePage {
     this.canGpsMode = false;
     this.canBroadcast = false;
     this.canCapsuleMode = false;
-    this.canCloudMode = true;
     this.brand = "";
     this.model = "";
     this.serial = "";
