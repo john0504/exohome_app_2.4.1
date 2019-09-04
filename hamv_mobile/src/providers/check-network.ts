@@ -43,6 +43,8 @@ export class CheckNetworkService {
       this.noNetworkToast = this.popupService.makeToast({
         message: notFoundMsg,
         position: 'top',
+        showCloseButton: true,
+        closeButtonText: 'X',
       });
     } else if (!show && this.noNetworkToast) {
       this.noNetworkToast.dismiss();
