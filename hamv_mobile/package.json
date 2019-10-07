@@ -177,7 +177,7 @@
       "ionic-plugin-deeplinks": {
         "URL_SCHEME": "myproduct",
         "DEEPLINK_SCHEME": "myproduct",
-        "DEEPLINK_HOST": "taiseia.apps.exosite.io",
+        "DEEPLINK_HOST": "exohomextaiseia.apps.exosite.io",
         "ANDROID_PATH_PREFIX": "/",
         "ANDROID_2_PATH_PREFIX": "/",
         "ANDROID_3_PATH_PREFIX": "/",

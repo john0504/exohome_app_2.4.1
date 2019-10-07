@@ -46,8 +46,8 @@ export interface AppConfig {
 
 export const appConfig: AppConfig = {
   appEngine: {
-    solutionId: 'taiseia',
-    productId: 'h56htm0x79n800000',
+    solutionId: 'exohomextaiseia',
+    productId: 'w5ffslng4cs000000',
   },
   mixpanel: {
     token: 'YOUR_TOKEN',
